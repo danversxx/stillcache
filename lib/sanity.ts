@@ -3,7 +3,7 @@ import { createClient } from '@sanity/client'
 export const client = createClient({
   projectId: '2jlzwuvy', // Replace with your project ID
   dataset: 'production',
-  useCdn: false,
+  useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2024-02-15',
 })
 
