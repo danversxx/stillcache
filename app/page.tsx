@@ -1,5 +1,5 @@
 export const revalidate = 60; // Revalidate every 60 seconds
-yimport Header from '@/components/Header';
+import Header from '@/components/Header';
 import FilmSection from '@/components/FilmSection';
 import Footer from '@/components/Footer';
 
