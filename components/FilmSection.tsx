@@ -123,9 +123,10 @@ export default async function FilmSection() {
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
-                <p className="text-[12px] font-normal tracking-tight-2" style={{lineHeight: '1'}}>
-                  © 1989 Kiki's Delivery Service / Eiko Kadono<br/>Studio Ghibli · Nibariki · Tokuma Shoten
-                </p>
+                <div className="flex flex-col">
+                  <span className="text-[12px] font-normal leading-none tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
+                  <span className="text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
+                </div>
               </div>
               {/* Studio Ghibli Logo - self-stretch so it spans full height */}
               <img
