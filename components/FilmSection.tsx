@@ -128,11 +128,11 @@ export default async function FilmSection() {
                   <span className="text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
-              {/* Studio Ghibli Logo - stretches to match text div height on all screens */}
+              {/* Studio Ghibli Logo - smaller on mobile, 57px on desktop */}
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 self-stretch lg:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[38px] lg:h-[57px]"
               />
             </div>
 
