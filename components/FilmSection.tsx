@@ -121,10 +121,10 @@ export default async function FilmSection() {
               <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                 Information
               </h3>
-              {/* Items - horizontal, fill, 57px, stretch children */}
-              <div className="w-full flex flex-row items-stretch justify-between" style={{height: '57px'}}>
-                {/* Text - vertical, fills height, 12px gap, justified space-between */}
-                <div className="flex flex-col justify-between flex-1">
+              {/* Items - 57px tall, space between text and logo */}
+              <div className="w-full flex flex-row items-center justify-between" style={{height: '57px'}}>
+                {/* Text - hugs content, vertically centered, 12px gap between lines */}
+                <div className="flex flex-col gap-3">
                   <span className="text-[12px] font-normal leading-none tracking-tight-2">
                     © 1989 Kiki's Delivery Service / Eiko Kadono
                   </span>
@@ -132,11 +132,11 @@ export default async function FilmSection() {
                     Studio Ghibli · Nibariki · Tokuma Shoten
                   </span>
                 </div>
-                {/* Studio Ghibli Logo - stretches to fill same 57px height */}
+                {/* Studio Ghibli Logo - 57px tall */}
                 <img
                   src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                   alt="Studio Ghibli"
-                  style={{height: '100%', width: 'auto'}}
+                  style={{height: '57px', width: 'auto'}}
                   className="object-contain flex-shrink-0"
                 />
               </div>
