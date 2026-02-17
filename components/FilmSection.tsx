@@ -42,11 +42,11 @@ export default async function FilmSection() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center gap-3 h-[52px]">
-            <span className="text-[22px] font-normal leading-none tracking-tight-2">
+          <div className="flex flex-col justify-center h-[52px]">
+            <span className="text-[16px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
-            <span className="text-[22px] font-bold leading-none tracking-tight-2">
+            <span className="text-[16px] font-bold leading-none tracking-tight-2">
               {film.title}
             </span>
           </div>
@@ -89,7 +89,7 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex flex-col justify-center gap-3 h-[52px]">
+            <div className="flex flex-col justify-center h-[52px]">
               <span className="text-[22px] font-normal leading-none tracking-tight-2">
                 {film.director}
               </span>
@@ -119,20 +119,20 @@ export default async function FilmSection() {
               <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                 Information
               </h3>
-              {/* Items: text + studio logo */}
-              <div className="w-full flex flex-row items-center justify-between">
-                <div className="flex flex-col justify-center h-[57px]">
+              {/* Items: text + studio logo aligned top and bottom */}
+              <div className="w-full flex flex-row items-stretch justify-between">
+                {/* Text Items - 12px gap between lines */}
+                <div className="flex flex-col justify-between gap-3">
                   <p className="text-[12px] font-normal leading-none tracking-tight-2 whitespace-pre-line">
                     {film.copyrightInfo}
                   </p>
                 </div>
-                <div className="h-[57px] flex items-center">
-                  <img
-                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
-                    alt="Studio Ghibli"
-                    className="h-full w-auto object-contain"
-                  />
-                </div>
+                {/* Studio Logo - same height as Items container */}
+                <img
+                  src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
+                  alt="Studio Ghibli"
+                  className="w-auto object-contain self-stretch"
+                />
               </div>
             </div>
 
