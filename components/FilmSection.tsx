@@ -132,7 +132,7 @@ export default async function FilmSection() {
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 h-[38px] lg:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[54px] lg:h-[57px]"
               />
             </div>
 
