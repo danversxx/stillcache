@@ -121,20 +121,19 @@ export default async function FilmSection() {
               <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                 Information
               </h3>
-              {/* Items: Text auto layout + Studio Logo, both 57px, evenly spread */}
+              {/* Items - horizontal, fill width, 57px height, spread evenly */}
               <div className="w-full flex flex-row items-center justify-between h-[57px]">
-                {/* Text - vertical auto layout, fill width, 57px height, 12px gap */}
-                <div className="flex flex-col justify-between h-[57px] gap-3">
+                {/* Text - vertical, fill, 57px, centre left, 12px gap */}
+                <div className="flex flex-col justify-center gap-3 flex-1">
                   <p className="text-[12px] font-normal leading-none tracking-tight-2 whitespace-pre-line">
                     {film.copyrightInfo}
                   </p>
                 </div>
-                {/* Studio Ghibli Logo - 57px height, width auto */}
+                {/* Studio Ghibli Logo - 57px height, auto width */}
                 <img
                   src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                   alt="Studio Ghibli"
-                  style={{ height: '57px', width: 'auto', maxWidth: '40%' }}
-                  className="object-contain flex-shrink-0"
+                  className="h-[57px] w-auto object-contain flex-shrink-0"
                 />
               </div>
             </div>
