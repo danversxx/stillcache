@@ -40,7 +40,6 @@ export default function WelcomeMessage() {
         const dayName = days[now.getDay()];
         const day = now.getDate();
         const monthName = months[now.getMonth()];
-        const year = now.getFullYear();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
@@ -57,10 +56,10 @@ export default function WelcomeMessage() {
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Line 1: location + date
-        setLine1(`Welcome. Viewing from: ${location} · ${dayName} ${day} ${monthName} ${year}`);
-        // Line 2: time + greeting
-        setLine2(`${hours}:${minutes}:${seconds} · ${greeting}`);
+        // Line 1: day date month time location
+        setLine1(`${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${location}`);
+        // Line 2: greeting
+        setLine2(greeting);
 
       } catch (error) {
         console.error('Error fetching location:', error);
