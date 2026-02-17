@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 
 export default function WelcomeMessage() {
-  const [line1, setLine1] = useState('Welcome. Viewing from: Loading...');
+  const [line1, setLine1] = useState('Loading...');
   const [line2, setLine2] = useState('');
+  const [line3, setLine3] = useState('');
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -23,7 +24,6 @@ export default function WelcomeMessage() {
         if (isCacheValid && cachedLocation) {
           locationData = JSON.parse(cachedLocation);
         } else {
-          // Fetch fresh location data
           const response = await fetch('https://ipapi.co/json/');
           if (response.ok) {
             locationData = await response.json();
@@ -44,6 +44,9 @@ export default function WelcomeMessage() {
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
 
+        // Get timezone abbreviation from the user's browser
+        const tzAbbr = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop() || '';
+
         // Get greeting based on hour
         const hour = now.getHours();
         let greeting = 'Good Night';
@@ -56,22 +59,22 @@ export default function WelcomeMessage() {
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Line 1: day date month time location
-        setLine1(`${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${location}`);
-        // Line 2: greeting
-        setLine2(greeting);
+        // Line 1: Tuesday 17 February 18:00:00 EST
+        setLine1(`${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${tzAbbr}`);
+        // Line 2: New York, USA
+        setLine2(location);
+        // Line 3: Good Evening
+        setLine3(greeting);
 
       } catch (error) {
         console.error('Error fetching location:', error);
-        setLine1('Welcome. Viewing from: Location unavailable');
+        setLine1('Location unavailable');
         setLine2('');
+        setLine3('');
       }
     };
 
-    // Update immediately
     updateWelcome();
-
-    // Update every second for time
     intervalId = setInterval(updateWelcome, 1000);
 
     return () => {
@@ -80,9 +83,10 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="w-full text-[14px] lg:text-[28px] font-bold leading-none tracking-tight-2">
+    <div className="w-full text-[18px] lg:text-[28px] font-bold leading-none tracking-tight-2 flex flex-col gap-0">
       <div>{line1}</div>
       {line2 && <div>{line2}</div>}
+      {line3 && <div className="mt-[1em]">{line3}</div>}
     </div>
   );
 }
