@@ -32,21 +32,23 @@ export default async function FilmSection() {
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-8">
 
         {/* Mobile: Film Heading (Avatar + Title side by side) */}
-        <div className="lg:hidden w-full flex flex-row items-center gap-6">
-          <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
+        <div className="lg:hidden w-full flex flex-row items-center gap-3">
+          {/* Avatar - same height as text block */}
+          <div className="w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
             <Image
               src={film.directorAvatarUrl}
               alt={film.director}
-              width={52}
-              height={52}
+              width={42}
+              height={42}
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center h-[52px]">
-            <span className="text-[16px] font-normal leading-none tracking-tight-2">
+          {/* Film Title - vertical, no gap between text layers */}
+          <div className="flex flex-col justify-center h-[42px]">
+            <span className="text-[18px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
-            <span className="text-[16px] font-bold leading-none tracking-tight-2">
+            <span className="text-[18px] font-bold leading-none tracking-tight-2">
               {film.title}
             </span>
           </div>
@@ -79,7 +81,7 @@ export default async function FilmSection() {
         <div className="w-full flex flex-col gap-5 lg:gap-6 lg:h-[432px]">
 
           {/* Desktop: Film Heading (Avatar + Title side by side) */}
-          <div className="hidden lg:flex flex-row items-center gap-6">
+          <div className="hidden lg:flex flex-row items-center gap-3">
             <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
               <Image
                 src={film.directorAvatarUrl}
@@ -119,19 +121,20 @@ export default async function FilmSection() {
               <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                 Information
               </h3>
-              {/* Items: text + studio logo aligned top and bottom */}
-              <div className="w-full flex flex-row items-stretch justify-between">
-                {/* Text Items - 12px gap between lines */}
-                <div className="flex flex-col justify-between gap-3">
+              {/* Items: Text auto layout + Studio Logo, both 57px, evenly spread */}
+              <div className="w-full flex flex-row items-center justify-between h-[57px]">
+                {/* Text - vertical auto layout, fill width, 57px height, 12px gap */}
+                <div className="flex flex-col justify-between h-[57px] gap-3">
                   <p className="text-[12px] font-normal leading-none tracking-tight-2 whitespace-pre-line">
                     {film.copyrightInfo}
                   </p>
                 </div>
-                {/* Studio Logo - same height as Items container */}
+                {/* Studio Ghibli Logo - 57px height, width auto */}
                 <img
                   src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                   alt="Studio Ghibli"
-                  className="w-auto object-contain self-stretch"
+                  style={{ height: '57px', width: 'auto', maxWidth: '40%' }}
+                  className="object-contain flex-shrink-0"
                 />
               </div>
             </div>
