@@ -3,7 +3,7 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full flex flex-col gap-4 lg:gap-6">
+    <header className="w-full flex flex-col gap-6">
       {/* Still Cache */}
       <div className="w-full flex items-center gap-4 lg:gap-6">
         {/* Muybridge Horse GIF */}
@@ -21,9 +21,7 @@ export default function Header() {
       </div>
 
       {/* Welcome */}
-      <div className="w-full">
-        <WelcomeMessage />
-      </div>
+      <WelcomeMessage />
     </header>
   );
 }
