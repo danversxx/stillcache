@@ -117,29 +117,22 @@ export default async function FilmSection() {
           <div className="w-full flex flex-col gap-3">
 
             {/* Information */}
-            <div className="w-full flex flex-col gap-3 pb-3 border-b border-white/10">
-              <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
-                Information
-              </h3>
-              {/* Items - 57px tall, space between text and logo */}
-              <div className="w-full flex flex-row items-center justify-between" style={{height: '57px'}}>
-                {/* Text - hugs content, vertically centered, 12px gap between lines */}
-                <div className="flex flex-col gap-3">
-                  <span className="text-[12px] font-normal leading-none tracking-tight-2">
-                    © 1989 Kiki's Delivery Service / Eiko Kadono
-                  </span>
-                  <span className="text-[12px] font-normal leading-none tracking-tight-2">
-                    Studio Ghibli · Nibariki · Tokuma Shoten
-                  </span>
-                </div>
-                {/* Studio Ghibli Logo - 57px tall */}
-                <img
-                  src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
-                  alt="Studio Ghibli"
-                  style={{height: '57px', width: 'auto'}}
-                  className="object-contain flex-shrink-0"
-                />
+            <div className="w-full flex flex-row items-stretch justify-between pb-3 border-b border-white/10">
+              {/* Left: Heading + Text */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
+                  Information
+                </h3>
+                <p className="text-[12px] font-normal tracking-tight-2" style={{lineHeight: '1'}}>
+                  © 1989 Kiki's Delivery Service / Eiko Kadono<br/>Studio Ghibli · Nibariki · Tokuma Shoten
+                </p>
               </div>
+              {/* Studio Ghibli Logo - self-stretch so it spans full height */}
+              <img
+                src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
+                alt="Studio Ghibli"
+                className="w-auto object-contain flex-shrink-0 self-stretch"
+              />
             </div>
 
             {/* Directed By (no avatar - moved to Film Heading) */}
