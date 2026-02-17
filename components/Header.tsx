@@ -3,9 +3,9 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full flex flex-col gap-3">
+    <header className="w-full flex flex-col gap-4 lg:gap-6">
       {/* Still Cache */}
-      <div className="w-full flex items-center gap-3">
+      <div className="w-full flex items-center gap-4 lg:gap-6">
         {/* Muybridge Horse GIF */}
         <div className="w-[90px] h-[60px] flex items-center justify-center overflow-hidden">
           <img 
