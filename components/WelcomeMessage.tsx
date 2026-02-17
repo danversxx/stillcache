@@ -80,7 +80,7 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="w-full text-[18px] lg:text-[28px] font-bold leading-none tracking-tight-2">
+    <div className="w-full text-[14px] lg:text-[28px] font-bold leading-none tracking-tight-2">
       <div>{line1}</div>
       {line2 && <div>{line2}</div>}
     </div>
