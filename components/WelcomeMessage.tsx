@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 
 export default function WelcomeMessage() {
-  const [welcomeText, setWelcomeText] = useState('Welcome. Viewing from: Loading...');
+  const [line1, setLine1] = useState('Welcome. Viewing from: Loading...');
+  const [line2, setLine2] = useState('');
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -56,13 +57,15 @@ export default function WelcomeMessage() {
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Build full welcome text
-        const welcomeMessage = `Welcome. Viewing from: ${location} · ${dayName} ${day} ${monthName} ${year} ${hours}:${minutes}:${seconds} · ${greeting}`;
-        
-        setWelcomeText(welcomeMessage);
+        // Line 1: location + date
+        setLine1(`Welcome. Viewing from: ${location} · ${dayName} ${day} ${monthName} ${year}`);
+        // Line 2: time + greeting
+        setLine2(`${hours}:${minutes}:${seconds} · ${greeting}`);
+
       } catch (error) {
         console.error('Error fetching location:', error);
-        setWelcomeText('Welcome. Viewing from: Location unavailable');
+        setLine1('Welcome. Viewing from: Location unavailable');
+        setLine2('');
       }
     };
 
@@ -79,7 +82,8 @@ export default function WelcomeMessage() {
 
   return (
     <div className="w-full text-[28px] lg:text-[28px] font-bold leading-none tracking-tight-2">
-      {welcomeText}
+      <div>{line1}</div>
+      {line2 && <div>{line2}</div>}
     </div>
   );
 }
