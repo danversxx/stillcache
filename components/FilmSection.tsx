@@ -22,28 +22,33 @@ type Film = {
 
 export default async function FilmSection() {
   const films: Film[] = await getFilms();
-  
-  // Get the first film (since we only have Kiki for now)
   const film = films[0];
-  
-  if (!film) {
-    return <div>No films found</div>;
-  }
+
+  if (!film) return <div>No films found</div>;
 
   return (
     <div className="w-full flex flex-col gap-8">
       {/* Content Section */}
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-8">
-        {/* Mobile: Film Heading First */}
-        <div className="lg:hidden w-full flex flex-col gap-2">
-          {/* Film Title */}
-          <div className="w-full flex flex-col">
-            <h2 className="text-[28px] font-bold leading-none tracking-tight-2">
-              {film.title}
-            </h2>
-            <p className="text-[28px] font-normal leading-none tracking-tight-2">
+
+        {/* Mobile: Film Heading (Avatar + Title side by side) */}
+        <div className="lg:hidden w-full flex flex-row items-center gap-6">
+          <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
+            <Image
+              src={film.directorAvatarUrl}
+              alt={film.director}
+              width={52}
+              height={52}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex flex-row items-center gap-3 h-[52px]">
+            <span className="text-[22px] font-normal leading-none tracking-tight-2">
               {film.director}
-            </p>
+            </span>
+            <span className="text-[22px] font-bold leading-none tracking-tight-2">
+              {film.title}
+            </span>
           </div>
         </div>
 
@@ -60,9 +65,9 @@ export default async function FilmSection() {
 
         {/* Mobile: Full Gallery Button Under Poster */}
         <div className="lg:hidden w-full">
-          <a 
-            href="#" 
-            className="w-full flex items-center justify-center px-2 py-4 border border-white rounded gap-1"
+          <a
+            href="#"
+            className="w-full flex items-center justify-center px-2 py-4 border border-white rounded"
           >
             <span className="text-[14px] font-bold leading-none tracking-tight-2">
               {film.title} · Full Gallery →
@@ -70,25 +75,34 @@ export default async function FilmSection() {
           </a>
         </div>
 
-        {/* Film Data - Desktop and Mobile (different order) */}
+        {/* Film Data */}
         <div className="w-full flex flex-col gap-5 lg:gap-6 lg:h-[432px]">
-          {/* Desktop: Film Heading */}
-          <div className="hidden lg:flex lg:flex-col gap-2">
-            {/* Film Title */}
-            <div className="w-full flex flex-col">
-              <h2 className="text-[28px] font-bold leading-none tracking-tight-2">
-                {film.title}
-              </h2>
-              <p className="text-[28px] font-normal leading-none tracking-tight-2">
+
+          {/* Desktop: Film Heading (Avatar + Title side by side) */}
+          <div className="hidden lg:flex flex-row items-center gap-6">
+            <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
+              <Image
+                src={film.directorAvatarUrl}
+                alt={film.director}
+                width={52}
+                height={52}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex flex-row items-center gap-3 h-[52px]">
+              <span className="text-[22px] font-normal leading-none tracking-tight-2">
                 {film.director}
-              </p>
+              </span>
+              <span className="text-[22px] font-bold leading-none tracking-tight-2">
+                {film.title}
+              </span>
             </div>
           </div>
 
           {/* Desktop: Full Gallery Link */}
           <div className="hidden lg:block w-full">
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="inline-flex items-center px-2 py-2 border border-white rounded"
             >
               <span className="text-[14px] font-bold leading-none tracking-tight-2">
@@ -99,48 +113,37 @@ export default async function FilmSection() {
 
           {/* Data Section */}
           <div className="w-full flex flex-col gap-3">
+
             {/* Information */}
             <div className="w-full flex flex-col gap-3 pb-3 border-b border-white/10">
               <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                 Information
               </h3>
-              <p className="text-[12px] font-normal leading-none tracking-tight-2 whitespace-pre-line">
-                {film.copyrightInfo}
-              </p>
+              {/* Items: text + studio logo */}
+              <div className="w-full flex flex-row items-center justify-between">
+                <div className="flex flex-col justify-center h-[57px]">
+                  <p className="text-[12px] font-normal leading-none tracking-tight-2 whitespace-pre-line">
+                    {film.copyrightInfo}
+                  </p>
+                </div>
+                <div className="h-[57px] flex items-center">
+                  <img
+                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studi-ghibli.svg"
+                    alt="Studio Ghibli"
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* Directed By */}
+            {/* Directed By (no avatar - moved to Film Heading) */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Directed by
               </span>
-              
-              {/* Director - Different order on mobile vs desktop */}
-              <div className="flex items-center gap-2">
-                {/* Desktop: Avatar first */}
-                <div className="hidden lg:block w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src={film.directorAvatarUrl}
-                    alt={film.director}
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="text-[12px] font-normal leading-none tracking-tight-2">
-                  {film.director}
-                </span>
-                {/* Mobile: Avatar after text */}
-                <div className="lg:hidden w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src={film.directorAvatarUrl}
-                    alt={film.director}
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+                {film.director}
+              </span>
             </div>
 
             {/* Overview */}
@@ -148,15 +151,10 @@ export default async function FilmSection() {
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Overview
               </span>
-              
-              {/* Overview-Info */}
               <div className="flex items-center gap-2">
-                {/* Rating Badge */}
                 <div className="w-5 h-5 flex items-center justify-center rounded bg-[#00E054]/50 border border-[#64FF9E]">
                   <span className="text-[12px] font-normal leading-none tracking-tight-2">{film.rating}</span>
                 </div>
-                
-                {/* Genre and Runtime */}
                 <span className="text-[12px] font-normal leading-none tracking-tight-2">
                   {film.genreRuntime}
                 </span>
@@ -188,11 +186,8 @@ export default async function FilmSection() {
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 External
               </span>
-              
-              {/* Links Container */}
               <div className="flex items-center gap-2">
-                {/* Trailer Button */}
-                <a 
+                <a
                   href={film.trailerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -202,9 +197,7 @@ export default async function FilmSection() {
                     Watch Trailer
                   </span>
                 </a>
-                
-                {/* Letterboxd Logo */}
-                <a 
+                <a
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -243,14 +236,11 @@ export default async function FilmSection() {
 
       {/* Divider */}
       <div className="w-full flex justify-center">
-        <span className="text-[14px] font-bold leading-none tracking-tight-2">
-          · · ·
-        </span>
+        <span className="text-[14px] font-bold leading-none tracking-tight-2">· · ·</span>
       </div>
 
       {/* Still Thumbnails */}
       <div className="w-full flex flex-col gap-4">
-        {/* Set 1 */}
         <div className="w-full flex flex-col md:flex-row items-center gap-4">
           {film.homepageStills.slice(0, 3).map((still, index) => (
             <div key={index} className="w-full md:flex-1">
@@ -264,8 +254,6 @@ export default async function FilmSection() {
             </div>
           ))}
         </div>
-
-        {/* Set 2 */}
         <div className="w-full flex flex-col md:flex-row items-center gap-4">
           {film.homepageStills.slice(3, 6).map((still, index) => (
             <div key={index} className="w-full md:flex-1">
