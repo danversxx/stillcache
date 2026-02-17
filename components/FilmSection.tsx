@@ -42,7 +42,7 @@ export default async function FilmSection() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex flex-row items-center gap-3 h-[52px]">
+          <div className="flex flex-col justify-center gap-3 h-[52px]">
             <span className="text-[22px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
@@ -89,7 +89,7 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex flex-row items-center gap-3 h-[52px]">
+            <div className="flex flex-col justify-center gap-3 h-[52px]">
               <span className="text-[22px] font-normal leading-none tracking-tight-2">
                 {film.director}
               </span>
@@ -128,7 +128,7 @@ export default async function FilmSection() {
                 </div>
                 <div className="h-[57px] flex items-center">
                   <img
-                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studi-ghibli.svg"
+                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                     alt="Studio Ghibli"
                     className="h-full w-auto object-contain"
                   />
