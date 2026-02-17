@@ -117,7 +117,7 @@ export default async function FilmSection() {
           <div className="w-full flex flex-col gap-3">
 
             {/* Information */}
-            <div className="w-full flex flex-row items-stretch justify-between pb-3 border-b border-white/10">
+            <div className="w-full flex flex-row items-center justify-between pb-3 border-b border-white/10">
               {/* Left: Heading + Text */}
               <div className="flex flex-col gap-3 lg:h-[57px] lg:justify-between overflow-hidden">
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
@@ -128,11 +128,11 @@ export default async function FilmSection() {
                   <span className="text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
-              {/* Studio Ghibli Logo - smaller on mobile, 57px on desktop */}
+              {/* Studio Ghibli Logo */}
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 h-[54px] lg:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[52px] lg:h-[57px]"
               />
             </div>
 
