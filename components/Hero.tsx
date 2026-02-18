@@ -4,7 +4,7 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full h-[352px] sm:h-[660px] lg:h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
+      className="w-full h-[352px] sm:h-[660px] lg:h-[880px] flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
@@ -12,7 +12,7 @@ export default function Hero() {
       }}
     >
       {/* Header - Logo + Welcome, evenly spread, scaled padding with safe area support */}
-      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
+      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
         {/* Logo - horse gif + "Still Cache" text, scaled gap */}
         <div className="flex items-center gap-[5px] sm:gap-[10px] lg:gap-[14px]">
           <div className="w-[30px] h-[20px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
@@ -34,7 +34,7 @@ export default function Hero() {
       </header>
 
       {/* Hero Film - poster + film text, scaled gap and padding */}
-      <div className="w-full flex items-end gap-[15px] sm:gap-[22px] lg:gap-[30px] py-4 sm:py-6 lg:py-8">
+      <div className="w-full flex items-end gap-[15px] sm:gap-[22px] lg:gap-[30px] py-4 sm:py-6 lg:py-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]">
         {/* Hero Film Poster - proportionally scaled */}
         <div className="w-[70px] h-[99px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px] flex-shrink-0">
           <img
