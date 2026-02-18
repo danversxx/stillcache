@@ -4,24 +4,13 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full flex flex-col justify-between"
+      className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '90vh', // Mobile/tablet: 90% viewport height for immersive feel
       }}
     >
-      {/* Desktop: Use aspect-ratio via media query */}
-      <style jsx>{`
-        @media (min-width: 1024px) {
-          section {
-            height: auto !important;
-            aspect-ratio: 1440 / 880;
-            max-height: 100vh;
-          }
-        }
-      `}</style>
       {/* Header - Logo + Welcome, evenly spread, fluid padding */}
       <header className="w-full flex flex-row items-center justify-between" style={{ 
         paddingTop: 'max(1rem, env(safe-area-inset-top))', 

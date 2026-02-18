@@ -33,3 +33,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Hero responsive height */
+@media (min-width: 1024px) {
+  .hero-responsive {
+    height: auto;
+    aspect-ratio: 1440 / 880;
+    max-height: 100vh;
+  }
+}
