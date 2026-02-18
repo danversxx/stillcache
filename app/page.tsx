@@ -7,18 +7,18 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-black">
       {/* Main Container - responsive width, proportionally scaled gap, scaled bottom padding */}
-      <div className="w-full mx-auto flex flex-col gap-4 sm:gap-8 lg:gap-16 pb-4 sm:pb-8 lg:pb-16">
+      <div className="w-full mx-auto flex flex-col" style={{ gap: '4.44vw', paddingBottom: '4.44vw' }}> {/* 64px at 1440px */}
         
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
 
-        {/* Films Section - responsive side padding */}
-        <section className="w-full">
+        {/* Films Section - fluid padding */}
+        <section className="w-full" style={{ paddingLeft: '8.33vw', paddingRight: '8.33vw' }}> {/* 120px at 1440px */}
           <FilmSection />
         </section>
 
-        {/* Footer - responsive side padding, 32px top/bottom padding */}
-        <div className="w-full">
+        {/* Footer - fluid padding */}
+        <div className="w-full" style={{ paddingLeft: '8.33vw', paddingRight: '8.33vw' }}>
           <Footer />
         </div>
       </div>
