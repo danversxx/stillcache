@@ -48,11 +48,8 @@ export default function Hero() {
         paddingLeft: 'min(8.33vw, 120px)', // 120px at 1440px
         paddingRight: 'min(8.33vw, 120px)'
       }}>
-        {/* Hero Film Poster - proportionally fluid */}
-        <div className="flex-shrink-0" style={{ 
-          width: 'min(9.72vw, 140px)', // 140px at 1440px
-          height: 'min(13.75vw, 198px)' // 198px at 1440px
-        }}>
+        {/* Hero Film Poster - larger on mobile, scales to desktop */}
+        <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px]">
           <img
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-poster.webp"
             alt="Sentimental Value Poster"
@@ -64,10 +61,10 @@ export default function Hero() {
         <div className="flex flex-col" style={{ gap: 'min(0.83vw, 12px)' }}> {/* 12px at 1440px */}
           {/* Hero Film Name - title + director */}
           <div className="flex flex-col">
-            <span className="font-bold leading-none tracking-tight-2" style={{ fontSize: 'min(1.53vw, 22px)' }}> {/* 22px at 1440px */}
+            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
               Sentimental Value
             </span>
-            <span className="font-normal leading-none tracking-tight-2" style={{ fontSize: 'min(1.53vw, 22px)' }}>
+            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
           </div>
