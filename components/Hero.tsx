@@ -9,7 +9,8 @@ export default function Hero() {
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '61.11vw' // 880px at 1440px = 61.11%
+        aspectRatio: '1440 / 880', // Maintains Figma's exact proportions
+        maxHeight: '100vh' // Never exceeds viewport height
       }}
     >
       {/* Header - Logo + Welcome, evenly spread, fluid padding */}
