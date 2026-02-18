@@ -6,7 +6,7 @@ export default function Hero() {
     <>
       <style>{`
         .hero-responsive {
-          background-position: 85% center;
+          background-position: 75% center;
         }
         @media (min-width: 1024px) {
           .hero-responsive {
