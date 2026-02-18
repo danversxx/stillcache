@@ -11,8 +11,8 @@ export default function Hero() {
         backgroundPosition: 'center'
       }}
     >
-      {/* Header - Logo + Welcome, evenly spread, scaled padding */}
-      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8">
+      {/* Header - Logo + Welcome, evenly spread, scaled padding with safe area support */}
+      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
         {/* Logo - horse gif + "Still Cache" text, scaled gap */}
         <div className="flex items-center gap-[5px] sm:gap-[10px] lg:gap-[14px]">
           <div className="w-[30px] h-[20px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
