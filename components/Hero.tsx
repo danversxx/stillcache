@@ -3,12 +3,24 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Hero() {
   return (
-    <section 
-      className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between bg-cover bg-right lg:bg-center"
-      style={{
-        backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
-      }}
-    >
+    <>
+      <style>{`
+        .hero-responsive {
+          background-position: 85% center;
+        }
+        @media (min-width: 1024px) {
+          .hero-responsive {
+            background-position: center;
+          }
+        }
+      `}</style>
+      <section 
+        className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between"
+        style={{
+          backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
+          backgroundSize: 'cover',
+        }}
+      >
       {/* Header - Stacked on mobile, horizontal on desktop */}
       <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 px-4 lg:px-24 xl:px-[120px] pt-6 lg:pt-8 pb-6 lg:pb-8" style={{ 
         paddingTop: 'max(1.5rem, env(safe-area-inset-top))'
@@ -58,5 +70,6 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </>
   );
 }
