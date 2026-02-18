@@ -12,23 +12,23 @@ export default function Hero() {
       }}
     >
       {/* Header - Logo + Welcome, evenly spread, scaled padding */}
-      <header className="w-full flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-0 py-4 sm:py-6 lg:py-8">
+      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8">
         {/* Logo - horse gif + "Still Cache" text, scaled gap */}
-        <div className="flex items-center gap-[7px] sm:gap-[10px] lg:gap-[14px]">
-          <div className="w-[36px] h-[24px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
+        <div className="flex items-center gap-[5px] sm:gap-[10px] lg:gap-[14px]">
+          <div className="w-[30px] h-[20px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
             <img 
               src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
               alt="Muybridge Horse"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-[24px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+          <h1 className="text-[20px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
             Still Cache
           </h1>
         </div>
 
         {/* Welcome - date/time + location/greeting, scaled gap */}
-        <div className="w-full sm:w-auto">
+        <div className="flex-shrink min-w-0">
           <WelcomeMessage />
         </div>
       </header>
