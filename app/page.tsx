@@ -1,4 +1,5 @@
 export const revalidate = 60;
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FilmSection from '@/components/FilmSection';
 import Footer from '@/components/Footer';
@@ -6,6 +7,9 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <div className="w-full min-h-screen bg-black">
+      {/* Header - separate from Hero */}
+      <Header />
+      
       {/* Main Container - responsive width, proportionally scaled gap, scaled bottom padding */}
       <div className="w-full mx-auto flex flex-col" style={{ gap: 'min(4.44vw, 64px)', paddingBottom: 'min(4.44vw, 64px)' }}> {/* 64px at 1440px */}
         
