@@ -4,7 +4,7 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full h-[440px] sm:h-[660px] lg:h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
+      className="w-full h-[352px] sm:h-[660px] lg:h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
@@ -15,14 +15,14 @@ export default function Hero() {
       <header className="w-full flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-0 py-4 sm:py-6 lg:py-8">
         {/* Logo - horse gif + "Still Cache" text, scaled gap */}
         <div className="flex items-center gap-[7px] sm:gap-[10px] lg:gap-[14px]">
-          <div className="w-[45px] h-[30px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
+          <div className="w-[36px] h-[24px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
             <img 
               src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
               alt="Muybridge Horse"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-[30px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+          <h1 className="text-[24px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
             Still Cache
           </h1>
         </div>
