@@ -12,9 +12,8 @@ export default function Hero() {
       }}
     >
       {/* Header - Stacked on mobile, horizontal on desktop */}
-      <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 px-4 lg:px-24 xl:px-[120px]" style={{ 
-        paddingTop: 'max(1rem, env(safe-area-inset-top))', 
-        paddingBottom: '1rem'
+      <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 px-4 lg:px-24 xl:px-[120px] pt-6 lg:pt-8 pb-6 lg:pb-8" style={{ 
+        paddingTop: 'max(1.5rem, env(safe-area-inset-top))'
       }}>
         {/* Logo - horse gif + "Still Cache" text */}
         <div className="flex items-center gap-2 lg:gap-[14px]">
@@ -37,7 +36,7 @@ export default function Hero() {
       </header>
 
       {/* Hero Film - poster + film text, responsive padding and gap */}
-      <div className="w-full flex items-end gap-4 lg:gap-[30px] pb-4 px-4 lg:px-24 xl:px-[120px] lg:pb-8">
+      <div className="w-full flex items-end gap-4 lg:gap-[30px] pb-6 lg:pb-8 px-4 lg:px-24 xl:px-[120px]">
         {/* Hero Film Poster - larger on mobile, scales to desktop */}
         <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px]">
           <img
