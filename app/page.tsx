@@ -13,12 +13,12 @@ export default function Home() {
         <Hero />
 
         {/* Films Section - responsive side padding */}
-        <section className="w-full px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]">
+        <section className="w-full">
           <FilmSection />
         </section>
 
         {/* Footer - responsive side padding, 32px top/bottom padding */}
-        <div className="w-full px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]">
+        <div className="w-full">
           <Footer />
         </div>
       </div>

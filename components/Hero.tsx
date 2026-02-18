@@ -4,37 +4,39 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
+      className="w-full h-[440px] sm:h-[660px] lg:h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
     >
-      {/* Header - Logo + Welcome, evenly spread, 32px top/bottom padding */}
-      <header className="w-full flex items-center justify-between py-8">
-        {/* Logo - horse gif + "Still Cache" text, 14px gap */}
-        <div className="flex items-center gap-[14px]">
-          <div className="w-[90px] h-[60px]">
+      {/* Header - Logo + Welcome, evenly spread, scaled padding */}
+      <header className="w-full flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-4 sm:gap-0 py-4 sm:py-6 lg:py-8">
+        {/* Logo - horse gif + "Still Cache" text, scaled gap */}
+        <div className="flex items-center gap-[7px] sm:gap-[10px] lg:gap-[14px]">
+          <div className="w-[45px] h-[30px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
             <img 
               src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
               alt="Muybridge Horse"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+          <h1 className="text-[30px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
             Still Cache
           </h1>
         </div>
 
-        {/* Welcome - date/time + location/greeting, 14px gap */}
-        <WelcomeMessage />
+        {/* Welcome - date/time + location/greeting, scaled gap */}
+        <div className="w-full sm:w-auto">
+          <WelcomeMessage />
+        </div>
       </header>
 
-      {/* Hero Film - poster + film text, 30px gap, 32px top/bottom padding */}
-      <div className="w-full flex items-end gap-[30px] py-8">
-        {/* Hero Film Poster - 140x198px */}
-        <div className="w-[140px] h-[198px] flex-shrink-0">
+      {/* Hero Film - poster + film text, scaled gap and padding */}
+      <div className="w-full flex items-end gap-[15px] sm:gap-[22px] lg:gap-[30px] py-4 sm:py-6 lg:py-8">
+        {/* Hero Film Poster - proportionally scaled */}
+        <div className="w-[70px] h-[99px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px] flex-shrink-0">
           <img
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-poster.webp"
             alt="Sentimental Value Poster"
@@ -42,14 +44,14 @@ export default function Hero() {
           />
         </div>
 
-        {/* Hero Film Text - film name + director, 12px gap */}
-        <div className="flex flex-col gap-3">
+        {/* Hero Film Text - film name + director, scaled gap */}
+        <div className="flex flex-col gap-[6px] sm:gap-[9px] lg:gap-3">
           {/* Hero Film Name - title + director */}
           <div className="flex flex-col">
-            <span className="text-[22px] font-bold leading-none tracking-tight-2">
+            <span className="text-[11px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
               Sentimental Value
             </span>
-            <span className="text-[22px] font-normal leading-none tracking-tight-2">
+            <span className="text-[11px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
           </div>
