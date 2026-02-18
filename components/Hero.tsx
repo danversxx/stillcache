@@ -4,7 +4,7 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full h-[880px] px-[120px] flex flex-col justify-between"
+      className="w-full h-[880px] px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px] flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
