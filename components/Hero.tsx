@@ -7,15 +7,17 @@ export default function Hero() {
       <style>{`
         .hero-responsive {
           background-position: 65% center;
+          height: min(420px, 85vh);
         }
         @media (min-width: 1024px) {
           .hero-responsive {
             background-position: center;
+            height: auto;
           }
         }
       `}</style>
       <section 
-        className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between"
+        className="hero-responsive w-full lg:h-auto flex flex-col justify-between"
         style={{
           backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
           backgroundSize: 'cover',
