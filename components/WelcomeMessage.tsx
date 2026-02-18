@@ -77,12 +77,12 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-row items-center gap-[8px] sm:gap-[10px] lg:gap-[14px]">
-      <div className="text-[10px] sm:text-[18px] lg:text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+    <div className="flex flex-row items-center" style={{ gap: '0.97vw' }}> {/* 14px at 1440px */}
+      <div className="font-bold leading-none tracking-tight-2 whitespace-pre-line" style={{ fontSize: '1.67vw' }}> {/* 24px at 1440px */}
         {dateTime}
       </div>
       {locationGreeting && (
-        <div className="text-[10px] sm:text-[18px] lg:text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+        <div className="font-bold leading-none tracking-tight-2 whitespace-pre-line" style={{ fontSize: '1.67vw' }}>
           {locationGreeting}
         </div>
       )}

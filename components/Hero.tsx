@@ -4,39 +4,56 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="w-full h-[352px] sm:h-[660px] lg:h-[880px] flex flex-col justify-between"
+      className="w-full flex flex-col justify-between"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
+        height: '61.11vw' // 880px at 1440px = 61.11%
       }}
     >
-      {/* Header - Logo + Welcome, evenly spread, scaled padding with safe area support */}
-      <header className="w-full flex flex-row items-center justify-between py-4 sm:py-6 lg:py-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]" style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}>
-        {/* Logo - horse gif + "Still Cache" text, scaled gap */}
-        <div className="flex items-center gap-[5px] sm:gap-[10px] lg:gap-[14px]">
-          <div className="w-[30px] h-[20px] sm:w-[68px] sm:h-[45px] lg:w-[90px] lg:h-[60px]">
+      {/* Header - Logo + Welcome, evenly spread, fluid padding */}
+      <header className="w-full flex flex-row items-center justify-between" style={{ 
+        paddingTop: 'max(1rem, env(safe-area-inset-top))', 
+        paddingBottom: '2.22vw', // 32px at 1440px
+        paddingLeft: '8.33vw', // 120px at 1440px
+        paddingRight: '8.33vw'
+      }}>
+        {/* Logo - horse gif + "Still Cache" text, fluid gap */}
+        <div className="flex items-center" style={{ gap: '0.97vw' }}> {/* 14px at 1440px */}
+          <div style={{ 
+            width: '6.25vw', // 90px at 1440px
+            height: '4.17vw' // 60px at 1440px
+          }}>
             <img 
               src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
               alt="Muybridge Horse"
               className="w-full h-full object-cover"
             />
           </div>
-          <h1 className="text-[20px] sm:text-[45px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+          <h1 className="font-bold leading-none tracking-tight-2 whitespace-nowrap" style={{ fontSize: '4.17vw' }}> {/* 60px at 1440px */}
             Still Cache
           </h1>
         </div>
 
-        {/* Welcome - date/time + location/greeting, scaled gap */}
+        {/* Welcome - date/time + location/greeting, fluid gap */}
         <div className="flex-shrink min-w-0">
           <WelcomeMessage />
         </div>
       </header>
 
-      {/* Hero Film - poster + film text, scaled gap and padding */}
-      <div className="w-full flex items-end gap-[15px] sm:gap-[22px] lg:gap-[30px] py-4 sm:py-6 lg:py-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-[120px]">
-        {/* Hero Film Poster - proportionally scaled */}
-        <div className="w-[70px] h-[99px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px] flex-shrink-0">
+      {/* Hero Film - poster + film text, fluid gap and padding */}
+      <div className="w-full flex items-end" style={{ 
+        gap: '2.08vw', // 30px at 1440px
+        paddingBottom: '2.22vw', // 32px at 1440px
+        paddingLeft: '8.33vw', // 120px at 1440px
+        paddingRight: '8.33vw'
+      }}>
+        {/* Hero Film Poster - proportionally fluid */}
+        <div className="flex-shrink-0" style={{ 
+          width: '9.72vw', // 140px at 1440px
+          height: '13.75vw' // 198px at 1440px
+        }}>
           <img
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-poster.webp"
             alt="Sentimental Value Poster"
@@ -44,14 +61,14 @@ export default function Hero() {
           />
         </div>
 
-        {/* Hero Film Text - film name + director, scaled gap */}
-        <div className="flex flex-col gap-[6px] sm:gap-[9px] lg:gap-3">
+        {/* Hero Film Text - film name + director, fluid gap */}
+        <div className="flex flex-col" style={{ gap: '0.83vw' }}> {/* 12px at 1440px */}
           {/* Hero Film Name - title + director */}
           <div className="flex flex-col">
-            <span className="text-[11px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
+            <span className="font-bold leading-none tracking-tight-2" style={{ fontSize: '1.53vw' }}> {/* 22px at 1440px */}
               Sentimental Value
             </span>
-            <span className="text-[11px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
+            <span className="font-normal leading-none tracking-tight-2" style={{ fontSize: '1.53vw' }}>
               Joachim Trier
             </span>
           </div>
