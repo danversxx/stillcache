@@ -12,7 +12,7 @@ export default function Hero() {
         @media (min-width: 1024px) {
           .hero-responsive {
             background-position: center;
-            height: auto;
+            height: calc(100vh - 140px);
           }
         }
       `}</style>

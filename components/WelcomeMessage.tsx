@@ -77,7 +77,7 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-row items-center gap-2 lg:gap-[14px]">
+    <div className="flex flex-row items-center justify-between lg:justify-start gap-2 lg:gap-[14px] w-full lg:w-auto">
       <div className="text-[14px] lg:text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
         {dateTime}
       </div>

@@ -2,7 +2,7 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 px-4 lg:px-24 xl:px-[120px] pt-6 lg:pt-8 pb-6 lg:pb-8 bg-black" style={{ 
+    <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 px-4 lg:px-24 xl:px-[120px] pt-6 lg:pt-4 pb-6 lg:pb-4 bg-black" style={{ 
       paddingTop: 'max(1.5rem, env(safe-area-inset-top))'
     }}>
       {/* Logo - horse gif + "Still Cache" text */}
