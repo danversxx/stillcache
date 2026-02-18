@@ -27,7 +27,7 @@ export default async function FilmSection() {
   if (!film) return <div>No films found</div>;
 
   return (
-    <div className="w-full flex flex-col gap-8">
+    <div className="w-full flex flex-col gap-6">
       {/* Content Section */}
       <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-8">
 

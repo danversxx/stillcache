@@ -3,9 +3,8 @@
 import { useEffect, useState } from 'react';
 
 export default function WelcomeMessage() {
-  const [line1, setLine1] = useState('Loading...');
-  const [line2, setLine2] = useState('');
-  const [line3, setLine3] = useState('');
+  const [dateTime, setDateTime] = useState('Loading...');
+  const [locationGreeting, setLocationGreeting] = useState('');
 
   useEffect(() => {
     let intervalId: NodeJS.Timeout;
@@ -17,7 +16,6 @@ export default function WelcomeMessage() {
         const cachedLocation = sessionStorage.getItem('geo_location_cache');
         const cacheTimestamp = sessionStorage.getItem('geo_cache_timestamp');
         
-        // Check if cache is valid (1 hour)
         const isCacheValid = cacheTimestamp && 
           (Date.now() - parseInt(cacheTimestamp, 10)) < 3600000;
 
@@ -44,10 +42,10 @@ export default function WelcomeMessage() {
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
 
-        // Get timezone abbreviation from the user's browser
+        // Get timezone abbreviation
         const tzAbbr = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop() || '';
 
-        // Get greeting based on hour
+        // Get greeting
         const hour = now.getHours();
         let greeting = 'Good Night';
         if (hour >= 5 && hour < 12) greeting = 'Good Morning';
@@ -59,18 +57,14 @@ export default function WelcomeMessage() {
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Line 1: Tuesday 17 February 18:00:00 EST
-        setLine1(`${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${tzAbbr}`);
-        // Line 2: New York, USA
-        setLine2(location);
-        // Line 3: Good Evening
-        setLine3(greeting);
+        // Set both text blocks
+        setDateTime(`${dayName} ${day} ${monthName}\n${hours}:${minutes}:${seconds} ${tzAbbr}`);
+        setLocationGreeting(`${location}\n${greeting}`);
 
       } catch (error) {
         console.error('Error fetching location:', error);
-        setLine1('Location unavailable');
-        setLine2('');
-        setLine3('');
+        setDateTime('Loading...');
+        setLocationGreeting('');
       }
     };
 
@@ -83,10 +77,15 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="w-full text-[18px] lg:text-[28px] font-bold leading-none tracking-tight-2 flex flex-col gap-0">
-      <div>{line1}</div>
-      {line2 && <div>{line2}</div>}
-      {line3 && <div className="mt-[1em]">{line3}</div>}
+    <div className="flex items-center gap-[14px]">
+      <div className="text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+        {dateTime}
+      </div>
+      {locationGreeting && (
+        <div className="text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+          {locationGreeting}
+        </div>
+      )}
     </div>
   );
 }
