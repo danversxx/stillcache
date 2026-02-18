@@ -4,11 +4,9 @@ import WelcomeMessage from './WelcomeMessage';
 export default function Hero() {
   return (
     <section 
-      className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between"
+      className="hero-responsive w-full h-[90vh] lg:h-auto flex flex-col justify-between bg-cover bg-right lg:bg-center"
       style={{
         backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
       }}
     >
       {/* Header - Stacked on mobile, horizontal on desktop */}
