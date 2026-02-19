@@ -10,8 +10,8 @@ export default function Home() {
       {/* Header - separate from Hero */}
       <Header />
       
-      {/* Main Container - responsive width, proportionally scaled gap, scaled bottom padding */}
-      <div className="w-full mx-auto flex flex-col" style={{ gap: 'min(4.44vw, 64px)', paddingBottom: 'min(4.44vw, 64px)' }}> {/* 64px at 1440px */}
+      {/* Main Container - responsive width, 14px gap on mobile, 64px on desktop */}
+      <div className="w-full mx-auto flex flex-col gap-3.5 lg:gap-16" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
         
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
