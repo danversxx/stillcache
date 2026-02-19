@@ -45,13 +45,16 @@ export default function WelcomeMessage() {
         // Get timezone abbreviation
         const tzAbbr = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop() || '';
 
+        // Format date/time on one line
+        const dateTimeString = `${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${tzAbbr}`;
+
         // Build location string (no greeting)
         const location = locationData 
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
         // Set date/time and location
-        setDateTime(`${dayName} ${day} ${monthName}\n${hours}:${minutes}:${seconds} ${tzAbbr}`);
+        setDateTime(dateTimeString);
         setLocationGreeting(location);
 
       } catch (error) {
@@ -70,12 +73,12 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-col gap-1">
-      <div className="text-[14px] lg:text-[16px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+    <div className="flex flex-col gap-0 lg:items-end">
+      <div className="text-[14px] lg:text-[16px] font-bold leading-tight tracking-tight-2">
         {dateTime}
       </div>
       {locationGreeting && (
-        <div className="text-[14px] lg:text-[16px] font-bold leading-none tracking-tight-2">
+        <div className="text-[14px] lg:text-[16px] font-bold leading-tight tracking-tight-2">
           {locationGreeting}
         </div>
       )}
