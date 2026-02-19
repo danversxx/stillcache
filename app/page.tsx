@@ -16,13 +16,13 @@ export default function Home() {
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
 
-        {/* Films Section - fluid padding */}
-        <section className="w-full" style={{ paddingLeft: 'min(8.33vw, 120px)', paddingRight: 'min(8.33vw, 120px)' }}> {/* 120px at 1440px */}
+        {/* Films Section - responsive padding */}
+        <section className="w-full px-4 lg:px-24 xl:px-[120px]">
           <FilmSection />
         </section>
 
-        {/* Footer - fluid padding */}
-        <div className="w-full" style={{ paddingLeft: 'min(8.33vw, 120px)', paddingRight: 'min(8.33vw, 120px)' }}>
+        {/* Footer - responsive padding */}
+        <div className="w-full px-4 lg:px-24 xl:px-[120px]">
           <Footer />
         </div>
       </div>

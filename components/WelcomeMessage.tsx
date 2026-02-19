@@ -73,7 +73,7 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-0 lg:items-end">
+    <div className="flex flex-col gap-0 items-start lg:items-start">
       <div className="text-[14px] lg:text-[16px] font-bold leading-tight tracking-tight-2">
         {dateTime}
       </div>
