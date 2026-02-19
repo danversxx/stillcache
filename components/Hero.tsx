@@ -1,40 +1,31 @@
 import Image from 'next/image';
-import WelcomeMessage from './WelcomeMessage';
 
 export default function Hero() {
   return (
-    <section 
-      className="w-full h-[880px] px-[120px] flex flex-col justify-between"
-      style={{
-        backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
-    >
-      {/* Header - Logo + Welcome, evenly spread, 32px top/bottom padding */}
-      <header className="w-full flex items-center justify-between py-8">
-        {/* Logo - horse gif + "Still Cache" text, 14px gap */}
-        <div className="flex items-center gap-[14px]">
-          <div className="w-[90px] h-[60px]">
-            <img 
-              src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
-              alt="Muybridge Horse"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <h1 className="text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
-            Still Cache
-          </h1>
-        </div>
-
-        {/* Welcome - date/time + location/greeting, 14px gap */}
-        <WelcomeMessage />
-      </header>
-
-      {/* Hero Film - poster + film text, 30px gap, 32px top/bottom padding */}
-      <div className="w-full flex items-end gap-[30px] py-8">
-        {/* Hero Film Poster - 140x198px */}
-        <div className="w-[140px] h-[198px] flex-shrink-0">
+    <>
+      <style>{`
+        .hero-responsive {
+          background-position: center;
+          height: min(400px, 85vh);
+        }
+        @media (min-width: 1024px) {
+          .hero-responsive {
+            background-position: center;
+            height: calc(100vh - 140px);
+          }
+        }
+      `}</style>
+      <section 
+        className="hero-responsive w-full lg:h-auto flex flex-col justify-end"
+        style={{
+          backgroundImage: 'url(https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-hero.webp)',
+          backgroundSize: 'cover',
+        }}
+      >
+      {/* Hero Film - poster + film text */}
+      <div className="w-full flex items-end gap-4 lg:gap-[30px] pb-6 lg:pb-8 px-4 lg:px-24 xl:px-[120px]">
+        {/* Hero Film Poster */}
+        <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] lg:w-[140px] lg:h-[198px]">
           <img
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-poster.webp"
             alt="Sentimental Value Poster"
@@ -42,20 +33,19 @@ export default function Hero() {
           />
         </div>
 
-        {/* Hero Film Text - film name, director, copyright, and trailer */}
-        <div className="flex flex-col gap-3">
-          {/* Hero Film Name - title + director */}
+        {/* Hero Film Text */}
+        <div className="flex flex-col gap-2 lg:gap-3">
           <div className="flex flex-col">
-            <span className="text-[22px] font-bold leading-none tracking-tight-2">
+            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
               Sentimental Value
             </span>
-            <span className="text-[22px] font-normal leading-none tracking-tight-2">
+            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
           </div>
           
           {/* Copyright info */}
-          <div className="text-[11px] sm:text-[12px] lg:text-[14px] font-normal leading-tight tracking-tight-2">
+          <div className="text-[10px] sm:text-[11px] lg:text-[13px] font-normal leading-tight tracking-tight-2">
             © 2025 Sentimental Value / Joachim Trier<br />
             Nordisk Film · Neon
           </div>
@@ -67,12 +57,13 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="inline-flex items-center px-[6px] py-[6px] border border-white rounded w-fit"
           >
-            <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-normal leading-none tracking-tight-2">
               Watch Trailer
             </span>
           </a>
         </div>
       </div>
     </section>
+    </>
   );
 }
