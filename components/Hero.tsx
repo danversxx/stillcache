@@ -35,8 +35,8 @@ export default function Hero() {
           />
         </div>
 
-        {/* Hero Film Text - film name + director, fluid gap */}
-        <div className="flex flex-col" style={{ gap: 'min(0.83vw, 12px)' }}> {/* 12px at 1440px */}
+        {/* Hero Film Text - film name, director, and copyright */}
+        <div className="flex flex-col gap-2 lg:gap-3">
           {/* Hero Film Name - title + director */}
           <div className="flex flex-col">
             <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
@@ -45,6 +45,11 @@ export default function Hero() {
             <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
+          </div>
+          {/* Copyright info */}
+          <div className="text-[11px] sm:text-[12px] lg:text-[14px] font-normal leading-tight tracking-tight-2">
+            © 2025 Sentimental Value / Joachim Trier<br />
+            Nordisk Film · Neon
           </div>
         </div>
       </div>

@@ -45,21 +45,14 @@ export default function WelcomeMessage() {
         // Get timezone abbreviation
         const tzAbbr = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop() || '';
 
-        // Get greeting
-        const hour = now.getHours();
-        let greeting = 'Good Night';
-        if (hour >= 5 && hour < 12) greeting = 'Good Morning';
-        else if (hour >= 12 && hour < 17) greeting = 'Good Afternoon';
-        else if (hour >= 17 && hour < 22) greeting = 'Good Evening';
-
-        // Build location string
+        // Build location string (no greeting)
         const location = locationData 
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Set both text blocks
+        // Set date/time and location
         setDateTime(`${dayName} ${day} ${monthName}\n${hours}:${minutes}:${seconds} ${tzAbbr}`);
-        setLocationGreeting(`${location}\n${greeting}`);
+        setLocationGreeting(location);
 
       } catch (error) {
         console.error('Error fetching location:', error);
@@ -77,12 +70,12 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-row items-center justify-between lg:justify-start gap-2 lg:gap-[14px] w-full lg:w-auto">
-      <div className="text-[14px] lg:text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+    <div className="flex flex-col lg:flex-col gap-1">
+      <div className="text-[14px] lg:text-[16px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
         {dateTime}
       </div>
       {locationGreeting && (
-        <div className="text-[14px] lg:text-[24px] font-bold leading-none tracking-tight-2 whitespace-pre-line">
+        <div className="text-[14px] lg:text-[16px] font-bold leading-none tracking-tight-2">
           {locationGreeting}
         </div>
       )}

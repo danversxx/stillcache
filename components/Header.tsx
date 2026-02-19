@@ -7,14 +7,14 @@ export default function Header() {
     }}>
       {/* Logo - horse gif + "Still Cache" text */}
       <div className="flex items-center gap-2 lg:gap-[14px]">
-        <div className="w-[54px] h-[36px] lg:w-[90px] lg:h-[60px]">
+        <div className="w-[54px] h-[36px] lg:w-[75px] lg:h-[50px]">
           <img 
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
             alt="Muybridge Horse"
             className="w-full h-full object-cover"
           />
         </div>
-        <h1 className="text-[36px] lg:text-[60px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+        <h1 className="text-[36px] lg:text-[42px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
           Still Cache
         </h1>
       </div>
