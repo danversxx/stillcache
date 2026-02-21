@@ -35,12 +35,22 @@ export default function Hero() {
 
         {/* Hero Film Text */}
         <div className="flex flex-col gap-2 lg:gap-3">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
             <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
               Sentimental Value
+            </span>
+          </div>
+          
+          {/* Rating */}
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 flex items-center justify-center rounded" style={{ backgroundColor: 'rgba(224, 97, 0, 0.5)', border: '1px solid #FFAA64' }}>
+              <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-normal leading-none tracking-tight-2">15</span>
+            </div>
+            <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-normal leading-none tracking-tight-2">
+              Drama/Comedy ‧ 2hr 13m
             </span>
           </div>
           
