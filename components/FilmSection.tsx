@@ -45,10 +45,10 @@ export default async function FilmSection() {
           </div>
           {/* Film Title - vertical, no gap between text layers */}
           <div className="flex flex-col justify-center h-[42px]">
-            <span className="text-[18px] font-normal leading-none tracking-tight-2">
+            <span className="text-[14px] sm:text-[18px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
-            <span className="text-[18px] font-bold leading-none tracking-tight-2">
+            <span className="text-[14px] sm:text-[18px] font-bold leading-none tracking-tight-2">
               {film.title}
             </span>
           </div>
@@ -201,7 +201,7 @@ export default async function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[60px] h-[22px] sm:w-[64px] sm:h-[23px] lg:w-[72px] lg:h-[26px]"
+                  className="w-[50px] h-[18px] sm:w-[64px] sm:h-[23px] lg:w-[72px] lg:h-[26px]"
                 >
                   <svg width="82" height="30" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2056_71)">
