@@ -23,7 +23,7 @@ export default function Hero() {
         }}
       >
       {/* Hero Film - poster + film text */}
-      <div className="w-full flex items-end gap-4 md:gap-[30px] pb-6 md:pb-8 px-4 md:px-24 xl:px-[120px]">
+      <div className="w-full flex items-end gap-4 md:gap-[30px] pb-6 md:pb-8 px-4 md:px-16 xl:px-[120px]">
         {/* Hero Film Poster */}
         <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] md:w-[140px] md:h-[198px]">
           <img
