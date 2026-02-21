@@ -7,11 +7,11 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <div className="w-full min-h-screen bg-black">
-      {/* Header - separate from Hero */}
+      {/* Header - fixed */}
       <Header />
       
-      {/* Main Container - responsive width, 14px gap on mobile, 64px on desktop */}
-      <div className="w-full mx-auto flex flex-col gap-3.5 lg:gap-16" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
+      {/* Main Container - add top padding for fixed header */}
+      <div className="w-full mx-auto flex flex-col gap-3.5 lg:gap-16 pt-[100px] lg:pt-[52px]" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
         
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
