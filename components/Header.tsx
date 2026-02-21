@@ -2,13 +2,11 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 flex flex-row items-center justify-between px-4 lg:px-24 xl:px-[120px] py-6 lg:py-0" style={{ 
-      height: 'auto',
+    <header className="w-full fixed top-0 left-0 right-0 z-50 flex flex-col lg:flex-row items-start lg:items-center justify-between px-4 lg:px-24 xl:px-[120px] py-4 lg:py-0 gap-2 lg:gap-0" style={{ 
       minHeight: '52px',
       backgroundColor: 'rgba(0, 0, 0, 0.7)',
       backdropFilter: 'blur(20px)',
-      WebkitBackdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+      WebkitBackdropFilter: 'blur(20px)'
     }}>
       {/* Logo */}
       <div className="flex items-center gap-[10px]">
@@ -25,7 +23,7 @@ export default function Header() {
       </div>
 
       {/* Welcome */}
-      <div className="flex-shrink min-w-0">
+      <div className="flex-shrink min-w-0 w-full lg:w-auto">
         <WelcomeMessage />
       </div>
     </header>

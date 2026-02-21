@@ -36,11 +36,11 @@ export default function Hero() {
         {/* Hero Film Text */}
         <div className="flex flex-col gap-2 lg:gap-3">
           <div className="flex flex-col">
-            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
-              Sentimental Value
-            </span>
             <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
+            </span>
+            <span className="text-[14px] sm:text-[16px] lg:text-[22px] font-bold leading-none tracking-tight-2">
+              Sentimental Value
             </span>
           </div>
           
