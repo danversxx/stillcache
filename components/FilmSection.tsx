@@ -27,14 +27,14 @@ export default async function FilmSection() {
   if (!film) return <div>No films found</div>;
 
   return (
-    <div className="w-full flex flex-col gap-4 sm:gap-5 lg:gap-6">
+    <div className="w-full flex flex-col gap-6">
       {/* Content Section */}
-      <div className="w-full flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8">
+      <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-8">
 
         {/* Mobile: Film Heading (Avatar + Title side by side) */}
-        <div className="lg:hidden w-full flex flex-row items-center gap-2 sm:gap-3">
+        <div className="lg:hidden w-full flex flex-row items-center gap-3">
           {/* Avatar - same height as text block */}
-          <div className="w-[32px] h-[32px] sm:w-[42px] sm:h-[42px] rounded-full overflow-hidden flex-shrink-0">
+          <div className="w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
             <Image
               src={film.directorAvatarUrl}
               alt={film.director}
@@ -44,11 +44,11 @@ export default async function FilmSection() {
             />
           </div>
           {/* Film Title - vertical, no gap between text layers */}
-          <div className="flex flex-col justify-center h-[32px] sm:h-[42px]">
-            <span className="text-[14px] sm:text-[18px] font-normal leading-none tracking-tight-2">
+          <div className="flex flex-col justify-center h-[42px]">
+            <span className="text-[18px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
-            <span className="text-[14px] sm:text-[18px] font-bold leading-none tracking-tight-2">
+            <span className="text-[18px] font-bold leading-none tracking-tight-2">
               {film.title}
             </span>
           </div>
@@ -69,16 +69,16 @@ export default async function FilmSection() {
         <div className="lg:hidden w-full">
           <a
             href="#"
-            className="w-full flex items-center justify-center px-2 py-3 sm:py-4 border border-white rounded"
+            className="w-full flex items-center justify-center px-2 py-4 border border-white rounded"
           >
-            <span className="text-[12px] sm:text-[14px] font-bold leading-none tracking-tight-2">
+            <span className="text-[14px] font-bold leading-none tracking-tight-2">
               {film.title} · Full Gallery →
             </span>
           </a>
         </div>
 
         {/* Film Data */}
-        <div className="w-full flex flex-col gap-4 sm:gap-5 lg:gap-6 lg:h-[432px]">
+        <div className="w-full flex flex-col gap-5 lg:gap-6 lg:h-[432px]">
 
           {/* Desktop: Film Heading (Avatar + Title side by side) */}
           <div className="hidden lg:flex flex-row items-center gap-3">
@@ -114,76 +114,76 @@ export default async function FilmSection() {
           </div>
 
           {/* Data Section */}
-          <div className="w-full flex flex-col gap-2 sm:gap-3">
+          <div className="w-full flex flex-col gap-3">
 
             {/* Information */}
-            <div className="w-full flex flex-row items-center justify-between pb-2 sm:pb-3 border-b border-white/10">
+            <div className="w-full flex flex-row items-center justify-between pb-3 border-b border-white/10">
               {/* Left: Heading + Text */}
-              <div className="flex flex-col gap-2 sm:gap-3 lg:h-[57px] lg:justify-between overflow-hidden pr-2">
-                <h3 className="text-[11px] sm:text-[14px] font-bold leading-none tracking-tight-2">
+              <div className="flex flex-col gap-3 lg:h-[57px] lg:justify-between overflow-hidden">
+                <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
                 <div className="flex flex-col overflow-hidden">
-                  <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
-                  <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
+                  <span className="text-[12px] font-normal leading-none tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
+                  <span className="text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
               {/* Studio Ghibli Logo */}
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 h-[40px] sm:h-[52px] lg:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[52px] lg:h-[57px]"
               />
             </div>
 
             {/* Directed By (no avatar - moved to Film Heading) */}
-            <div className="w-full flex items-center justify-between pb-2 sm:pb-3 border-b border-white/10">
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Directed by
               </span>
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 {film.director}
               </span>
             </div>
 
             {/* Overview */}
-            <div className="w-full flex items-center justify-between pb-2 sm:pb-3 border-b border-white/10">
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Overview
               </span>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded bg-[#00E054]/50 border border-[#64FF9E]">
-                  <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">{film.rating}</span>
+                <div className="w-5 h-5 flex items-center justify-center rounded bg-[#00E054]/50 border border-[#64FF9E]">
+                  <span className="text-[12px] font-normal leading-none tracking-tight-2">{film.rating}</span>
                 </div>
-                <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+                <span className="text-[12px] font-normal leading-none tracking-tight-2">
                   {film.genreRuntime}
                 </span>
               </div>
             </div>
 
             {/* Studio */}
-            <div className="w-full flex items-center justify-between pb-2 sm:pb-3 border-b border-white/10">
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Studio
               </span>
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 {film.studio}
               </span>
             </div>
 
             {/* Country */}
-            <div className="w-full flex items-center justify-between pb-2 sm:pb-3 border-b border-white/10">
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 Country
               </span>
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 {film.country}
               </span>
             </div>
 
             {/* External Links */}
             <div className="w-full flex items-center justify-between">
-              <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2">
                 External
               </span>
               <div className="flex items-center gap-2">
@@ -191,9 +191,9 @@ export default async function FilmSection() {
                   href={film.trailerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-[4px] py-[4px] sm:px-[6px] sm:py-[6px] border border-white rounded flex items-center justify-center"
+                  className="px-[6px] py-[6px] border border-white rounded flex items-center justify-center"
                 >
-                  <span className="text-[10px] sm:text-[12px] font-normal leading-none tracking-tight-2">
+                  <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-normal leading-none tracking-tight-2">
                     Watch Trailer
                   </span>
                 </a>
@@ -201,9 +201,9 @@ export default async function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[62px] h-[22px] sm:w-[82px] sm:h-[30px]"
+                  className="w-[68px] h-[25px] sm:w-[75px] sm:h-[27px] lg:w-[82px] lg:h-[30px]"
                 >
-                  <svg width="100%" height="100%" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                  <svg width="82" height="30" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2056_71)">
                       <path d="M40.9998 30C49.3984 30 56.2067 23.2795 56.2067 14.9893C56.2067 6.69911 49.3984 -0.0214233 40.9998 -0.0214233C32.6013 -0.0214233 25.793 6.69911 25.793 14.9893C25.793 23.2795 32.6013 30 40.9998 30Z" fill="#00E054"/>
                       <mask id="mask0_2056_71" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="53" y="0" width="29" height="31">
@@ -236,12 +236,12 @@ export default async function FilmSection() {
 
       {/* Divider */}
       <div className="w-full flex justify-center">
-        <span className="text-[11px] sm:text-[14px] font-bold leading-none tracking-tight-2">· · ·</span>
+        <span className="text-[14px] font-bold leading-none tracking-tight-2">· · ·</span>
       </div>
 
       {/* Still Thumbnails */}
-      <div className="w-full flex flex-col gap-3 sm:gap-4">
-        <div className="w-full flex flex-col md:flex-row items-center gap-3 sm:gap-4">
+      <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col md:flex-row items-center gap-4">
           {film.homepageStills.slice(0, 3).map((still, index) => (
             <div key={index} className="w-full md:flex-1">
               <Image
@@ -254,7 +254,7 @@ export default async function FilmSection() {
             </div>
           ))}
         </div>
-        <div className="w-full flex flex-col md:flex-row items-center gap-3 sm:gap-4">
+        <div className="w-full flex flex-col md:flex-row items-center gap-4">
           {film.homepageStills.slice(3, 6).map((still, index) => (
             <div key={index} className="w-full md:flex-1">
               <Image
