@@ -2,8 +2,11 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full flex flex-row items-center justify-between px-4 lg:px-24 xl:px-[120px] bg-black" style={{ 
-      height: '52px'
+    <header className="w-full flex flex-row items-center justify-between px-4 lg:px-24 xl:px-[120px] sticky top-0 z-50" style={{ 
+      height: '52px',
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      backdropFilter: 'blur(10px)',
+      WebkitBackdropFilter: 'blur(10px)'
     }}>
       {/* Logo */}
       <div className="flex items-center gap-[10px]">
@@ -14,7 +17,7 @@ export default function Header() {
             className="w-full h-full object-cover"
           />
         </div>
-        <h1 className="text-[18px] font-bold leading-none tracking-tight-2 whitespace-nowrap" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+        <h1 className="text-[18px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
           Still Cache
         </h1>
       </div>
