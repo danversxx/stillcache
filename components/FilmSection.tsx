@@ -201,7 +201,7 @@ export default async function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[68px] h-[25px] sm:w-[75px] sm:h-[27px] lg:w-[82px] lg:h-[30px]"
+                  className="w-[60px] h-[22px] sm:w-[64px] sm:h-[23px] lg:w-[72px] lg:h-[26px]"
                 >
                   <svg width="82" height="30" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2056_71)">
