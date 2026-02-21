@@ -203,7 +203,7 @@ export default async function FilmSection() {
                   rel="noopener noreferrer"
                   className="w-[40px] h-[15px] sm:w-[55px] sm:h-[20px] lg:w-[72px] lg:h-[26px]"
                 >
-                  <svg width="82" height="30" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-full h-full" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2056_71)">
                       <path d="M40.9998 30C49.3984 30 56.2067 23.2795 56.2067 14.9893C56.2067 6.69911 49.3984 -0.0214233 40.9998 -0.0214233C32.6013 -0.0214233 25.793 6.69911 25.793 14.9893C25.793 23.2795 32.6013 30 40.9998 30Z" fill="#00E054"/>
                       <mask id="mask0_2056_71" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="53" y="0" width="29" height="31">
