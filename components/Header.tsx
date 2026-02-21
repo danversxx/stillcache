@@ -2,24 +2,24 @@ import WelcomeMessage from './WelcomeMessage';
 
 export default function Header() {
   return (
-    <header className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3.5 lg:gap-0 px-4 lg:px-24 xl:px-[120px] pt-6 lg:pt-4 pb-3.5 lg:pb-4 bg-black" style={{ 
-      paddingTop: 'max(1.5rem, env(safe-area-inset-top))'
+    <header className="w-full flex flex-row items-center justify-between px-4 lg:px-24 xl:px-[120px] bg-black" style={{ 
+      height: '52px'
     }}>
-      {/* Logo - horse gif + "Still Cache" text */}
-      <div className="flex items-center gap-2 lg:gap-[14px]">
-        <div className="w-[54px] h-[36px] lg:w-[75px] lg:h-[50px]">
+      {/* Logo */}
+      <div className="flex items-center gap-[10px]">
+        <div className="w-[45px] h-[30px]">
           <img 
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
             alt="Muybridge Horse"
             className="w-full h-full object-cover"
           />
         </div>
-        <h1 className="text-[36px] lg:text-[42px] font-bold leading-none tracking-tight-2 whitespace-nowrap">
+        <h1 className="text-[18px] font-bold leading-none tracking-tight-2 whitespace-nowrap" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
           Still Cache
         </h1>
       </div>
 
-      {/* Welcome - date/time + location/greeting side by side */}
+      {/* Welcome */}
       <div className="flex-shrink min-w-0">
         <WelcomeMessage />
       </div>

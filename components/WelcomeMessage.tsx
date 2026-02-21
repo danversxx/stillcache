@@ -45,17 +45,21 @@ export default function WelcomeMessage() {
         // Get timezone abbreviation
         const tzAbbr = now.toLocaleTimeString('en-US', { timeZoneName: 'short' }).split(' ').pop() || '';
 
-        // Format date/time on one line
-        const dateTimeString = `${dayName} ${day} ${monthName} ${hours}:${minutes}:${seconds} ${tzAbbr}`;
+        // Get greeting
+        const hour = now.getHours();
+        let greeting = 'Good Night';
+        if (hour >= 5 && hour < 12) greeting = 'Good Morning';
+        else if (hour >= 12 && hour < 17) greeting = 'Good Afternoon';
+        else if (hour >= 17 && hour < 22) greeting = 'Good Evening';
 
-        // Build location string (no greeting)
+        // Build location string
         const location = locationData 
           ? `${locationData.city}, ${locationData.country_name}`
           : 'Unknown Location';
 
-        // Set date/time and location
-        setDateTime(dateTimeString);
-        setLocationGreeting(location);
+        // Set both text blocks
+        setDateTime(`${dayName} ${day} ${monthName}\n${hours}:${minutes}:${seconds} ${tzAbbr}`);
+        setLocationGreeting(`${location}\n${greeting}`);
 
       } catch (error) {
         console.error('Error fetching location:', error);
@@ -73,12 +77,12 @@ export default function WelcomeMessage() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-0 items-start lg:items-start">
-      <div className="text-[14px] lg:text-[16px] font-bold leading-tight tracking-tight-2">
+    <div className="flex items-center gap-2">
+      <div className="text-[14px] font-normal leading-none tracking-tight-2" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
         {dateTime}
       </div>
       {locationGreeting && (
-        <div className="text-[14px] lg:text-[16px] font-bold leading-tight tracking-tight-2">
+        <div className="text-[14px] font-normal leading-none tracking-tight-2" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
           {locationGreeting}
         </div>
       )}
