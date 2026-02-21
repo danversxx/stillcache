@@ -11,18 +11,18 @@ export default function Home() {
       <Header />
       
       {/* Main Container - add top padding for fixed header */}
-      <div className="w-full mx-auto flex flex-col gap-3.5 lg:gap-16 pt-[90px] lg:pt-[52px]" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
+      <div className="w-full mx-auto flex flex-col gap-3.5 md:gap-16 pt-[90px] md:pt-[52px]" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
         
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
 
         {/* Films Section - responsive padding */}
-        <section className="w-full px-4 lg:px-24 xl:px-[120px]">
+        <section className="w-full px-4 md:px-24 xl:px-[120px]">
           <FilmSection />
         </section>
 
         {/* Footer - responsive padding */}
-        <div className="w-full px-4 lg:px-24 xl:px-[120px]">
+        <div className="w-full px-4 md:px-24 xl:px-[120px]">
           <Footer />
         </div>
       </div>

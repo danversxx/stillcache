@@ -29,10 +29,10 @@ export default async function FilmSection() {
   return (
     <div className="w-full flex flex-col gap-6">
       {/* Content Section */}
-      <div className="w-full flex flex-col lg:flex-row gap-5 lg:gap-8">
+      <div className="w-full flex flex-col md:flex-row gap-5 md:gap-8">
 
         {/* Mobile: Film Heading (Avatar + Title side by side) */}
-        <div className="lg:hidden w-full flex flex-row items-center gap-3">
+        <div className="md:hidden w-full flex flex-row items-center gap-3">
           {/* Avatar - same height as text block */}
           <div className="w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
             <Image
@@ -55,18 +55,18 @@ export default async function FilmSection() {
         </div>
 
         {/* Poster */}
-        <div className="w-full lg:w-[288.14px] lg:h-[432px] flex-shrink-0">
+        <div className="w-full md:w-[288.14px] md:h-[432px] flex-shrink-0">
           <Image
             src={film.posterUrl}
             alt={`${film.title} Poster`}
             width={288}
             height={432}
-            className="w-full h-auto lg:h-[432px] object-cover aspect-[288/432]"
+            className="w-full h-auto md:h-[432px] object-cover aspect-[288/432]"
           />
         </div>
 
         {/* Mobile: Full Gallery Button Under Poster */}
-        <div className="lg:hidden w-full">
+        <div className="md:hidden w-full">
           <a
             href="#"
             className="w-full flex items-center justify-center px-2 py-4 border border-white rounded"
@@ -78,10 +78,10 @@ export default async function FilmSection() {
         </div>
 
         {/* Film Data */}
-        <div className="w-full flex flex-col gap-5 lg:gap-6 lg:h-[432px]">
+        <div className="w-full flex flex-col gap-5 md:gap-6 md:h-[432px]">
 
           {/* Desktop: Film Heading (Avatar + Title side by side) */}
-          <div className="hidden lg:flex flex-row items-center gap-3">
+          <div className="hidden md:flex flex-row items-center gap-3">
             <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
               <Image
                 src={film.directorAvatarUrl}
@@ -102,7 +102,7 @@ export default async function FilmSection() {
           </div>
 
           {/* Desktop: Full Gallery Link */}
-          <div className="hidden lg:block w-full">
+          <div className="hidden md:block w-full">
             <a
               href="#"
               className="inline-flex items-center px-2 py-2 border border-white rounded"
@@ -119,7 +119,7 @@ export default async function FilmSection() {
             {/* Information */}
             <div className="w-full flex flex-row items-center justify-between pb-3 border-b border-white/10">
               {/* Left: Heading + Text */}
-              <div className="flex flex-col gap-3 lg:h-[57px] lg:justify-between overflow-hidden">
+              <div className="flex flex-col gap-3 md:h-[57px] md:justify-between overflow-hidden">
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
@@ -132,7 +132,7 @@ export default async function FilmSection() {
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 h-[52px] lg:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[52px] md:h-[57px]"
               />
             </div>
 
@@ -193,7 +193,7 @@ export default async function FilmSection() {
                   rel="noopener noreferrer"
                   className="px-[6px] py-[6px] border border-white rounded flex items-center justify-center"
                 >
-                  <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-normal leading-none tracking-tight-2">
+                  <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-none tracking-tight-2">
                     Watch Trailer
                   </span>
                 </a>
@@ -201,7 +201,7 @@ export default async function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[60px] h-[22px] sm:w-[66px] sm:h-[24px] lg:w-[72px] lg:h-[26px]"
+                  className="w-[60px] h-[22px] sm:w-[66px] sm:h-[24px] md:w-[72px] md:h-[26px]"
                 >
                   <svg className="w-full h-full" viewBox="0 0 82 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_2056_71)">

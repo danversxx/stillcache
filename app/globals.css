@@ -35,7 +35,7 @@ a {
 }
 
 /* Hero responsive height */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .hero-responsive {
     height: auto;
     aspect-ratio: 1440 / 880;
