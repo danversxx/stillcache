@@ -11,7 +11,7 @@ export default function Home() {
       <Header />
       
       {/* Main Container - add top padding for fixed header */}
-      <div className="w-full mx-auto flex flex-col gap-0 lg:gap-16 pt-[90px] lg:pt-[52px]" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
+      <div className="w-full mx-auto flex flex-col gap-3.5 lg:gap-16 pt-[90px] lg:pt-[52px]" style={{ paddingBottom: 'min(4.44vw, 64px)' }}>
         
         {/* Hero Section - 880px height, responsive side padding */}
         <Hero />
