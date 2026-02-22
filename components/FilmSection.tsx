@@ -113,19 +113,19 @@ export default async function FilmSection() {
             </a>
           </div>
 
-          {/* Data Section */}
-          <div className="w-full flex flex-col gap-3">
+          {/* Data Section - 16px gaps between rows for breathing room */}
+          <div className="w-full flex flex-col gap-4">
 
             {/* Information */}
-            <div className="w-full flex flex-row items-center justify-between pb-3 border-b border-white/10">
+            <div className="w-full flex flex-row items-start justify-between pb-4 border-b border-white/10">
               {/* Left: Heading + Text */}
-              <div className="flex flex-col gap-3 md:h-[57px] md:justify-between overflow-hidden">
+              <div className="flex flex-col gap-2 overflow-hidden pr-3">
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
-                <div className="flex flex-col overflow-hidden">
-                  <span className="text-[12px] font-normal leading-none tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
-                  <span className="text-[12px] font-normal leading-none tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
+                <div className="flex flex-col gap-1 overflow-hidden">
+                  <span className="text-[12px] font-normal leading-tight tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
+                  <span className="text-[12px] font-normal leading-tight tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
               {/* Studio Ghibli Logo */}
@@ -136,9 +136,9 @@ export default async function FilmSection() {
               />
             </div>
 
-            {/* Directed By (no avatar - moved to Film Heading) */}
-            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            {/* Directed By - 14px label, 12px value */}
+            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Directed by
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -146,9 +146,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Overview */}
-            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            {/* Overview - 14px label, 12px value */}
+            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Overview
               </span>
               <div className="flex items-center gap-2">
@@ -161,9 +161,9 @@ export default async function FilmSection() {
               </div>
             </div>
 
-            {/* Studio */}
-            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            {/* Studio - 14px label, 12px value */}
+            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Studio
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -171,9 +171,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Country */}
-            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            {/* Country - 14px label, 12px value */}
+            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Country
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -181,9 +181,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* External Links */}
-            <div className="w-full flex items-center justify-between">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+            {/* External Links - 14px label */}
+            <div className="w-full flex items-center justify-between pt-2">
+              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 External
               </span>
               <div className="flex items-center gap-2">
