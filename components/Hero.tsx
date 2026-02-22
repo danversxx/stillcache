@@ -33,8 +33,8 @@ export default function Hero() {
           />
         </div>
 
-        {/* Hero Film Text - 12px gap between items */}
-        <div className="flex flex-col gap-3">
+        {/* Hero Film Text - 8px gap mobile, 12px desktop */}
+        <div className="flex flex-col gap-2 md:gap-3">
           {/* Director/Title - 22px text, 4px gap for optical balance */}
           <div className="flex flex-col gap-1">
             <span className="text-[14px] sm:text-[16px] md:text-[22px] font-normal leading-none tracking-tight-2">
