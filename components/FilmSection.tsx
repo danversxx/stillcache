@@ -43,8 +43,8 @@ export default async function FilmSection() {
               className="w-full h-full object-cover"
             />
           </div>
-          {/* Film Title - vertical, no gap between text layers */}
-          <div className="flex flex-col justify-center h-[42px]">
+          {/* Film Title - vertical, 2px gap between text layers */}
+          <div className="flex flex-col justify-center h-[42px] gap-0.5">
             <span className="text-[14px] sm:text-[18px] font-normal leading-none tracking-tight-2">
               {film.director}
             </span>
@@ -91,7 +91,7 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex flex-col justify-center h-[52px]">
+            <div className="flex flex-col justify-center h-[52px] gap-0.5">
               <span className="text-[22px] font-normal leading-none tracking-tight-2">
                 {film.director}
               </span>

@@ -23,7 +23,7 @@ export default function Hero() {
         }}
       >
       {/* Hero Film - poster + film text */}
-      <div className="w-full flex items-end gap-4 md:gap-[30px] pb-6 md:pb-8 px-4 md:px-14 xl:px-[120px]">
+      <div className="w-full flex items-end gap-4 md:gap-[30px] pb-6 md:pb-8 px-4 md:px-8 xl:px-[120px]">
         {/* Hero Film Poster */}
         <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] md:w-[140px] md:h-[198px]">
           <img
@@ -34,8 +34,8 @@ export default function Hero() {
         </div>
 
         {/* Hero Film Text */}
-        <div className="flex flex-col gap-2 md:gap-3">
-          <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-0.5">
             <span className="text-[14px] sm:text-[16px] md:text-[22px] font-normal leading-none tracking-tight-2">
               Joachim Trier
             </span>
