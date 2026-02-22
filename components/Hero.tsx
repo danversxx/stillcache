@@ -22,8 +22,8 @@ export default function Hero() {
           backgroundSize: 'cover',
         }}
       >
-      {/* Hero Film - poster + film text, items-start for precise top alignment */}
-      <div className="w-full flex items-start gap-6 pb-6 md:pb-8 px-4 md:px-8 xl:px-[120px]">
+      {/* Hero Film - items-end for bottom alignment desktop, 12px gap mobile */}
+      <div className="w-full flex items-end gap-3 md:gap-6 pb-6 md:pb-8 px-4 md:px-8 xl:px-[120px]">
         {/* Hero Film Poster - 140px mobile matches data height */}
         <div className="flex-shrink-0 w-[99px] h-[140px] sm:w-[105px] sm:h-[148px] md:w-[140px] md:h-[198px]">
           <img
