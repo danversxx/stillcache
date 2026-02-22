@@ -76,8 +76,8 @@ export default async function FilmSection() {
           </a>
         </div>
 
-        {/* Film Data */}
-        <div className="w-full flex flex-col gap-5 md:gap-6 md:h-[432px]">
+        {/* Film Data - exactly 432px to match poster, justify-between for precise distribution */}
+        <div className="w-full flex flex-col md:h-[432px] md:justify-between">
 
           {/* Desktop: Film Heading */}
           <div className="hidden md:flex flex-row items-center gap-3">
@@ -113,8 +113,8 @@ export default async function FilmSection() {
             </a>
           </div>
 
-          {/* Data Section - 12px gaps for utilitarian precision */}
-          <div className="w-full flex flex-col gap-3">
+          {/* Data Section - 12px gaps, justify-between will handle spacing */}
+          <div className="w-full flex flex-col gap-3 md:gap-0 md:justify-between md:flex-grow">
 
             {/* Information - calculated spacing */}
             <div className="w-full flex flex-row items-start justify-between pb-3 border-b border-white/10">
@@ -179,8 +179,8 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* External - flex-grow to push to bottom and align with poster */}
-            <div className="w-full flex items-end justify-between flex-grow">
+            {/* External - last item, parent justify-between handles alignment */}
+            <div className="w-full flex items-center justify-between">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 External
               </span>

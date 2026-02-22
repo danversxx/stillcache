@@ -22,10 +22,10 @@ export default function Hero() {
           backgroundSize: 'cover',
         }}
       >
-      {/* Hero Film - poster + film text, 24px gap desktop */}
-      <div className="w-full flex items-end gap-6 pb-6 md:pb-8 px-4 md:px-8 xl:px-[120px]">
-        {/* Hero Film Poster */}
-        <div className="flex-shrink-0 w-[80px] h-[113px] sm:w-[105px] sm:h-[148px] md:w-[140px] md:h-[198px]">
+      {/* Hero Film - poster + film text, items-start for precise top alignment */}
+      <div className="w-full flex items-start gap-6 pb-6 md:pb-8 px-4 md:px-8 xl:px-[120px]">
+        {/* Hero Film Poster - 140px mobile matches data height */}
+        <div className="flex-shrink-0 w-[99px] h-[140px] sm:w-[105px] sm:h-[148px] md:w-[140px] md:h-[198px]">
           <img
             src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/hero/sentimental-value-poster.webp"
             alt="Sentimental Value Poster"
