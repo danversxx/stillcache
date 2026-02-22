@@ -53,14 +53,14 @@ export default async function FilmSection() {
           </div>
         </div>
 
-        {/* Poster */}
-        <div className="w-full md:w-[288.14px] md:h-[432px] flex-shrink-0">
+        {/* Poster - 402px to match Figma Film Data height */}
+        <div className="w-full md:w-[288px] md:h-[402px] flex-shrink-0">
           <Image
             src={film.posterUrl}
             alt={`${film.title} Poster`}
             width={288}
-            height={432}
-            className="w-full h-auto md:h-[432px] object-cover aspect-[288/432]"
+            height={402}
+            className="w-full h-auto md:h-[402px] object-cover aspect-[288/432]"
           />
         </div>
 
@@ -76,10 +76,10 @@ export default async function FilmSection() {
           </a>
         </div>
 
-        {/* Film Data - exactly 432px to match poster, with internal 24px gaps */}
-        <div className="w-full flex flex-col gap-6 md:h-[432px] md:justify-between">
+        {/* Film Data - 402px: Heading(52) + gap(24) + Gallery(32) + gap(24) + Data(270) */}
+        <div className="w-full flex flex-col gap-6 md:h-[402px]">
 
-          {/* Desktop: Film Heading */}
+          {/* Desktop: Film Heading - 52px hug */}
           <div className="hidden md:flex flex-row items-center gap-3">
             <div className="w-[52px] h-[52px] rounded-full overflow-hidden flex-shrink-0">
               <Image
@@ -101,11 +101,11 @@ export default async function FilmSection() {
             </div>
           </div>
 
-          {/* Desktop: Full Gallery Link - 14px text */}
+          {/* Desktop: Full Gallery Link - 32px hug (8px padding top/bottom) */}
           <div className="hidden md:block w-full">
             <a
               href="#"
-              className="inline-flex items-center px-3 py-2 border border-white rounded"
+              className="inline-flex items-center px-2 py-2 border border-white rounded"
             >
               <span className="text-[14px] font-bold leading-none tracking-tight-2">
                 {film.title} · Full Gallery →
@@ -113,8 +113,8 @@ export default async function FilmSection() {
             </a>
           </div>
 
-          {/* Data Section - 12px gaps between rows */}
-          <div className="w-full flex flex-col gap-3">
+          {/* Data Section - 270px fill, 12px gaps between rows */}
+          <div className="w-full flex flex-col gap-3 md:flex-grow">
 
             {/* Information - calculated spacing */}
             <div className="w-full flex flex-row items-start justify-between pb-3 border-b border-white/10">
@@ -134,9 +134,9 @@ export default async function FilmSection() {
               />
             </div>
 
-            {/* Directed By */}
+            {/* Directed By - 12px label and value */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Directed by
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -144,9 +144,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Overview */}
+            {/* Overview - 12px label and value */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Overview
               </span>
               <div className="flex items-center gap-2">
@@ -159,9 +159,9 @@ export default async function FilmSection() {
               </div>
             </div>
 
-            {/* Studio */}
+            {/* Studio - 12px label and value */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Studio
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -169,9 +169,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Country */}
+            {/* Country - 12px label and value */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Country
               </span>
               <span className="text-[12px] font-normal leading-none tracking-tight-2">
@@ -179,9 +179,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* External - last item, parent justify-between handles alignment */}
+            {/* External - 12px label */}
             <div className="w-full flex items-center justify-between">
-              <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 External
               </span>
               <div className="flex items-center gap-2">
