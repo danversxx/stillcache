@@ -116,15 +116,15 @@ export default async function FilmSection() {
           {/* Data Section - 270px fill, 12px gaps between rows */}
           <div className="w-full flex flex-col gap-3 md:flex-grow">
 
-            {/* Information - calculated spacing */}
+            {/* Information - smart flex sizing */}
             <div className="w-full flex flex-row items-start justify-between pb-3 border-b border-white/10">
-              <div className="flex flex-col gap-2 overflow-hidden pr-3 max-w-[60%]">
+              <div className="flex flex-col gap-2 overflow-hidden pr-3 flex-1">
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[12px] font-normal leading-tight tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
-                  <span className="text-[12px] font-normal leading-tight tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
+                  <span className="text-[10px] md:text-[12px] font-normal leading-tight tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
+                  <span className="text-[10px] md:text-[12px] font-normal leading-tight tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
               <img
@@ -134,54 +134,54 @@ export default async function FilmSection() {
               />
             </div>
 
-            {/* Directed By - 12px label and value */}
+            {/* Directed By - 10px mobile, 12px desktop */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Directed by
               </span>
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
                 {film.director}
               </span>
             </div>
 
-            {/* Overview - 12px label and value */}
+            {/* Overview - 10px mobile, 12px desktop */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Overview
               </span>
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 flex items-center justify-center rounded bg-[#00E054]/50 border border-[#64FF9E]">
-                  <span className="text-[12px] font-normal leading-none tracking-tight-2">{film.rating}</span>
+                  <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">{film.rating}</span>
                 </div>
-                <span className="text-[12px] font-normal leading-none tracking-tight-2">
+                <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
                   {film.genreRuntime}
                 </span>
               </div>
             </div>
 
-            {/* Studio - 12px label and value */}
+            {/* Studio - 10px mobile, 12px desktop */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Studio
               </span>
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
                 {film.studio}
               </span>
             </div>
 
-            {/* Country - 12px label and value */}
+            {/* Country - 10px mobile, 12px desktop */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 Country
               </span>
-              <span className="text-[12px] font-normal leading-none tracking-tight-2">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
                 {film.country}
               </span>
             </div>
 
-            {/* External - 12px label */}
+            {/* External - 10px mobile, 12px desktop */}
             <div className="w-full flex items-center justify-between">
-              <span className="text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
                 External
               </span>
               <div className="flex items-center gap-2">
