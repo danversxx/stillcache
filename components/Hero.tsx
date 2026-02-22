@@ -55,10 +55,14 @@ export default function Hero() {
             </span>
           </div>
           
-          {/* Copyright - 12px text */}
-          <div className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-tight tracking-tight-2">
-            © 2025 Sentimental Value / Joachim Trier<br />
-            Nordisk Film · Neon
+          {/* Copyright - 12px text, 4px gap between lines */}
+          <div className="flex flex-col gap-1">
+            <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-tight tracking-tight-2">
+              © 2025 Sentimental Value / Joachim Trier
+            </span>
+            <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-tight tracking-tight-2">
+              Nordisk Film · Neon
+            </span>
           </div>
           
           {/* Watch Trailer Button - 14px text */}

@@ -113,31 +113,29 @@ export default async function FilmSection() {
             </a>
           </div>
 
-          {/* Data Section - 16px gaps between rows for breathing room */}
-          <div className="w-full flex flex-col gap-4">
+          {/* Data Section - 12px gaps for utilitarian precision */}
+          <div className="w-full flex flex-col gap-3">
 
-            {/* Information */}
-            <div className="w-full flex flex-row items-start justify-between pb-4 border-b border-white/10">
-              {/* Left: Heading + Text */}
-              <div className="flex flex-col gap-2 overflow-hidden pr-3">
+            {/* Information - calculated spacing */}
+            <div className="w-full flex flex-row items-start justify-between pb-3 border-b border-white/10">
+              <div className="flex flex-col gap-2 overflow-hidden pr-3 max-w-[60%]">
                 <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
-                <div className="flex flex-col gap-1 overflow-hidden">
+                <div className="flex flex-col gap-1">
                   <span className="text-[12px] font-normal leading-tight tracking-tight-2">© 1989 Kiki's Delivery Service / Eiko Kadono</span>
                   <span className="text-[12px] font-normal leading-tight tracking-tight-2">Studio Ghibli · Nibariki · Tokuma Shoten</span>
                 </div>
               </div>
-              {/* Studio Ghibli Logo */}
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt="Studio Ghibli"
-                className="w-auto object-contain flex-shrink-0 h-[52px] md:h-[57px]"
+                className="w-auto object-contain flex-shrink-0 h-[57px]"
               />
             </div>
 
-            {/* Directed By - 14px label, 12px value */}
-            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+            {/* Directed By */}
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Directed by
               </span>
@@ -146,8 +144,8 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Overview - 14px label, 12px value */}
-            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+            {/* Overview */}
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Overview
               </span>
@@ -161,8 +159,8 @@ export default async function FilmSection() {
               </div>
             </div>
 
-            {/* Studio - 14px label, 12px value */}
-            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+            {/* Studio */}
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Studio
               </span>
@@ -171,8 +169,8 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Country - 14px label, 12px value */}
-            <div className="w-full flex items-center justify-between pb-4 border-b border-white/10">
+            {/* Country */}
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 Country
               </span>
@@ -181,8 +179,8 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* External Links - 14px label */}
-            <div className="w-full flex items-center justify-between pt-2">
+            {/* External - flex-grow to push to bottom and align with poster */}
+            <div className="w-full flex items-end justify-between flex-grow">
               <span className="text-[14px] font-normal leading-none tracking-tight-2 opacity-60">
                 External
               </span>
