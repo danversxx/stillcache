@@ -45,16 +45,6 @@ export default function Hero() {
             </span>
           </div>
           
-          {/* Rating - 12px text, 8px gap */}
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 flex items-center justify-center rounded" style={{ backgroundColor: 'rgba(224, 97, 0, 0.5)', border: '1px solid #FFAA64' }}>
-              <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-none tracking-tight-2">15</span>
-            </div>
-            <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-none tracking-tight-2">
-              Drama/Comedy ‧ 2hr 13m
-            </span>
-          </div>
-          
           {/* Copyright - 12px text, 4px gap between lines */}
           <div className="flex flex-col gap-1">
             <span className="text-[10px] sm:text-[11px] md:text-[12px] font-normal leading-tight tracking-tight-2">

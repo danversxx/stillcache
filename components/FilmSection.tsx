@@ -64,13 +64,13 @@ export default async function FilmSection() {
           />
         </div>
 
-        {/* Mobile: Full Gallery Button - 14px text, consistent padding */}
+        {/* Mobile: Full Gallery Button - 12px text, same padding */}
         <div className="md:hidden w-full">
           <a
             href="#"
             className="w-full flex items-center justify-center px-3 py-3 border border-white rounded"
           >
-            <span className="text-[14px] font-bold leading-none tracking-tight-2">
+            <span className="text-[12px] md:text-[14px] font-bold leading-none tracking-tight-2">
               {film.title} · Full Gallery →
             </span>
           </a>
@@ -119,7 +119,7 @@ export default async function FilmSection() {
             {/* Information - smart flex sizing */}
             <div className="w-full flex flex-row items-start justify-between pb-3 border-b border-white/10">
               <div className="flex flex-col gap-2 overflow-hidden pr-3 flex-1">
-                <h3 className="text-[14px] font-bold leading-none tracking-tight-2">
+                <h3 className="text-[12px] md:text-[14px] font-bold leading-none tracking-tight-2">
                   Information
                 </h3>
                 <div className="flex flex-col gap-1">
@@ -134,9 +134,9 @@ export default async function FilmSection() {
               />
             </div>
 
-            {/* Directed By - 10px mobile, 12px desktop */}
+            {/* Directed By - white text */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 text-white">
                 Directed by
               </span>
               <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
@@ -144,9 +144,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Overview - 10px mobile, 12px desktop */}
+            {/* Overview - white text */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 text-white">
                 Overview
               </span>
               <div className="flex items-center gap-2">
@@ -159,9 +159,9 @@ export default async function FilmSection() {
               </div>
             </div>
 
-            {/* Studio - 10px mobile, 12px desktop */}
+            {/* Studio - white text */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 text-white">
                 Studio
               </span>
               <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
@@ -169,9 +169,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* Country - 10px mobile, 12px desktop */}
+            {/* Country - white text */}
             <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 text-white">
                 Country
               </span>
               <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2">
@@ -179,9 +179,9 @@ export default async function FilmSection() {
               </span>
             </div>
 
-            {/* External - 10px mobile, 12px desktop */}
+            {/* External - white text */}
             <div className="w-full flex items-center justify-between">
-              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 opacity-60">
+              <span className="text-[10px] md:text-[12px] font-normal leading-none tracking-tight-2 text-white">
                 External
               </span>
               <div className="flex items-center gap-2">
