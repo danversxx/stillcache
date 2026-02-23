@@ -21,7 +21,7 @@ const films: Film[] = [
     title: "Kiki's Delivery Service",
     director: 'Hayao Miyazaki',
     directorAvatarUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/avatars/hayao-miyazaki.png',
-    posterUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/posters/kikis-delivery-service.png',
+    posterUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/posters/kikis-delivery-service-poster.png',
     studio: 'Studio Ghibli',
     country: 'Japan',
     copyright: '© 1989 Kiki\'s Delivery Service / Eiko Kadono\nStudio Ghibli · Nibariki · Tokuma Shoten',
@@ -31,10 +31,10 @@ const films: Film[] = [
     trailerUrl: 'https://www.youtube.com/watch?v=4bG17OYs-GA',
     letterboxdUrl: 'https://letterboxd.com/film/kikis-delivery-service/',
     stills: [
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-1.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-2.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-3.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-4.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-1.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-2.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-3.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-4.png',
     ]
   }
 ];
@@ -175,12 +175,13 @@ export default function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
+                  className="flex items-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
                 >
-                  <svg viewBox="0 0 500 250" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
-                    <path d="M196 133c23-21 57-21 80 0 8 7 14 15 18 25l8 20c1 4 3 7 7 7h46c6 0 10-6 8-12-20-58-78-99-145-99S89 115 69 173c-2 6 2 12 8 12h46c4 0 6-3 7-7 10-31 35-54 66-45z" fill="#00e054"/>
-                    <path d="M304 133c-23-21-57-21-80 0-8 7-14 15-18 25l-8 20c-1 4-3 7-7 7h-46c-6 0-10-6-8-12 20-58 78-99 145-99s125 41 145 99c2 6-2 12-8 12h-46c-4 0-6-3-7-7-10-31-35-54-66-45z" fill="#40bcf4"/>
-                  </svg>
+                  <img
+                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/misc/letterboxd.svg"
+                    alt="Letterboxd"
+                    className="w-full h-full object-contain"
+                  />
                 </a>
               </div>
             </div>
