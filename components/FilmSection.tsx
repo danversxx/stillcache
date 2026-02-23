@@ -20,8 +20,8 @@ const films: Film[] = [
     id: 'kikis-delivery-service',
     title: "Kiki's Delivery Service",
     director: 'Hayao Miyazaki',
-    directorAvatarUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/directors/hayao-miyazaki.webp',
-    posterUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/posters/kikis-delivery-service.webp',
+    directorAvatarUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/avatars/hayao-miyazaki.png',
+    posterUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/posters/kikis-delivery-service.png',
     studio: 'Studio Ghibli',
     country: 'Japan',
     copyright: '© 1989 Kiki\'s Delivery Service / Eiko Kadono\nStudio Ghibli · Nibariki · Tokuma Shoten',
@@ -31,10 +31,10 @@ const films: Film[] = [
     trailerUrl: 'https://www.youtube.com/watch?v=4bG17OYs-GA',
     letterboxdUrl: 'https://letterboxd.com/film/kikis-delivery-service/',
     stills: [
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-1.webp',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-2.webp',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-3.webp',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-4.webp',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-1.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-2.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-3.png',
+      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kikis-delivery-service/kiki-4.png',
     ]
   }
 ];
