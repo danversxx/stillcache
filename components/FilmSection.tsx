@@ -52,25 +52,36 @@ export default function FilmSection() {
         {/* Section - Poster + Data side by side on desktop */}
         <div className="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-6">
           
-          {/* Mobile: Avatar + Director/Title at top */}
-          <div className="md:hidden flex flex-row items-center gap-3">
-            <div className="w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
-              <Image
-                src={film.directorAvatarUrl}
-                alt={film.director}
-                width={42}
-                height={42}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-[14px] font-normal leading-none tracking-tight text-black">
-                {film.director}
-              </span>
-              <span className="text-[14px] font-semibold leading-none tracking-tight text-black">
-                {film.title}
-              </span>
-            </div>
+          {/* Mobile: Avatar */}
+          <div className="md:hidden w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
+            <Image
+              src={film.directorAvatarUrl}
+              alt={film.director}
+              width={42}
+              height={42}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Mobile: Director Name - 22px (text-2xl = 24px) */}
+          <div className="md:hidden text-2xl font-normal leading-none text-black">
+            {film.director}
+          </div>
+
+          {/* Mobile: Film Title - 42px */}
+          <div className="md:hidden text-[42px] font-semibold leading-none text-black">
+            {film.title}
+          </div>
+
+          {/* Mobile: Poster (comes before Studio logo on mobile) */}
+          <div className="md:hidden w-full aspect-[2/3]">
+            <Image
+              src={film.posterUrl}
+              alt={`${film.title} Poster`}
+              width={400}
+              height={600}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* Data - 600px height on desktop, evenly distributed */}
@@ -112,11 +123,21 @@ export default function FilmSection() {
               {film.copyright}
             </div>
 
-            {/* Information - horizontal on desktop, vertical on mobile */}
-            <div className="w-full flex flex-col md:flex-row md:items-center gap-3 md:gap-8 pt-4 border-t border-black">
+            {/* Gallery Button - 718px wide, 26px tall, 6px padding */}
+            <a
+              href="#stills"
+              className="w-full flex items-center justify-center px-[6px] py-[6px] border border-black text-black"
+            >
+              <span className="text-[12px] font-normal leading-none">
+                Kiki's Delivery Service · Full Gallery →
+              </span>
+            </a>
+
+            {/* Information - horizontal on desktop, vertical on mobile, NO top padding or border */}
+            <div className="w-full flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
               
               {/* Directed by */}
-              <div className="flex flex-col gap-0 md:gap-0">
+              <div className="flex flex-col gap-0">
                 <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">Directed by</span>
                 <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">{film.director}</span>
               </div>
@@ -174,14 +195,14 @@ export default function FilmSection() {
 
           </div>
 
-          {/* Poster - 400×600px desktop, full width mobile */}
-          <div className="w-full md:w-[400px] md:h-[600px]">
+          {/* Desktop: Poster - 400×600px */}
+          <div className="hidden md:block w-[400px] h-[600px]">
             <Image
               src={film.posterUrl}
               alt={`${film.title} Poster`}
               width={400}
               height={600}
-              className="w-full h-auto md:w-[400px] md:h-[600px] object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
 
@@ -193,7 +214,7 @@ export default function FilmSection() {
         </div>
 
         {/* Still Thumbnails */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
           {film.stills.map((still, index) => (
             <div key={index} className="w-full aspect-[3/2]">
               <Image
