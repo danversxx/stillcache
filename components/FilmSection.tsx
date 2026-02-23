@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 interface Film {
   id: string;
   title: string;
@@ -54,12 +52,9 @@ export default function FilmSection() {
           
           {/* Mobile: Avatar */}
           <div className="md:hidden w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
-            <Image
+            <img
               src={film.directorAvatarUrl}
               alt={film.director}
-              width={42}
-              height={42}
-              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -76,12 +71,9 @@ export default function FilmSection() {
 
           {/* Mobile: Poster (comes before Studio logo on mobile) */}
           <div className="md:hidden w-full aspect-[2/3]">
-            <Image
+            <img
               src={film.posterUrl}
               alt={`${film.title} Poster`}
-              width={400}
-              height={600}
-              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -91,12 +83,9 @@ export default function FilmSection() {
             
             {/* Desktop: Avatar */}
             <div className="hidden md:block w-[52px] h-[52px] rounded-full overflow-hidden">
-              <Image
+              <img
                 src={film.directorAvatarUrl}
                 alt={film.director}
-                width={52}
-                height={52}
-                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
@@ -200,12 +189,9 @@ export default function FilmSection() {
 
           {/* Desktop: Poster - 400×600px */}
           <div className="hidden md:block w-[400px] h-[600px]">
-            <Image
+            <img
               src={film.posterUrl}
               alt={`${film.title} Poster`}
-              width={400}
-              height={600}
-              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -221,12 +207,9 @@ export default function FilmSection() {
         <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
           {film.stills.map((still, index) => (
             <div key={index} className="w-full aspect-[3/2]">
-              <Image
+              <img
                 src={still}
                 alt={`${film.title} Still ${index + 1}`}
-                width={285}
-                height={190}
-                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
