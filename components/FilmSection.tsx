@@ -59,6 +59,7 @@ export default function FilmSection() {
               alt={film.director}
               width={42}
               height={42}
+              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -80,6 +81,7 @@ export default function FilmSection() {
               alt={`${film.title} Poster`}
               width={400}
               height={600}
+              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -94,6 +96,7 @@ export default function FilmSection() {
                 alt={film.director}
                 width={52}
                 height={52}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
@@ -183,9 +186,9 @@ export default function FilmSection() {
                   href={film.letterboxdUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
+                  className="flex items-center justify-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
                 >
-                  <svg viewBox="0 0 500 250" className="w-full h-full">
+                  <svg viewBox="0 0 500 250" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
                     <path d="M196 133c23-21 57-21 80 0 8 7 14 15 18 25l8 20c1 4 3 7 7 7h46c6 0 10-6 8-12-20-58-78-99-145-99S89 115 69 173c-2 6 2 12 8 12h46c4 0 6-3 7-7 10-31 35-54 66-45z" fill="#00e054"/>
                     <path d="M304 133c-23-21-57-21-80 0-8 7-14 15-18 25l-8 20c-1 4-3 7-7 7h-46c-6 0-10-6-8-12 20-58 78-99 145-99s125 41 145 99c2 6-2 12-8 12h-46c-4 0-6-3-7-7-10-31-35-54-66-45z" fill="#40bcf4"/>
                   </svg>
@@ -202,6 +205,7 @@ export default function FilmSection() {
               alt={`${film.title} Poster`}
               width={400}
               height={600}
+              unoptimized
               className="w-full h-full object-cover"
             />
           </div>
@@ -222,6 +226,7 @@ export default function FilmSection() {
                 alt={`${film.title} Still ${index + 1}`}
                 width={285}
                 height={190}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>
