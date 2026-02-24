@@ -10,26 +10,32 @@ export const client = createClient({
 // Fetch all films ordered by display order
 export async function getFilms() {
   return client.fetch(`
-    *[_type == "film"] | order(displayOrder asc) {
+    *[_type == "film"] | order(order asc) {
       _id,
-      filmTitle,
-      directorName,
+
+      // map schema field names -> frontend field names
+      "filmTitle": title,
+      "directorName": director,
       directorAvatarUrl,
-      copyrightInformation,
+      "copyrightInformation": copyrightInfo,
       rating,
       genreRuntime,
       studio,
       country,
       trailerUrl,
       letterboxdUrl,
-      posterImageUrl,
-      homepageStills[]{
+
+      // poster can exist under different names depending on old/new docs
+      "posterImageUrl": coalesce(posterUrl, posterImageUrl),
+
+      // stills: support both formats (url directly OR asset->url from older structure)
+      "homepageStills": homepageStills[]{
         _key,
-        asset->{
-          url
-        }
+        "url": coalesce(url, asset->url),
+        alt
       },
-      displayOrder
+
+      "displayOrder": order
     }
   `)
 }
