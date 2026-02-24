@@ -194,7 +194,7 @@ export default async function FilmSection() {
 
         {/* Still Thumbnails */}
         <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {film.homepageStills?.map((still) => (
+          {film.homepageStills?.map((still: { _key: string; asset: { url: string } }) => (
             <div key={still._key} className="w-full aspect-[3/2]">
               <img
                 src={still.asset.url}
