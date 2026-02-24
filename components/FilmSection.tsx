@@ -25,18 +25,17 @@ export default async function FilmSection() {
   const films: Film[] = await getFilms();
   const film = films?.[0];
 
-  if (!film) {
-    return <div>No films found</div>;
-  }
+  if (!film) return <div>No films found</div>;
 
   return (
-    <div className="w-full px-4 md:px-[120px]">
-      <div className="w-full flex flex-col gap-8">
-        {/* Section - Poster + Data side by side on desktop */}
-        <div className="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-6">
-          {/* Mobile: Avatar */}
+    <section className="w-[1440px] px-[120px] mx-auto flex flex-col gap-[32px]">
+      {/* SECTION */}
+      <div className="w-[1200px] flex items-center justify-between">
+        {/* DATA */}
+        <div className="w-[718px] h-[597px] flex flex-col justify-between">
+          {/* 1 Avatar */}
           {film.directorAvatarUrl ? (
-            <div className="md:hidden w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
+            <div className="w-[52px] h-[52px] rounded-full overflow-hidden">
               <img
                 src={film.directorAvatarUrl}
                 alt={film.directorName}
@@ -45,197 +44,138 @@ export default async function FilmSection() {
             </div>
           ) : null}
 
-          {/* Mobile: Director Name */}
-          <div className="md:hidden text-2xl font-normal leading-none text-black">
+          {/* 2 Director */}
+          <div className="text-[32px] font-normal leading-none text-black">
             {film.directorName}
           </div>
 
-          {/* Mobile: Film Title */}
-          <div className="md:hidden text-[42px] font-semibold leading-none text-black">
+          {/* 3 Title */}
+          <div className="text-[82px] font-semibold leading-[1] text-black w-[718px]">
             {film.filmTitle}
           </div>
 
-          {/* Mobile: Poster */}
-          {film.posterImageUrl ? (
-            <div className="md:hidden w-full aspect-[2/3]">
-              <img
-                src={film.posterImageUrl}
-                alt={`${film.filmTitle} Poster`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ) : null}
-
-          {/* Data */}
-          <div className="w-full md:w-[718px] flex flex-col md:h-[600px] md:justify-between gap-4 md:gap-0">
-            {/* Desktop: Avatar */}
-            {film.directorAvatarUrl ? (
-              <div className="hidden md:block w-[52px] h-[52px] rounded-full overflow-hidden">
-                <img
-                  src={film.directorAvatarUrl}
-                  alt={film.directorName}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ) : null}
-
-            {/* Desktop: Director Name */}
-            <div className="hidden md:block text-[32px] font-normal leading-none text-black">
-              {film.directorName}
-            </div>
-
-            {/* Desktop: Film Title */}
-            <div
-              className="hidden md:block text-[82px] font-semibold leading-none text-black"
-              style={{ maxWidth: '718px' }}
-            >
-              {film.filmTitle}
-            </div>
-
-            {/* Studio Logo */}
-            <div className="w-auto h-[45px] md:h-[57px]">
-              <img
-                src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
-                alt={film.studio || 'Studio logo'}
-                className="w-auto h-full object-contain"
-                style={{ filter: 'brightness(0)' }}
-              />
-            </div>
-
-            {/* Copyright */}
-            {film.copyrightInformation ? (
-              <div className="text-[10px] md:text-[14px] font-normal leading-tight text-black whitespace-pre-line">
-                {film.copyrightInformation}
-              </div>
-            ) : null}
-
-            {/* Gallery Button */}
-            <a
-              href="#stills"
-              className="w-full flex items-center justify-center px-[6px] py-[6px] border border-black text-black"
-            >
-              <span className="text-[12px] font-normal leading-none">
-                {film.filmTitle} · Full Gallery →
-              </span>
-            </a>
-
-            {/* Information */}
-            <div className="w-full flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
-              <div className="flex flex-col gap-0">
-                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                  Directed by
-                </span>
-                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                  {film.directorName}
-                </span>
-              </div>
-
-              {film.genreRuntime ? (
-                <div className="flex flex-col gap-0">
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    Overview
-                  </span>
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    {film.genreRuntime}
-                  </span>
-                </div>
-              ) : null}
-
-              {film.studio ? (
-                <div className="flex flex-col gap-0">
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    Studio
-                  </span>
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    {film.studio}
-                  </span>
-                </div>
-              ) : null}
-
-              {film.country ? (
-                <div className="flex flex-col gap-0">
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    Country
-                  </span>
-                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                    {film.country}
-                  </span>
-                </div>
-              ) : null}
-            </div>
-
-            {/* External */}
-            <div className="w-full flex flex-col gap-3">
-              <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
-                External
-              </span>
-
-              <div className="flex flex-row items-center gap-2">
-                {film.trailerUrl ? (
-                  <a
-                    href={film.trailerUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-[6px] py-[6px] border border-black text-black"
-                  >
-                    <span className="text-[11px] md:text-[12px] font-normal leading-none">
-                      Watch Trailer
-                    </span>
-                  </a>
-                ) : null}
-
-                {film.letterboxdUrl ? (
-                  <a
-                    href={film.letterboxdUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
-                  >
-                    <img
-                      src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/misc/letterboxd.svg"
-                      alt="Letterboxd"
-                      className="w-full h-full object-contain"
-                    />
-                  </a>
-                ) : null}
-              </div>
-            </div>
+          {/* 4 Studio logo */}
+          <div className="w-[118px] h-[57px]">
+            <img
+              src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
+              alt={film.studio || 'Studio logo'}
+              className="w-full h-full object-contain"
+              style={{ filter: 'brightness(0)' }}
+            />
           </div>
 
-          {/* Desktop: Poster */}
-          {film.posterImageUrl ? (
-            <div className="hidden md:block w-[400px] h-[600px]">
+          {/* 5 Copyright */}
+          {film.copyrightInformation ? (
+            <div className="text-[14px] font-normal leading-tight text-black whitespace-pre-line">
+              {film.copyrightInformation}
+            </div>
+          ) : null}
+
+          {/* GALLERY button (above Information) */}
+          <a
+            href="#stills"
+            className="w-[718px] border border-black px-[6px] py-[6px] text-black flex items-center justify-center"
+          >
+            <span className="text-[12px] font-normal leading-none">
+              {film.filmTitle} Stills Gallery
+            </span>
+          </a>
+
+          {/* 6 Information */}
+          <div className="w-[718px] pt-[16px] border-t border-black flex items-center gap-[32px]">
+            <div className="flex flex-col">
+              <span className="text-[14px] font-normal leading-none text-black">Directed by</span>
+              <span className="text-[14px] font-normal leading-none text-black">{film.directorName}</span>
+            </div>
+
+            {film.genreRuntime ? (
+              <div className="flex flex-col">
+                <span className="text-[14px] font-normal leading-none text-black">Overview</span>
+                <span className="text-[14px] font-normal leading-none text-black">{film.genreRuntime}</span>
+              </div>
+            ) : null}
+
+            {film.studio ? (
+              <div className="flex flex-col">
+                <span className="text-[14px] font-normal leading-none text-black">Studio</span>
+                <span className="text-[14px] font-normal leading-none text-black">{film.studio}</span>
+              </div>
+            ) : null}
+
+            {film.country ? (
+              <div className="flex flex-col">
+                <span className="text-[14px] font-normal leading-none text-black">Country</span>
+                <span className="text-[14px] font-normal leading-none text-black">{film.country}</span>
+              </div>
+            ) : null}
+          </div>
+
+          {/* 7 External */}
+          <div className="w-[718px] flex flex-col gap-[12px]">
+            <div className="text-[14px] font-normal leading-none text-black">External</div>
+
+            <div className="w-[162px] h-[26px] flex items-center gap-[8px]">
+              {film.trailerUrl ? (
+                <a
+                  href={film.trailerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border border-black px-[6px] py-[6px] text-black inline-flex items-center"
+                >
+                  <span className="text-[12px] font-normal leading-none">Watch Trailer</span>
+                </a>
+              ) : null}
+
+              {film.letterboxdUrl ? (
+                <a
+                  href={film.letterboxdUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-[70px] h-[26px] flex items-center"
+                >
+                  <img
+                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/misc/letterboxd.svg"
+                    alt="Letterboxd"
+                    className="w-full h-full object-contain"
+                  />
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </div>
+
+        {/* POSTER */}
+        {film.posterImageUrl ? (
+          <div className="w-[718px] h-[597px]">
+            <img
+              src={film.posterImageUrl}
+              alt={`${film.filmTitle} Poster`}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ) : null}
+      </div>
+
+      {/* DIVIDER */}
+      <div className="w-[1200px] h-[17px] flex items-center justify-center">
+        <span className="text-[14px] font-bold leading-none text-black">· · ·</span>
+      </div>
+
+      {/* STILL THUMBNAILS */}
+      <div id="stills" className="w-[1200px] grid grid-cols-4 gap-[16px]">
+        {film.homepageStills?.map((still: { _key: string; url?: string; alt?: string }) => {
+          if (!still?.url) return null;
+          return (
+            <div key={still._key} className="w-full aspect-[3/2]">
               <img
-                src={film.posterImageUrl}
-                alt={`${film.filmTitle} Poster`}
+                src={still.url}
+                alt={still.alt || `${film.filmTitle} Still`}
                 className="w-full h-full object-cover"
               />
             </div>
-          ) : null}
-        </div>
-
-        {/* Divider */}
-        <div className="w-full flex items-center justify-center py-2">
-          <span className="text-[14px] font-bold leading-none text-black">· · ·</span>
-        </div>
-
-        {/* Stills */}
-        <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {film.homepageStills?.map((still: { _key: string; url?: string; alt?: string }) => {
-            if (!still?.url) return null;
-
-            return (
-              <div key={still._key} className="w-full aspect-[3/2]">
-                <img
-                  src={still.url}
-                  alt={still.alt || `${film.filmTitle} Still`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            );
-          })}
-        </div>
+          );
+        })}
       </div>
-    </div>
+    </section>
   );
 }
