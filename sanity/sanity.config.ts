@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'Still Cache',
 
-  projectId: '2jlzwuvy',
+  projectId: '78tpiznj',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
