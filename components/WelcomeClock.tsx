@@ -3,83 +3,54 @@
 import { useEffect, useMemo, useState } from 'react';
 
 type ClockData = {
-  dateText: string;
-  timeText: string;
-  tzText: string;
-  placeText: string;
+  line: string;
 };
 
-function getTimezoneAbbrev(d: Date) {
-  // Try to extract "GMT", "BST", "PST", etc from formatToParts
-  try {
-    const parts = new Intl.DateTimeFormat(undefined, {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-      timeZoneName: 'short',
-    }).formatToParts(d);
+function formatClock(d: Date) {
+  const time = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZoneName: 'short',
+  }).format(d);
 
-    const tz = parts.find((p) => p.type === 'timeZoneName')?.value?.trim();
-    return tz || '';
-  } catch {
-    return '';
-  }
-}
-
-function formatClockParts(d: Date): ClockData {
-  const dateText = new Intl.DateTimeFormat(undefined, {
+  const date = new Intl.DateTimeFormat(undefined, {
     weekday: 'long',
     day: '2-digit',
     month: 'long',
   }).format(d);
 
-  const timeText = new Intl.DateTimeFormat(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  }).format(d);
-
-  const tzText = getTimezoneAbbrev(d);
-
-  return {
-    dateText,
-    timeText,
-    tzText,
-    placeText: '',
-  };
+  return `${date} ${time}`;
 }
 
 export default function WelcomeClock() {
   const [now, setNow] = useState<Date | null>(null);
   const [place, setPlace] = useState<string>('');
 
-  // Prevent hydration mismatch by only rendering the ticking clock after mount
+  // start ticking after mount (prevents hydration mismatch)
   useEffect(() => {
     setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
+  // fetch location
   useEffect(() => {
     let cancelled = false;
 
     async function loadPlace() {
       try {
         const res = await fetch('https://ipinfo.io/json', { cache: 'no-store' });
-        const data = (await res.json()) as {
-          city?: string;
-          region?: string;
-          country?: string;
-        };
+        const data = await res.json();
 
         const city = data.city || '';
-        const countryCode = data.country || '';
-        const country = countryCode === 'GB' ? 'United Kingdom' : countryCode;
+        const country =
+          data.country === 'GB' ? 'United Kingdom' : data.country || '';
 
-        const placeText = [city, country].filter(Boolean).join(', ');
-        if (!cancelled) setPlace(placeText);
+        const text = [city, country].filter(Boolean).join(', ');
+
+        if (!cancelled) setPlace(text);
       } catch {
         if (!cancelled) setPlace('');
       }
@@ -91,38 +62,27 @@ export default function WelcomeClock() {
     };
   }, []);
 
-  const content = useMemo(() => {
+  const content: ClockData | null = useMemo(() => {
     if (!now) return null;
-    const { dateText, timeText, tzText } = formatClockParts(now);
-    return {
-      dateText,
-      timeText,
-      tzText,
-      placeText: place,
-    };
-  }, [now, place]);
+    const line = formatClock(now);
+    return { line };
+  }, [now]);
 
-  // Keep layout stable: placeholder on first paint
+  // invisible placeholder prevents layout shift
   if (!content) {
     return (
-      <div className="text-[18px] leading-none font-normal">
-        <div className="opacity-0 tabular-nums whitespace-nowrap">
-          Tuesday 24 February 00:00:00 GMT
-        </div>
-        <div className="opacity-0 whitespace-nowrap">Manchester, United Kingdom</div>
+      <div className="text-[18px] leading-none whitespace-nowrap">
+        <span className="opacity-0">
+          Tuesday 24 February 00:00:00 GMT Bolton, United Kingdom
+        </span>
       </div>
     );
   }
 
-  const topLine = `${content.dateText} ${content.timeText}${content.tzText ? ` ${content.tzText}` : ''}`;
-
   return (
-    <div className="text-[18px] leading-none font-normal">
-      {/* Desktop: single line, never wrap. Mobile: can be its own line naturally. */}
-      <div className="tabular-nums whitespace-nowrap">{topLine}</div>
-
-      {/* Location: show on its own line (mobile & desktop), never wrap */}
-      {content.placeText ? <div className="whitespace-nowrap">{content.placeText}</div> : null}
+    <div className="text-[18px] leading-none whitespace-nowrap tabular-nums">
+      {content.line}
+      {place && <span> {place}</span>}
     </div>
   );
 }
