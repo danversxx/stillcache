@@ -14,11 +14,9 @@ interface Film {
   letterboxdUrl: string;
   posterImageUrl: string;
   homepageStills: Array<{
-    _key: string;
-    asset: {
-      url: string;
-    };
-  }>;
+  _key: string;
+  url: string;
+}>;
   displayOrder: number;
 }
 
@@ -194,13 +192,11 @@ export default async function FilmSection() {
 
         {/* Still Thumbnails */}
         <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {film.homepageStills?.map((still: { _key: string; asset: { url: string } }) => (
+          {film.homepageStills?.map((still: { _key: string; url: string }) => (
             <div key={still._key} className="w-full aspect-[3/2]">
-              <img
-                src={still.asset.url}
-                alt={`${film.filmTitle} Still`}
-                className="w-full h-full object-cover"
-              />
+             <div className="w-full h-full border border-black p-2 overflow-auto text-[10px] leading-tight">
+  {JSON.stringify(still, null, 2)}
+</div>
             </div>
           ))}
         </div>
