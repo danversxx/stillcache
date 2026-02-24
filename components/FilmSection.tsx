@@ -4,24 +4,25 @@ interface Film {
   _id: string;
   filmTitle: string;
   directorName: string;
-  directorAvatarUrl: string;
-  copyrightInformation: string;
-  rating: string;
-  genreRuntime: string;
-  studio: string;
-  country: string;
-  trailerUrl: string;
-  letterboxdUrl: string;
+  directorAvatarUrl?: string;
+  copyrightInformation?: string;
+  rating?: string;
+  genreRuntime?: string;
+  studio?: string;
+  country?: string;
+  trailerUrl?: string;
+  letterboxdUrl?: string;
   posterImageUrl?: string;
   homepageStills?: Array<{
     _key: string;
     url?: string;
+    alt?: string;
   }>;
-  displayOrder: number;
+  displayOrder?: number;
 }
 
 export default async function FilmSection() {
-  const films = await getFilms();
+  const films: Film[] = await getFilms();
   const film = films?.[0];
 
   if (!film) {
@@ -31,12 +32,10 @@ export default async function FilmSection() {
   return (
     <div className="w-full px-4 md:px-[120px]">
       <div className="w-full flex flex-col gap-8">
-
-        {/* Section */}
+        {/* Section - Poster + Data side by side on desktop */}
         <div className="w-full flex flex-col md:flex-row md:justify-between md:items-start gap-6">
-
-          {/* Mobile Avatar */}
-          {film.directorAvatarUrl && (
+          {/* Mobile: Avatar */}
+          {film.directorAvatarUrl ? (
             <div className="md:hidden w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
               <img
                 src={film.directorAvatarUrl}
@@ -44,20 +43,20 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-          )}
+          ) : null}
 
-          {/* Mobile Director */}
+          {/* Mobile: Director Name */}
           <div className="md:hidden text-2xl font-normal leading-none text-black">
             {film.directorName}
           </div>
 
-          {/* Mobile Title */}
+          {/* Mobile: Film Title */}
           <div className="md:hidden text-[42px] font-semibold leading-none text-black">
             {film.filmTitle}
           </div>
 
-          {/* Mobile Poster */}
-          {film.posterImageUrl && (
+          {/* Mobile: Poster */}
+          {film.posterImageUrl ? (
             <div className="md:hidden w-full aspect-[2/3]">
               <img
                 src={film.posterImageUrl}
@@ -65,13 +64,12 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-          )}
+          ) : null}
 
           {/* Data */}
           <div className="w-full md:w-[718px] flex flex-col md:h-[600px] md:justify-between gap-4 md:gap-0">
-
-            {/* Desktop Avatar */}
-            {film.directorAvatarUrl && (
+            {/* Desktop: Avatar */}
+            {film.directorAvatarUrl ? (
               <div className="hidden md:block w-[52px] h-[52px] rounded-full overflow-hidden">
                 <img
                   src={film.directorAvatarUrl}
@@ -79,15 +77,18 @@ export default async function FilmSection() {
                   className="w-full h-full object-cover"
                 />
               </div>
-            )}
+            ) : null}
 
-            {/* Desktop Director */}
+            {/* Desktop: Director Name */}
             <div className="hidden md:block text-[32px] font-normal leading-none text-black">
               {film.directorName}
             </div>
 
-            {/* Desktop Title */}
-            <div className="hidden md:block text-[82px] font-semibold leading-none text-black" style={{ maxWidth: '718px' }}>
+            {/* Desktop: Film Title */}
+            <div
+              className="hidden md:block text-[82px] font-semibold leading-none text-black"
+              style={{ maxWidth: '718px' }}
+            >
               {film.filmTitle}
             </div>
 
@@ -95,16 +96,18 @@ export default async function FilmSection() {
             <div className="w-auto h-[45px] md:h-[57px]">
               <img
                 src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
-                alt={film.studio}
+                alt={film.studio || 'Studio logo'}
                 className="w-auto h-full object-contain"
                 style={{ filter: 'brightness(0)' }}
               />
             </div>
 
             {/* Copyright */}
-            <div className="text-[10px] md:text-[14px] font-normal leading-tight text-black whitespace-pre-line">
-              {film.copyrightInformation}
-            </div>
+            {film.copyrightInformation ? (
+              <div className="text-[10px] md:text-[14px] font-normal leading-tight text-black whitespace-pre-line">
+                {film.copyrightInformation}
+              </div>
+            ) : null}
 
             {/* Gallery Button */}
             <a
@@ -116,66 +119,91 @@ export default async function FilmSection() {
               </span>
             </a>
 
-            {/* Info */}
+            {/* Information */}
             <div className="w-full flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
-
-              <div>
-                <span className="text-[10px] md:text-[14px]">Directed by</span>
-                <div className="text-[10px] md:text-[14px]">{film.directorName}</div>
+              <div className="flex flex-col gap-0">
+                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                  Directed by
+                </span>
+                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                  {film.directorName}
+                </span>
               </div>
 
-              <div>
-                <span className="text-[10px] md:text-[14px]">Overview</span>
-                <div className="text-[10px] md:text-[14px]">{film.genreRuntime}</div>
-              </div>
+              {film.genreRuntime ? (
+                <div className="flex flex-col gap-0">
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    Overview
+                  </span>
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    {film.genreRuntime}
+                  </span>
+                </div>
+              ) : null}
 
-              <div>
-                <span className="text-[10px] md:text-[14px]">Studio</span>
-                <div className="text-[10px] md:text-[14px]">{film.studio}</div>
-              </div>
+              {film.studio ? (
+                <div className="flex flex-col gap-0">
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    Studio
+                  </span>
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    {film.studio}
+                  </span>
+                </div>
+              ) : null}
 
-              <div>
-                <span className="text-[10px] md:text-[14px]">Country</span>
-                <div className="text-[10px] md:text-[14px]">{film.country}</div>
-              </div>
-
+              {film.country ? (
+                <div className="flex flex-col gap-0">
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    Country
+                  </span>
+                  <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                    {film.country}
+                  </span>
+                </div>
+              ) : null}
             </div>
 
             {/* External */}
             <div className="w-full flex flex-col gap-3">
-              <span className="text-[10px] md:text-[14px]">External</span>
+              <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">
+                External
+              </span>
 
               <div className="flex flex-row items-center gap-2">
-                <a
-                  href={film.trailerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-[6px] py-[6px] border border-black text-black"
-                >
-                  <span className="text-[11px] md:text-[12px]">
-                    Watch Trailer
-                  </span>
-                </a>
+                {film.trailerUrl ? (
+                  <a
+                    href={film.trailerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-[6px] py-[6px] border border-black text-black"
+                  >
+                    <span className="text-[11px] md:text-[12px] font-normal leading-none">
+                      Watch Trailer
+                    </span>
+                  </a>
+                ) : null}
 
-                <a
-                  href={film.letterboxdUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
-                >
-                  <img
-                    src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/misc/letterboxd.svg"
-                    alt="Letterboxd"
-                    className="w-full h-full object-contain"
-                  />
-                </a>
+                {film.letterboxdUrl ? (
+                  <a
+                    href={film.letterboxdUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center w-[64px] h-[23px] md:w-[70px] md:h-[26px]"
+                  >
+                    <img
+                      src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/misc/letterboxd.svg"
+                      alt="Letterboxd"
+                      className="w-full h-full object-contain"
+                    />
+                  </a>
+                ) : null}
               </div>
             </div>
-
           </div>
 
-          {/* Desktop Poster */}
-          {film.posterImageUrl && (
+          {/* Desktop: Poster */}
+          {film.posterImageUrl ? (
             <div className="hidden md:block w-[400px] h-[600px]">
               <img
                 src={film.posterImageUrl}
@@ -183,8 +211,7 @@ export default async function FilmSection() {
                 className="w-full h-full object-cover"
               />
             </div>
-          )}
-
+          ) : null}
         </div>
 
         {/* Divider */}
@@ -193,20 +220,22 @@ export default async function FilmSection() {
         </div>
 
         {/* Stills */}
-<div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-  {film.homepageStills?.map((still: { _key: string; url?: string }) => {
-    if (!still?.url) return null;
+        <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+          {film.homepageStills?.map((still: { _key: string; url?: string; alt?: string }) => {
+            if (!still?.url) return null;
 
-    return (
-      <div key={still._key} className="w-full aspect-[3/2]">
-        <img
-          src={still.url}
-          alt={`${film.filmTitle} Still`}
-          className="w-full h-full object-cover"
-        />
+            return (
+              <div key={still._key} className="w-full aspect-[3/2]">
+                <img
+                  src={still.url}
+                  alt={still.alt || `${film.filmTitle} Still`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    );
-  })}
-</div>
+    </div>
   );
 }
