@@ -193,23 +193,20 @@ export default async function FilmSection() {
         </div>
 
         {/* Stills */}
-        <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {film.homepageStills?.map((still) => {
-            if (!still?.url) return null;
+<div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
+  {film.homepageStills?.map((still: { _key: string; url?: string }) => {
+    if (!still?.url) return null;
 
-            return (
-              <div key={still._key} className="w-full aspect-[3/2]">
-                <img
-                  src={still.url}
-                  alt={`${film.filmTitle} Still`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            );
-          })}
-        </div>
-
+    return (
+      <div key={still._key} className="w-full aspect-[3/2]">
+        <img
+          src={still.url}
+          alt={`${film.filmTitle} Still`}
+          className="w-full h-full object-cover"
+        />
       </div>
-    </div>
+    );
+  })}
+</div>
   );
 }
