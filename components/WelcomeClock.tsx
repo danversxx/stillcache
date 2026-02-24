@@ -3,11 +3,12 @@
 import { useEffect, useMemo, useState } from 'react';
 
 type ClockData = {
-  line: string;
+  timeText: string;
+  placeText: string;
 };
 
-function formatClock(d: Date) {
-  const time = new Intl.DateTimeFormat(undefined, {
+function formatTimeParts(d: Date) {
+  const timeText = new Intl.DateTimeFormat(undefined, {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
@@ -15,13 +16,13 @@ function formatClock(d: Date) {
     timeZoneName: 'short',
   }).format(d);
 
-  const date = new Intl.DateTimeFormat(undefined, {
+  const dateText = new Intl.DateTimeFormat(undefined, {
     weekday: 'long',
     day: '2-digit',
     month: 'long',
   }).format(d);
 
-  return `${date} ${time}`;
+  return { timeText, dateText };
 }
 
 export default function WelcomeClock() {
@@ -45,35 +46,40 @@ export default function WelcomeClock() {
         const data = await res.json();
 
         const city = data.city || '';
+        const countryCode = data.country || '';
+
         const country =
-          data.country === 'GB' ? 'United Kingdom' : data.country || '';
+          countryCode === 'GB' ? 'United Kingdom' : countryCode;
 
-        const text = [city, country].filter(Boolean).join(', ');
+        const placeText = [city, country].filter(Boolean).join(', ');
 
-        if (!cancelled) setPlace(text);
+        if (!cancelled) setPlace(placeText);
       } catch {
         if (!cancelled) setPlace('');
       }
     }
 
     loadPlace();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
   const content: ClockData | null = useMemo(() => {
     if (!now) return null;
-    const line = formatClock(now);
-    return { line };
-  }, [now]);
 
-  // invisible placeholder prevents layout shift
+    const { timeText, dateText } = formatTimeParts(now);
+
+    return {
+      timeText: `${dateText} ${timeText}`,
+      placeText: place,
+    };
+  }, [now, place]);
+
+  // placeholder to avoid layout shift
   if (!content) {
     return (
       <div className="text-[18px] leading-none whitespace-nowrap">
-        <span className="opacity-0">
-          Tuesday 24 February 00:00:00 GMT Bolton, United Kingdom
+        <span className="opacity-0 tabular-nums">
+          Tuesday 24 February 00:00:00 GMT
         </span>
       </div>
     );
@@ -81,8 +87,8 @@ export default function WelcomeClock() {
 
   return (
     <div className="text-[18px] leading-none whitespace-nowrap tabular-nums">
-      {content.line}
-      {place && <span> {place}</span>}
+      {content.timeText}
+      {content.placeText && ` · ${content.placeText}`}
     </div>
   );
 }
