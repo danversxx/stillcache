@@ -3,28 +3,52 @@
 import { useEffect, useMemo, useState } from 'react';
 
 type ClockData = {
+  dateText: string;
   timeText: string;
+  tzText: string;
   placeText: string;
 };
 
-function formatTimeParts(d: Date) {
-  // Locale-aware time + timezone abbreviation (GMT, PST, IST, etc.)
-  const timeText = new Intl.DateTimeFormat(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-    timeZoneName: 'short',
-  }).format(d);
+function getTimezoneAbbrev(d: Date) {
+  // Try to extract "GMT", "BST", "PST", etc from formatToParts
+  try {
+    const parts = new Intl.DateTimeFormat(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZoneName: 'short',
+    }).formatToParts(d);
 
-  // e.g. "Tuesday 24 February"
+    const tz = parts.find((p) => p.type === 'timeZoneName')?.value?.trim();
+    return tz || '';
+  } catch {
+    return '';
+  }
+}
+
+function formatClockParts(d: Date): ClockData {
   const dateText = new Intl.DateTimeFormat(undefined, {
     weekday: 'long',
     day: '2-digit',
     month: 'long',
   }).format(d);
 
-  return { timeText, dateText };
+  const timeText = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).format(d);
+
+  const tzText = getTimezoneAbbrev(d);
+
+  return {
+    dateText,
+    timeText,
+    tzText,
+    placeText: '',
+  };
 }
 
 export default function WelcomeClock() {
@@ -43,7 +67,6 @@ export default function WelcomeClock() {
 
     async function loadPlace() {
       try {
-        // Uses ipinfo.io (you already tested it works)
         const res = await fetch('https://ipinfo.io/json', { cache: 'no-store' });
         const data = (await res.json()) as {
           city?: string;
@@ -53,14 +76,11 @@ export default function WelcomeClock() {
 
         const city = data.city || '';
         const countryCode = data.country || '';
-        // Prefer "City, United Kingdom" instead of "GB"
-        const country =
-          countryCode === 'GB' ? 'United Kingdom' : countryCode;
+        const country = countryCode === 'GB' ? 'United Kingdom' : countryCode;
 
         const placeText = [city, country].filter(Boolean).join(', ');
         if (!cancelled) setPlace(placeText);
       } catch {
-        // If it fails, just omit location rather than breaking UI
         if (!cancelled) setPlace('');
       }
     }
@@ -71,30 +91,38 @@ export default function WelcomeClock() {
     };
   }, []);
 
-  const content: ClockData | null = useMemo(() => {
+  const content = useMemo(() => {
     if (!now) return null;
-    const { timeText, dateText } = formatTimeParts(now);
+    const { dateText, timeText, tzText } = formatClockParts(now);
     return {
-      timeText: `${dateText} ${timeText}`,
+      dateText,
+      timeText,
+      tzText,
       placeText: place,
     };
   }, [now, place]);
 
-  // Keep layout stable: render a placeholder line on first paint
+  // Keep layout stable: placeholder on first paint
   if (!content) {
     return (
-      <div className="text-[18px] leading-none font-normal whitespace-nowrap">
-        <span className="opacity-0">Tuesday 24 February 00:00:00 GMT</span>
+      <div className="text-[18px] leading-none font-normal">
+        <div className="opacity-0 tabular-nums whitespace-nowrap">
+          Tuesday 24 February 00:00:00 GMT
+        </div>
+        <div className="opacity-0 whitespace-nowrap">Manchester, United Kingdom</div>
       </div>
     );
   }
 
+  const topLine = `${content.dateText} ${content.timeText}${content.tzText ? ` ${content.tzText}` : ''}`;
+
   return (
     <div className="text-[18px] leading-none font-normal">
-      <div className="whitespace-nowrap tabular-nums">{content.timeText}</div>
-      {content.placeText ? (
-        <div className="whitespace-nowrap">{content.placeText}</div>
-      ) : null}
+      {/* Desktop: single line, never wrap. Mobile: can be its own line naturally. */}
+      <div className="tabular-nums whitespace-nowrap">{topLine}</div>
+
+      {/* Location: show on its own line (mobile & desktop), never wrap */}
+      {content.placeText ? <div className="whitespace-nowrap">{content.placeText}</div> : null}
     </div>
   );
 }
