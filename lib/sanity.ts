@@ -1,7 +1,7 @@
 import { createClient } from '@sanity/client'
 
 export const client = createClient({
-  projectId: '2jlzwuvy', // Replace with your project ID
+  projectId: '78tpiznj',
   dataset: 'production',
   useCdn: process.env.NODE_ENV === 'production',
   apiVersion: '2024-02-15',
@@ -10,20 +10,26 @@ export const client = createClient({
 // Fetch all films ordered by display order
 export async function getFilms() {
   return client.fetch(`
-    *[_type == "film"] | order(order asc) {
-      title,
-      director,
+    *[_type == "film"] | order(displayOrder asc) {
+      _id,
+      filmTitle,
+      directorName,
       directorAvatarUrl,
-      copyrightInfo,
+      copyrightInformation,
       rating,
       genreRuntime,
       studio,
       country,
       trailerUrl,
       letterboxdUrl,
-      posterUrl,
-      homepageStills,
-      order
+      posterImageUrl,
+      homepageStills[]{
+        _key,
+        asset->{
+          url
+        }
+      },
+      displayOrder
     }
   `)
 }

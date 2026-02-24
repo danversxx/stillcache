@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client';
+import { getFilms } from '@/lib/sanity';
 
 interface Film {
   _id: string;
@@ -20,33 +20,6 @@ interface Film {
     };
   }>;
   displayOrder: number;
-}
-
-async function getFilms(): Promise<Film[]> {
-  const films = await client.fetch(
-    `*[_type == "film"] | order(displayOrder asc) {
-      _id,
-      filmTitle,
-      directorName,
-      directorAvatarUrl,
-      copyrightInformation,
-      rating,
-      genreRuntime,
-      studio,
-      country,
-      trailerUrl,
-      letterboxdUrl,
-      posterImageUrl,
-      homepageStills[]{
-        _key,
-        asset->{
-          url
-        }
-      },
-      displayOrder
-    }`
-  );
-  return films;
 }
 
 export default async function FilmSection() {
