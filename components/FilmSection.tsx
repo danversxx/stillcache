@@ -1,46 +1,61 @@
+import { client } from '@/sanity/lib/client';
+
 interface Film {
-  id: string;
-  title: string;
-  director: string;
+  _id: string;
+  filmTitle: string;
+  directorName: string;
   directorAvatarUrl: string;
-  posterUrl: string;
+  copyrightInformation: string;
+  rating: string;
+  genreRuntime: string;
   studio: string;
   country: string;
-  copyright: string;
-  genreRuntime: string;
-  rating: string;
-  studioLogoUrl: string;
   trailerUrl: string;
   letterboxdUrl: string;
-  stills: string[];
+  posterImageUrl: string;
+  homepageStills: Array<{
+    _key: string;
+    asset: {
+      url: string;
+    };
+  }>;
+  displayOrder: number;
 }
 
-const films: Film[] = [
-  {
-    id: 'kikis-delivery-service',
-    title: "Kiki's Delivery Service",
-    director: 'Hayao Miyazaki',
-    directorAvatarUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/avatars/hayao-miyazaki.png',
-    posterUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/posters/kikis-delivery-service-poster.png',
-    studio: 'Studio Ghibli',
-    country: 'Japan',
-    copyright: '© 1989 Kiki\'s Delivery Service / Eiko Kadono\nStudio Ghibli · Nibariki · Tokuma Shoten',
-    genreRuntime: 'Family/Fantasy ‧ 1hr 42m',
-    rating: 'U',
-    studioLogoUrl: 'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg',
-    trailerUrl: 'https://www.youtube.com/watch?v=4bG17OYs-GA',
-    letterboxdUrl: 'https://letterboxd.com/film/kikis-delivery-service/',
-    stills: [
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-1.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-2.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-3.png',
-      'https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/stills/kiki/kikis-delivery-service-4.png',
-    ]
-  }
-];
+async function getFilms(): Promise<Film[]> {
+  const films = await client.fetch(
+    `*[_type == "film"] | order(displayOrder asc) {
+      _id,
+      filmTitle,
+      directorName,
+      directorAvatarUrl,
+      copyrightInformation,
+      rating,
+      genreRuntime,
+      studio,
+      country,
+      trailerUrl,
+      letterboxdUrl,
+      posterImageUrl,
+      homepageStills[]{
+        _key,
+        asset->{
+          url
+        }
+      },
+      displayOrder
+    }`
+  );
+  return films;
+}
 
-export default function FilmSection() {
+export default async function FilmSection() {
+  const films = await getFilms();
   const film = films[0];
+
+  if (!film) {
+    return <div>No films found</div>;
+  }
 
   return (
     <div className="w-full px-4 md:px-[120px]">
@@ -54,26 +69,26 @@ export default function FilmSection() {
           <div className="md:hidden w-[42px] h-[42px] rounded-full overflow-hidden flex-shrink-0">
             <img
               src={film.directorAvatarUrl}
-              alt={film.director}
+              alt={film.directorName}
               className="w-full h-full object-cover"
             />
           </div>
 
           {/* Mobile: Director Name - 22px (text-2xl = 24px) */}
           <div className="md:hidden text-2xl font-normal leading-none text-black">
-            {film.director}
+            {film.directorName}
           </div>
 
           {/* Mobile: Film Title - 42px */}
           <div className="md:hidden text-[42px] font-semibold leading-none text-black">
-            {film.title}
+            {film.filmTitle}
           </div>
 
           {/* Mobile: Poster (comes before Studio logo on mobile) */}
           <div className="md:hidden w-full aspect-[2/3]">
             <img
-              src={film.posterUrl}
-              alt={`${film.title} Poster`}
+              src={film.posterImageUrl}
+              alt={`${film.filmTitle} Poster`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -85,25 +100,25 @@ export default function FilmSection() {
             <div className="hidden md:block w-[52px] h-[52px] rounded-full overflow-hidden">
               <img
                 src={film.directorAvatarUrl}
-                alt={film.director}
+                alt={film.directorName}
                 className="w-full h-full object-cover"
               />
             </div>
 
             {/* Desktop: Director Name */}
             <div className="hidden md:block text-[32px] font-normal leading-none text-black">
-              {film.director}
+              {film.directorName}
             </div>
 
-            {/* Desktop: Film Title - 82px, wraps after "Delivery" */}
+            {/* Desktop: Film Title - 82px */}
             <div className="hidden md:block text-[82px] font-semibold leading-none text-black" style={{ maxWidth: '718px' }}>
-              Kiki's Delivery<br />Service
+              {film.filmTitle}
             </div>
 
-            {/* Studio Logo */}
+            {/* Studio Logo - hardcoded for now, can be made dynamic later */}
             <div className="w-auto h-[45px] md:h-[57px]">
               <img
-                src={film.studioLogoUrl}
+                src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/studio-logos/studio-ghibli.svg"
                 alt={film.studio}
                 className="w-auto h-full object-contain"
                 style={{ filter: 'brightness(0)' }}
@@ -112,26 +127,26 @@ export default function FilmSection() {
 
             {/* Copyright */}
             <div className="text-[10px] md:text-[14px] font-normal leading-tight text-black whitespace-pre-line">
-              {film.copyright}
+              {film.copyrightInformation}
             </div>
 
-            {/* Gallery Button - 718px wide, 26px tall, 6px padding */}
+            {/* Gallery Button */}
             <a
               href="#stills"
               className="w-full flex items-center justify-center px-[6px] py-[6px] border border-black text-black"
             >
               <span className="text-[12px] font-normal leading-none">
-                Kiki's Delivery Service · Full Gallery →
+                {film.filmTitle} · Full Gallery →
               </span>
             </a>
 
-            {/* Information - horizontal on desktop, vertical on mobile, NO top padding or border */}
+            {/* Information - horizontal on desktop, vertical on mobile */}
             <div className="w-full flex flex-col md:flex-row md:items-center gap-3 md:gap-8">
               
               {/* Directed by */}
               <div className="flex flex-col gap-0">
                 <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">Directed by</span>
-                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">{film.director}</span>
+                <span className="text-[10px] md:text-[14px] font-normal leading-none text-black">{film.directorName}</span>
               </div>
 
               {/* Overview */}
@@ -191,8 +206,8 @@ export default function FilmSection() {
           {/* Desktop: Poster - 400×600px */}
           <div className="hidden md:block w-[400px] h-[600px]">
             <img
-              src={film.posterUrl}
-              alt={`${film.title} Poster`}
+              src={film.posterImageUrl}
+              alt={`${film.filmTitle} Poster`}
               className="w-full h-full object-cover"
             />
           </div>
@@ -206,11 +221,11 @@ export default function FilmSection() {
 
         {/* Still Thumbnails */}
         <div id="stills" className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
-          {film.stills.map((still, index) => (
-            <div key={index} className="w-full aspect-[3/2]">
+          {film.homepageStills?.map((still) => (
+            <div key={still._key} className="w-full aspect-[3/2]">
               <img
-                src={still}
-                alt={`${film.title} Still ${index + 1}`}
+                src={still.asset.url}
+                alt={`${film.filmTitle} Still`}
                 className="w-full h-full object-cover"
               />
             </div>
