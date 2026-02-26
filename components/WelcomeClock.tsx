@@ -140,27 +140,21 @@ export default function WelcomeClock() {
 
   return (
     <div
-      className={[
-        // Mobile/tablet: keep your existing stacked behaviour & muted tone
-        'text-[13px] sm:text-[14px] md:text-[18px]',
-        'leading-[18px] sm:leading-[22px] md:leading-[26px]',
-        'text-left text-[#999999] md:text-black',
-      ].join(' ')}
+      className="text-left"
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-        fontWeight: 500,
       }}
     >
-      {/* Mobile: stacked */}
-      <div className="md:hidden">
+      {/* Mobile/tablet: keep your existing stacked + muted behaviour */}
+      <div className="md:hidden text-[13px] sm:text-[14px] leading-[18px] sm:leading-[22px] text-[#999999]">
         <div>{line1}</div>
         <div className="hidden sm:block">{place}</div>
       </div>
 
-      {/* Desktop: Figma Welcome row (date + place), gap 8, bold, 18/26, black */}
-      <div className="hidden md:flex items-center gap-[8px] font-bold text-black">
-        <span className="text-[18px] leading-[26px]">{line1}</span>
-        <span className="text-[18px] leading-[26px]">{place}</span>
+      {/* Desktop: Figma Welcome */}
+      <div className="hidden md:flex items-center justify-end gap-[8px] text-black text-[14px] leading-[21px] tracking-[0.01em] font-normal">
+        <span>{line1}</span>
+        <span>{place}</span>
       </div>
     </div>
   );
