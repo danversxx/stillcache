@@ -8,8 +8,8 @@ export default {
       name: 'title',
       title: 'Film Title',
       type: 'string',
-      description: 'e.g., Kiki\'s Delivery Service',
-      validation: (Rule: any) => Rule.required()
+      description: "e.g., Kiki's Delivery Service",
+      validation: (Rule: any) => Rule.required(),
     },
     // Director Name
     {
@@ -17,22 +17,23 @@ export default {
       title: 'Director Name',
       type: 'string',
       description: 'e.g., Hayao Miyazaki',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
     },
     // Director Avatar URL
     {
       name: 'directorAvatarUrl',
       title: 'Director Avatar URL',
       type: 'url',
-      description: 'Cloudflare R2 URL for director photo'
+      description: 'Cloudflare R2 URL for director photo',
     },
     // Information - Copyright Text
     {
       name: 'copyrightInfo',
       title: 'Copyright Information',
       type: 'text',
-      description: 'e.g., © 1989 Kiki\'s Delivery Service / Eiko Kadono\nStudio Ghibli · Nibariki · Tokuma Shoten',
-      rows: 3
+      description:
+        "e.g., © 1989 Kiki's Delivery Service / Eiko Kadono\nStudio Ghibli · Nibariki · Tokuma Shoten",
+      rows: 3,
     },
     // Rating (U, PG, 12A, etc)
     {
@@ -40,7 +41,7 @@ export default {
       title: 'Rating',
       type: 'string',
       description: 'e.g., U, PG, 12A, 15, 18',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
     },
     // Genre and Runtime
     {
@@ -48,7 +49,7 @@ export default {
       title: 'Genre & Runtime',
       type: 'string',
       description: 'e.g., Family/Fantasy ‧ 1h 42m',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
     },
     // Studio
     {
@@ -56,7 +57,14 @@ export default {
       title: 'Studio',
       type: 'string',
       description: 'e.g., Studio Ghibli',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
+    },
+    // Studio Logo URL (Cloudflare R2)
+    {
+      name: 'studioLogoUrl',
+      title: 'Studio Logo URL',
+      type: 'url',
+      description: 'Cloudflare R2 URL for the studio logo (SVG/PNG).',
     },
     // Country
     {
@@ -64,21 +72,21 @@ export default {
       title: 'Country',
       type: 'string',
       description: 'e.g., Japan',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
     },
     // Trailer URL
     {
       name: 'trailerUrl',
       title: 'Trailer URL',
       type: 'url',
-      description: 'YouTube or other video URL'
+      description: 'YouTube or other video URL',
     },
     // Letterboxd URL
     {
       name: 'letterboxdUrl',
       title: 'Letterboxd URL',
       type: 'url',
-      description: 'Letterboxd film page URL'
+      description: 'Letterboxd film page URL',
     },
     // Poster URL
     {
@@ -86,7 +94,7 @@ export default {
       title: 'Poster Image URL',
       type: 'url',
       description: 'Cloudflare R2 URL for film poster',
-      validation: (Rule: any) => Rule.required()
+      validation: (Rule: any) => Rule.required(),
     },
     // Homepage Stills (6 images for preview)
     {
@@ -94,24 +102,26 @@ export default {
       title: 'Homepage Stills (6 images)',
       type: 'array',
       description: 'Select 6 stills to display on homepage',
-      of: [{
-        type: 'object',
-        fields: [
-          {
-            name: 'url',
-            title: 'Image URL',
-            type: 'url',
-            description: 'Cloudflare R2 URL'
-          },
-          {
-            name: 'alt',
-            title: 'Alt Text',
-            type: 'string',
-            description: 'Brief description of the still'
-          }
-        ]
-      }],
-      validation: (Rule: any) => Rule.required().length(6)
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'url',
+              title: 'Image URL',
+              type: 'url',
+              description: 'Cloudflare R2 URL',
+            },
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              description: 'Brief description of the still',
+            },
+          ],
+        },
+      ],
+      validation: (Rule: any) => Rule.required().length(6),
     },
     // Display Order
     {
@@ -119,13 +129,13 @@ export default {
       title: 'Display Order',
       type: 'number',
       description: 'Order films appear on homepage (1, 2, 3...)',
-      validation: (Rule: any) => Rule.required()
-    }
+      validation: (Rule: any) => Rule.required(),
+    },
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'director'
-    }
-  }
-}
+      subtitle: 'director',
+    },
+  },
+};
