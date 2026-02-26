@@ -1,5 +1,6 @@
 import FilmSection from '@/components/FilmSection';
 import WelcomeClock from '@/components/WelcomeClock';
+import { getFilms } from '@/lib/sanity';
 
 function Header() {
   return (
@@ -31,13 +32,20 @@ function Footer() {
   );
 }
 
-export default function Page() {
+export default async function Page() {
+  const films = await getFilms();
+  const film = films[0] ?? null;
+
   return (
     <main className="bg-white text-black antialiased">
-      <div className="w-full mx-auto max-w-[2200px] px-[18px] sm:px-[24px] md:px-[64px] xl:px-[190px] 2xl:px-[190px] flex flex-col gap-[64px]">
-        <Header />
-        <FilmSection />
-        <Footer />
+      {/* Outer: Figma-like fluid side padding on desktop */}
+      <div className="w-full px-[clamp(64px,13.2vw,260px)]">
+        {/* Inner: one shared content frame for ALL sections (Header / Film / Footer) */}
+        <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1240px)] flex flex-col gap-[64px]">
+          <Header />
+          <FilmSection film={film} />
+          <Footer />
+        </div>
       </div>
     </main>
   );

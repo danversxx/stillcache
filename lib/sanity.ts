@@ -27,6 +27,9 @@ export type Film = {
   trailerUrl?: string;
   letterboxdUrl?: string;
 
+  // ISO date from Sanity e.g. "1989-07-29"
+  releaseDate?: string;
+
   posterImageUrl: string;
 
   homepageStills: Array<{
@@ -54,6 +57,9 @@ const FILMS_QUERY = /* groq */ `
     country,
     trailerUrl,
     letterboxdUrl,
+
+    // ISO date (stored in Sanity as a date)
+    releaseDate,
 
     // Poster can exist under different names depending on old/new docs
     "posterImageUrl": coalesce(posterUrl, posterImageUrl),
@@ -104,6 +110,8 @@ function normalizeFilm(input: any): Film {
 
     trailerUrl: typeof input?.trailerUrl === 'string' ? input.trailerUrl : undefined,
     letterboxdUrl: typeof input?.letterboxdUrl === 'string' ? input.letterboxdUrl : undefined,
+
+    releaseDate: typeof input?.releaseDate === 'string' ? input.releaseDate : undefined,
 
     posterImageUrl: asString(input?.posterImageUrl),
 
