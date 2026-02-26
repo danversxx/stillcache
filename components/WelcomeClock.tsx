@@ -61,11 +61,6 @@ export default function WelcomeClock() {
   const [now, setNow] = useState(() => new Date());
   const [place, setPlace] = useState('');
 
-  /**
-   * Minute-accurate clock update:
-   * - Aligns first tick to the next minute boundary
-   * - Then updates every 60 seconds
-   */
   useEffect(() => {
     let intervalId: number | undefined;
     let timeoutId: number | undefined;
@@ -90,11 +85,6 @@ export default function WelcomeClock() {
     };
   }, []);
 
-  /**
-   * Lightweight location line:
-   * - Fast path: reads from session cache
-   * - Network path: fetch with timeout + abort for robustness
-   */
   useEffect(() => {
     let cancelled = false;
 
@@ -115,9 +105,7 @@ export default function WelcomeClock() {
         const data: unknown = await res.json();
 
         const city =
-          typeof (data as { city?: unknown }).city === 'string'
-            ? (data as { city: string }).city
-            : '';
+          typeof (data as { city?: unknown }).city === 'string' ? (data as { city: string }).city : '';
 
         const country =
           typeof (data as { country_name?: unknown }).country_name === 'string'
@@ -152,14 +140,28 @@ export default function WelcomeClock() {
 
   return (
     <div
-      className="text-[13px] sm:text-[14px] md:text-[18px] leading-[18px] sm:leading-[22px] text-left text-[#999999] md:text-black"
+      className={[
+        // Mobile/tablet: keep your existing stacked behaviour & muted tone
+        'text-[13px] sm:text-[14px] md:text-[18px]',
+        'leading-[18px] sm:leading-[22px] md:leading-[26px]',
+        'text-left text-[#999999] md:text-black',
+      ].join(' ')}
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
         fontWeight: 500,
       }}
     >
-      <div>{line1}</div>
-      <div className="hidden sm:block">{place}</div>
+      {/* Mobile: stacked */}
+      <div className="md:hidden">
+        <div>{line1}</div>
+        <div className="hidden sm:block">{place}</div>
+      </div>
+
+      {/* Desktop: Figma Welcome row (date + place), gap 8, bold, 18/26, black */}
+      <div className="hidden md:flex items-center gap-[8px] font-bold text-black">
+        <span className="text-[18px] leading-[26px]">{line1}</span>
+        <span className="text-[18px] leading-[26px]">{place}</span>
+      </div>
     </div>
   );
 }

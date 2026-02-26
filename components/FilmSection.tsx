@@ -59,46 +59,38 @@ function FilmBlock({ film, index }: { film: Film; index: number }) {
   );
 }
 
-const RHYTHM_Y = 'gap-[12px]';
-const FILMDATA_SLOT = 'shrink-0 xl:py-[2px]';
-
 function FilmData({ film, stillAnchor }: { film: Film; stillAnchor: string }) {
   const rating = safeUpper(film.rating);
 
   return (
-    <div className="w-full flex flex-col gap-[20px] xl:gap-0 xl:h-[var(--poster-h)] xl:justify-between">
-      
-      <div className={['flex flex-col gap-[14px]', FILMDATA_SLOT].join(' ')}>
+    <div className="w-full flex flex-col gap-[18px] xl:gap-0 xl:h-[var(--poster-h)] xl:justify-between">
+      <div className="flex flex-col gap-[14px] shrink-0">
         <Avatar src={film.directorAvatarUrl} alt={film.directorName} />
-        <div className="text-[20px] md:text-[34px] xl:leading-snug font-medium text-[#999999]">
+        <div className="text-[20px] md:text-[34px] leading-[26px] md:leading-[40px] font-medium text-[#999999]">
           {film.directorName}
         </div>
       </div>
 
-      <div className={FILMDATA_SLOT}>
-        <h2 className="text-[44px] sm:text-[56px] md:text-[72px] xl:text-[82px] xl:leading-[0.98] font-bold tracking-tight">
-          {film.filmTitle}
-        </h2>
-      </div>
+      <h2 className="shrink-0 text-[44px] sm:text-[56px] md:text-[72px] xl:text-[82px] leading-[44px] sm:leading-[56px] md:leading-[70px] xl:leading-[80px] font-bold tracking-tight">
+        {film.filmTitle}
+      </h2>
 
-      <div className={FILMDATA_SLOT}>
+      <div className="shrink-0">
         <StudioMark studio={film.studio} studioLogoUrl={film.studioLogoUrl} />
       </div>
 
-      <div className={[FILMDATA_SLOT, 'text-[14px] xl:leading-normal whitespace-pre-line'].join(' ')}>
+      <div className="shrink-0 text-[14px] leading-[22px] whitespace-pre-line">
         {film.copyrightInformation || ''}
       </div>
 
-      <div className={FILMDATA_SLOT}>
-        <a
-          href={`#${stillAnchor}`}
-          className="w-full border border-black text-center py-[12px] xl:py-[10px] text-[14px] font-bold"
-        >
-          {film.filmTitle} Stills Gallery
-        </a>
-      </div>
+      <a
+        href={`#${stillAnchor}`}
+        className="shrink-0 w-full border border-black text-center py-[12px] text-[14px] leading-[22px] font-bold"
+      >
+        {film.filmTitle} Stills Gallery
+      </a>
 
-      <div className={FILMDATA_SLOT}>
+      <div className="shrink-0">
         <FilmMetaRow
           directorName={film.directorName}
           rating={rating}
@@ -108,7 +100,7 @@ function FilmData({ film, stillAnchor }: { film: Film; stillAnchor: string }) {
         />
       </div>
 
-      <div className={FILMDATA_SLOT}>
+      <div className="shrink-0">
         <ExternalLinks trailerUrl={film.trailerUrl} letterboxdUrl={film.letterboxdUrl} />
       </div>
     </div>
@@ -152,20 +144,34 @@ function StillsGrid({ id, filmTitle, stills }: { id: string; filmTitle: string; 
   );
 }
 
-function FilmMetaRow({ directorName, rating, genreRuntime, studio, country }:{
-  directorName: string; rating: string; genreRuntime: string; studio: string; country: string;
+/* ============================= */
+
+function FilmMetaRow({
+  directorName,
+  rating,
+  genreRuntime,
+  studio,
+  country,
+}: {
+  directorName: string;
+  rating: string;
+  genreRuntime: string;
+  studio: string;
+  country: string;
 }) {
   return (
     <div className="w-full overflow-x-auto">
-      <div className="inline-flex flex-nowrap items-start gap-[16px] text-[14px] leading-[22px]">
+      <div className="inline-flex flex-nowrap items-start gap-[32px] text-[14px] leading-[22px]">
         <MetaItem label="Directed By" value={directorName} />
-        <div className={['flex flex-col whitespace-nowrap', RHYTHM_Y].join(' ')}>
-          <span className="font-bold">Overview</span>
-          <div className="flex items-center gap-[10px]">
+
+        <div className="flex flex-col whitespace-nowrap">
+          <span className="font-bold leading-[22px]">Overview</span>
+          <div className="flex items-center gap-[10px] leading-[22px]">
             <RatingPill rating={rating} />
             <span>{genreRuntime}</span>
           </div>
         </div>
+
         <MetaItem label="Studio" value={studio} />
         <MetaItem label="Country" value={country} />
       </div>
@@ -173,11 +179,11 @@ function FilmMetaRow({ directorName, rating, genreRuntime, studio, country }:{
   );
 }
 
-function ExternalLinks({ trailerUrl, letterboxdUrl }:{ trailerUrl?: string; letterboxdUrl?: string }) {
+function ExternalLinks({ trailerUrl, letterboxdUrl }: { trailerUrl?: string; letterboxdUrl?: string }) {
   return (
-    <div className={['flex flex-col', RHYTHM_Y].join(' ')}>
-      <span className="font-bold text-[14px]">External</span>
-      <div className="flex flex-wrap items-center gap-[16px]">
+    <div className="flex flex-col gap-[12px]">
+      <span className="font-bold text-[14px] leading-[22px]">External</span>
+      <div className="flex flex-wrap items-center gap-[18px]">
         <ExternalButton href={trailerUrl} label="Watch Trailer" />
         <ExternalButton href={letterboxdUrl} label="Letterboxd" />
       </div>
@@ -185,16 +191,16 @@ function ExternalLinks({ trailerUrl, letterboxdUrl }:{ trailerUrl?: string; lett
   );
 }
 
-function MetaItem({ label, value }:{ label: string; value: string }) {
+function MetaItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className={['flex flex-col whitespace-nowrap text-[14px]', RHYTHM_Y].join(' ')}>
+    <div className="flex flex-col whitespace-nowrap text-[14px] leading-[22px]">
       <span className="font-bold">{label}</span>
       <span>{value}</span>
     </div>
   );
 }
 
-function RatingPill({ rating }:{ rating: string }) {
+function RatingPill({ rating }: { rating: string }) {
   return (
     <div className="w-[24px] h-[24px] border border-black rounded-full flex items-center justify-center">
       <span className="text-[11px] font-bold">{rating}</span>
@@ -202,7 +208,7 @@ function RatingPill({ rating }:{ rating: string }) {
   );
 }
 
-function StudioMark({ studio, studioLogoUrl }:{ studio: string; studioLogoUrl?: string }) {
+function StudioMark({ studio, studioLogoUrl }: { studio: string; studioLogoUrl?: string }) {
   if (studioLogoUrl) {
     return (
       <div className="h-[40px] md:h-[57px] relative">
@@ -217,7 +223,7 @@ function StudioMark({ studio, studioLogoUrl }:{ studio: string; studioLogoUrl?: 
   );
 }
 
-function Avatar({ src, alt }:{ src?: string; alt: string }) {
+function Avatar({ src, alt }: { src?: string; alt: string }) {
   if (!src) return <div className="w-[52px] h-[52px] rounded-full border border-black/20" />;
   return (
     <div className="w-[52px] h-[52px] rounded-full overflow-hidden relative">
@@ -226,7 +232,7 @@ function Avatar({ src, alt }:{ src?: string; alt: string }) {
   );
 }
 
-function ExternalButton({ href, label }:{ href?: string; label: string }) {
+function ExternalButton({ href, label }: { href?: string; label: string }) {
   const safe = href && (href.startsWith('http://') || href.startsWith('https://'));
   return (
     <a
@@ -235,7 +241,7 @@ function ExternalButton({ href, label }:{ href?: string; label: string }) {
       rel={safe ? 'noopener noreferrer' : undefined}
       aria-disabled={!safe}
       className={[
-        'inline-flex items-center border border-black px-[12px] py-[6px] xl:py-[4px] text-[14px] font-bold',
+        'inline-flex items-center border border-black px-[12px] py-[6px] text-[14px] font-bold',
         safe ? '' : 'opacity-50 pointer-events-none',
       ].join(' ')}
     >
