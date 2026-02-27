@@ -10,10 +10,15 @@ export const client = createClient({
 export type Film = {
   _id: string;
 
-  // Frontend-friendly aliases
   filmTitle: string;
+
   directorName: string;
   directorAvatarUrl?: string;
+  directorBirthYear?: number;
+  directorNationality?: string;
+
+  releaseDate?: string;
+
   copyrightInformation?: string;
 
   rating: string;
@@ -26,9 +31,6 @@ export type Film = {
 
   trailerUrl?: string;
   letterboxdUrl?: string;
-
-  // ISO date from Sanity e.g. "1989-07-29"
-  releaseDate?: string;
 
   posterImageUrl: string;
 
@@ -45,26 +47,30 @@ const FILMS_QUERY = /* groq */ `
   *[_type == "film"] | order(order asc) {
     _id,
 
-    // Map schema field names -> frontend field names (keep frontend stable)
     "filmTitle": title,
+
     "directorName": director,
     "directorAvatarUrl": directorAvatarUrl,
+    directorBirthYear,
+    directorNationality,
+
+    releaseDate,
+
     "copyrightInformation": copyrightInfo,
+
     rating,
     genreRuntime,
+
     studio,
     "studioLogoUrl": studioLogoUrl,
+
     country,
+
     trailerUrl,
     letterboxdUrl,
 
-    // ISO date (stored in Sanity as a date)
-    releaseDate,
-
-    // Poster can exist under different names depending on old/new docs
     "posterImageUrl": coalesce(posterUrl, posterImageUrl),
 
-    // Stills: support both formats (url directly OR asset->url from older structure)
     "homepageStills": homepageStills[]{
       _key,
       "url": coalesce(url, asset->url),
@@ -83,6 +89,10 @@ function asString(v: unknown): string {
   return typeof v === 'string' ? v : '';
 }
 
+function asNumber(v: unknown): number | undefined {
+  return typeof v === 'number' && Number.isFinite(v) ? v : undefined;
+}
+
 function normalizeFilm(input: any): Film {
   const stills = asArray(input?.homepageStills)
     .map((s: any) => ({
@@ -92,12 +102,21 @@ function normalizeFilm(input: any): Film {
     }))
     .filter((s) => Boolean(s.url));
 
+  const directorNationality =
+    typeof input?.directorNationality === 'string' ? input.directorNationality.trim() : '';
+
   return {
     _id: asString(input?._id),
 
     filmTitle: asString(input?.filmTitle),
+
     directorName: asString(input?.directorName),
     directorAvatarUrl: typeof input?.directorAvatarUrl === 'string' ? input.directorAvatarUrl : undefined,
+    directorBirthYear: asNumber(input?.directorBirthYear),
+    directorNationality: directorNationality || undefined,
+
+    releaseDate: typeof input?.releaseDate === 'string' ? input.releaseDate : undefined,
+
     copyrightInformation: typeof input?.copyrightInformation === 'string' ? input.copyrightInformation : undefined,
 
     rating: asString(input?.rating),
@@ -111,8 +130,6 @@ function normalizeFilm(input: any): Film {
     trailerUrl: typeof input?.trailerUrl === 'string' ? input.trailerUrl : undefined,
     letterboxdUrl: typeof input?.letterboxdUrl === 'string' ? input.letterboxdUrl : undefined,
 
-    releaseDate: typeof input?.releaseDate === 'string' ? input.releaseDate : undefined,
-
     posterImageUrl: asString(input?.posterImageUrl),
 
     homepageStills: stills,
@@ -121,22 +138,16 @@ function normalizeFilm(input: any): Film {
   };
 }
 
-/**
- * Fetch all films ordered by display order.
- * Returns frontend-ready objects with stable keys and defensive normalization.
- */
 export async function getFilms(): Promise<Film[]> {
   const raw = await client.fetch(FILMS_QUERY);
-  return asArray(raw).map(normalizeFilm).filter((f) => Boolean(f._id && f.filmTitle && f.posterImageUrl));
+  return asArray(raw)
+    .map(normalizeFilm)
+    .filter((f) => Boolean(f._id && f.filmTitle && f.posterImageUrl));
 }
 
-/**
- * Small helper to avoid breaking React keying if `_key` is missing.
- * Not security-related; just stability.
- */
 function cryptoRandomKey() {
   try {
-    // @ts-ignore - crypto may not exist in some environments, fallback below.
+    // @ts-ignore
     return globalThis.crypto?.randomUUID?.() ?? `k_${Math.random().toString(16).slice(2)}`;
   } catch {
     return `k_${Math.random().toString(16).slice(2)}`;

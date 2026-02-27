@@ -21,7 +21,23 @@ export default {
       type: 'url',
     },
 
-    // ✅ Release Date (displays as: 29 July 1989)
+    // ✅ Director metadata (kept simple + reusable across UI)
+    {
+      name: 'directorBirthYear',
+      title: 'Director Birth Year',
+      type: 'number',
+      description: 'e.g. 1941',
+      validation: (Rule: any) =>
+        Rule.integer().min(1800).max(new Date().getFullYear()),
+    },
+    {
+      name: 'directorNationality',
+      title: 'Director Nationality',
+      type: 'string',
+      description: 'e.g. Japan',
+    },
+
+    // ✅ Release Date (stored as ISO; we format on frontend)
     {
       name: 'releaseDate',
       title: 'Release Date',
