@@ -82,7 +82,6 @@ function LetterboxdMark({ href }: { href: string }) {
 }
 
 function StillTile({ url, alt }: { url: string; alt: string }) {
-  // Preserve Figma tile ratio while staying responsive; do not crop.
   return (
     <div className="relative w-full aspect-[342.67/192.75]">
       <img
@@ -142,15 +141,10 @@ export default function FilmSection({ film }: Props) {
   return (
     <section className="w-full bg-white text-black">
       <div className="flex flex-col items-center gap-[24px] md:gap-[32px]">
-        {/* Top Section */}
         <div className="w-full">
-          {/* Desktop preserved at xl+, mobile/tablet stacks safely */}
           <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 xl:gap-10">
-            {/* Data */}
             <div className="w-full max-w-[614px] flex flex-col items-start gap-[18px] md:gap-[32px]">
-              {/* Director + Title */}
               <div className="flex w-full flex-col items-start gap-[10px] md:gap-[8px]">
-                {/* Avatar + Director Name (same line on mobile too) */}
                 <div className="flex w-full items-center gap-[10px]">
                   {directorAvatarUrl ? (
                     <img
@@ -172,15 +166,14 @@ export default function FilmSection({ film }: Props) {
                   </h3>
                 </div>
 
-                {/* Film title matches director size on mobile for rhythm */}
                 <h2 className="text-[28px] md:text-[48px] font-bold leading-[32px] md:leading-[50px] text-black">
                   {film.filmTitle}
                 </h2>
               </div>
 
-              {/* Release + Copyright + Studio logo (evenly distributed) */}
-              <div className="flex w-full items-start justify-between gap-[16px]">
-                <div className="flex flex-col gap-[6px] md:gap-[10px] min-w-0">
+              {/* ✅ Mobile: center-align logo + text, clamp copyright to 2 lines */}
+              <div className="flex w-full items-center justify-between gap-[16px]">
+                <div className="flex flex-1 min-w-0 flex-col gap-[6px] md:gap-[10px]">
                   {releaseDate ? (
                     <p className="text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-black">
                       {releaseDate}
@@ -188,9 +181,25 @@ export default function FilmSection({ film }: Props) {
                   ) : null}
 
                   {copyrightInfo ? (
-                    <p className="whitespace-pre-line text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-[#999999] max-w-[26ch] md:max-w-none">
-                      {copyrightInfo}
-                    </p>
+                    <>
+                      {/* Mobile (clamped to 2 lines) */}
+                      <p
+                        className="md:hidden whitespace-pre-line text-[12px] leading-[18px] tracking-[0.01em] text-[#999999]"
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical" as any,
+                          overflow: "hidden",
+                        }}
+                      >
+                        {copyrightInfo}
+                      </p>
+
+                      {/* md+ (no clamp) */}
+                      <p className="hidden md:block whitespace-pre-line text-[14px] leading-[20px] tracking-[0.01em] text-[#999999]">
+                        {copyrightInfo}
+                      </p>
+                    </>
                   ) : null}
                 </div>
 
@@ -198,14 +207,13 @@ export default function FilmSection({ film }: Props) {
                   <img
                     src={studioLogoUrl}
                     alt={film.studio ? `${film.studio} logo` : "Studio logo"}
-                    className="h-[40px] md:h-[57px] w-auto shrink-0"
+                    className="h-[38px] md:h-[57px] w-auto shrink-0"
                     loading="lazy"
                     decoding="async"
                   />
                 ) : null}
               </div>
 
-              {/* Gallery button */}
               <button
                 type="button"
                 className="flex h-[44px] md:h-[46px] w-full items-center justify-center gap-[8px] border border-black p-[12px] transition-opacity hover:opacity-70"
@@ -215,7 +223,6 @@ export default function FilmSection({ film }: Props) {
                 </span>
               </button>
 
-              {/* Information: mobile becomes vertical rows with label/value on same line */}
               <div className="w-full flex flex-col gap-[10px] md:hidden">
                 <InfoRow label="Directed By" value={film.directorName} />
                 <InfoRow label="Overview" value={`${film.rating} \u202F\u00B7\u202F ${film.genreRuntime}`} />
@@ -235,7 +242,6 @@ export default function FilmSection({ film }: Props) {
                 ) : null}
               </div>
 
-              {/* Desktop/Tablet info (kept as-is, only slight wrapping safety) */}
               <div className="hidden md:flex w-full flex-wrap items-start gap-x-[32px] gap-y-[16px]">
                 <div className="flex flex-col items-start">
                   <p className="text-[14px] font-bold leading-[22px] tracking-[0.01em] text-black">
@@ -274,7 +280,6 @@ export default function FilmSection({ film }: Props) {
                 </div>
               </div>
 
-              {/* Desktop/Tablet external (kept) */}
               {(trailerHref || letterboxdHref) ? (
                 <div className="hidden md:flex w-full flex-col items-start gap-[12px]">
                   <p className="text-[14px] font-bold leading-[22px] tracking-[0.01em] text-black">
@@ -291,7 +296,6 @@ export default function FilmSection({ film }: Props) {
               ) : null}
             </div>
 
-            {/* Poster */}
             <div className="w-full xl:w-auto xl:shrink-0">
               {posterImageUrl ? (
                 <div className="w-full max-w-[420px] xl:max-w-none">
@@ -314,7 +318,6 @@ export default function FilmSection({ film }: Props) {
           </div>
         </div>
 
-        {/* Still Thumbnails (responsive grid; uncropped; desktop honours original) */}
         {stills.length > 0 ? (
           <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-[16px]">
