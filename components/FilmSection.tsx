@@ -228,7 +228,7 @@ export default function FilmSection({ film }: Props) {
                   )}
 
                   {/* Name/Info */}
-                  <div className="flex min-w-0 flex-1 flex-col items-start gap-[6px] md:gap-[8px]">
+                  <div className="flex min-w-0 flex-1 flex-col items-start gap-[6px] md:gap-[4px]">
                     {/* STYLE: Text stack spacing + truncation support (min-w-0) + responsive gap */}
 
                     {/* H3: +2px line-height */}
@@ -238,7 +238,7 @@ export default function FilmSection({ film }: Props) {
                     </h3>
 
                     {directorMeta ? (
-                      <p className="text-[12px] md:text-[16px] leading-[20px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] leading-[18px] tracking-[0.01em] text-black">
                         {/* STYLE: Director meta typography (size/leading/tracking) */}
                         {directorMeta}
                       </p>
@@ -260,10 +260,17 @@ export default function FilmSection({ film }: Props) {
                   {/* STYLE: Text column flow + spacing + responsive spacing */}
 
                   {releaseDate ? (
-                    <p className="text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-black">
-                      {/* STYLE: Release date typography */}
-                      {releaseDate}
-                    </p>
+                    <div className="flex flex-col gap-0">
+                      {/* STYLE: Group label + value as a single unit (removes spacing between them) */}
+                      <p className="text-[12px] md:text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
+                        {/* STYLE: Release Date label typography (matches date styling; bold weight for hierarchy) */}
+                        Release Date
+                      </p>
+                      <p className="text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-black">
+                        {/* STYLE: Release date typography */}
+                        {releaseDate}
+                      </p>
+                    </div>
                   ) : null}
 
                   {copyrightInfo ? (
@@ -315,7 +322,7 @@ export default function FilmSection({ film }: Props) {
                     </p>
                     <div className="flex items-center gap-[12px] justify-end flex-wrap">
                       {/* STYLE: Link group alignment + spacing + wrapping behaviour */}
-                      {trailerHref ? <ExternalButton href={trailerHref}>Trailer</ExternalButton> : null}
+                      {trailerHref ? <ExternalButton href={trailerHref}>Watch Trailer</ExternalButton> : null}
                       {letterboxdHref ? <LetterboxdMark href={letterboxdHref} /> : null}
                     </div>
                   </div>

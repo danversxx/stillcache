@@ -155,7 +155,7 @@ export default function WelcomeClock() {
           MOBILE / TABLET (stacked + muted)
           Visible: < md
       ───────────────────────────────────────────────────────── */}
-      <div className="md:hidden text-[13px] sm:text-[14px] leading-[18px] sm:leading-[22px] text-[#999999]">
+      <div className="md:hidden text-[13px] sm:text-[14px] font-medium leading-[18px] sm:leading-[22px] text-[#999999]">
         {/* STYLE: Mobile-only visibility (md:hidden) */}
         {/* STYLE: Typography (font size + line height) + responsive typography (sm:...) */}
         {/* STYLE: Color (muted grey) */}
@@ -170,7 +170,7 @@ export default function WelcomeClock() {
           DESKTOP (single line, aligned right)
           Visible: ≥ md
       ───────────────────────────────────────────────────────── */}
-      <div className="hidden md:flex items-center justify-end gap-[8px] text-black text-[14px] leading-[21px] tracking-[0.01em] font-normal">
+      <div className="hidden md:flex items-center justify-end gap-[8px] text-black font-medium text-[14px] leading-[21px] tracking-[0.01em] font-normal">
         {/* STYLE: Desktop-only visibility (hidden → md:flex) */}
         {/* STYLE: Layout (flex row) + vertical alignment (items-center) + right alignment (justify-end) */}
         {/* STYLE: Spacing (gap) */}

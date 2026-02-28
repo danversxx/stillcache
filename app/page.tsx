@@ -45,7 +45,7 @@ function Footer() {
   return (
     <footer className="py-[22px] md:py-[32px]">
       {/* STYLE: Footer vertical padding + responsive padding */}
-      <div className="text-[10px] md:text-[12px] leading-[14px]">
+      <div className="text-[10px] md:text-[14px] font-medium leading-[14px]">
         {/* STYLE: Footer typography (size/leading) + responsive typography */}
         © 2026 · Still Cache
       </div>
