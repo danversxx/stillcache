@@ -2,68 +2,144 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ──────────────────────────────────────────────────────────────
+   TYPOGRAPHY: Local font faces
+   Controls:
+   - Font family name used across the site
+   - Available weights (400/500/700)
+   - Loading strategy (font-display)
+────────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
+  /* STYLE: Source file path + format */
   font-weight: 400;
+  /* STYLE: Weight mapping (Regular) */
   font-style: normal;
+  /* STYLE: Normal (non-italic) */
   font-display: swap;
+  /* STYLE: Loading behaviour (swap prevents invisible text) */
 }
 
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Medium.woff2') format('woff2');
+  /* STYLE: Source file path + format */
   font-weight: 500;
+  /* STYLE: Weight mapping (Medium) */
   font-style: normal;
+  /* STYLE: Normal (non-italic) */
   font-display: swap;
+  /* STYLE: Loading behaviour */
 }
 
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
+  /* STYLE: Source file path + format */
   font-weight: 700;
+  /* STYLE: Weight mapping (Bold) */
   font-style: normal;
+  /* STYLE: Normal (non-italic) */
   font-display: swap;
+  /* STYLE: Loading behaviour */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   BASE RESET / BOX MODEL
+   Controls:
+   - Default margin/padding removal
+   - Consistent sizing with border-box
+────────────────────────────────────────────────────────────── */
 * {
   margin: 0;
+  /* STYLE: Removes browser default spacing */
   padding: 0;
+  /* STYLE: Removes browser default spacing */
   box-sizing: border-box;
+  /* STYLE: Predictable sizing (padding/border included in width/height) */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   DOCUMENT-LEVEL BEHAVIOUR
+   Controls:
+   - Prevent horizontal overflow
+   - Font rendering/smoothing
+────────────────────────────────────────────────────────────── */
 html {
   overflow-x: hidden;
+  /* STYLE: Prevents accidental horizontal scroll */
   -webkit-font-smoothing: antialiased;
+  /* STYLE: Smoother type rendering on WebKit */
   -moz-osx-font-smoothing: grayscale;
+  /* STYLE: Smoother type rendering on macOS Firefox */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   BODY THEME + GLOBAL TYPE
+   Controls:
+   - Default background/text colours
+   - Global font stack
+   - Global overflow behaviour
+────────────────────────────────────────────────────────────── */
 body {
   background-color: #000000;
+  /* STYLE: Global background colour */
   color: #ffffff;
+  /* STYLE: Global text colour */
   font-family: 'Helvetica Now Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif;
+  /* STYLE: Global font stack (primary → system fallbacks) */
   margin: 0;
+  /* STYLE: Ensure no default outer spacing */
   padding: 0;
+  /* STYLE: Ensure no default inner spacing */
   overflow-x: hidden;
+  /* STYLE: Prevents accidental horizontal scroll */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   MEDIA DEFAULTS
+   Controls:
+   - Block-level images
+   - Responsive sizing
+────────────────────────────────────────────────────────────── */
 img {
   display: block;
+  /* STYLE: Removes inline image whitespace and baseline gaps */
   max-width: 100%;
+  /* STYLE: Prevents images overflowing their containers */
   height: auto;
+  /* STYLE: Maintains aspect ratio when width changes */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   LINK DEFAULTS
+   Controls:
+   - Inherit colour from surrounding text
+   - Remove underline (use Tailwind/utility classes when needed)
+────────────────────────────────────────────────────────────── */
 a {
   color: inherit;
+  /* STYLE: Links use surrounding text colour */
   text-decoration: none;
+  /* STYLE: No underline by default (add underlines per-component as needed) */
 }
 
+/* ──────────────────────────────────────────────────────────────
+   RESPONSIVE UTILITIES: Hero sizing
+   Controls:
+   - Desktop+ aspect ratio behaviour
+   - Max viewport height constraint
+────────────────────────────────────────────────────────────── */
 /* Hero responsive height */
 @media (min-width: 768px) {
   .hero-responsive {
     height: auto;
+    /* STYLE: Height derives from aspect ratio/contents */
     aspect-ratio: 1440 / 880;
+    /* STYLE: Controls hero proportions on desktop */
     max-height: 100vh;
+    /* STYLE: Prevents hero exceeding viewport height */
   }
 }

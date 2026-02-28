@@ -57,6 +57,10 @@ function writeCache(placeText: string) {
   }
 }
 
+/* ──────────────────────────────────────────────────────────────
+   WELCOME CLOCK (Header → right side)
+   Visual output order: Mobile/Tablet block → Desktop block
+────────────────────────────────────────────────────────────── */
 export default function WelcomeClock() {
   const [now, setNow] = useState(() => new Date());
   const [place, setPlace] = useState('');
@@ -141,18 +145,36 @@ export default function WelcomeClock() {
   return (
     <div
       className="text-left"
+      /* STYLE: Text alignment for the overall block (e.g. text-left / text-right) */
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
+        /* STYLE: Font family/stack (swap typeface here) */
       }}
     >
-      {/* Mobile/tablet: keep your existing stacked + muted behaviour */}
+      {/* ────────────────────────────────────────────────────────
+          MOBILE / TABLET (stacked + muted)
+          Visible: < md
+      ───────────────────────────────────────────────────────── */}
       <div className="md:hidden text-[13px] sm:text-[14px] leading-[18px] sm:leading-[22px] text-[#999999]">
+        {/* STYLE: Mobile-only visibility (md:hidden) */}
+        {/* STYLE: Typography (font size + line height) + responsive typography (sm:...) */}
+        {/* STYLE: Color (muted grey) */}
         <div>{line1}</div>
-        <div className="hidden sm:block">{place}</div>
+        <div className="hidden sm:block">
+          {/* STYLE: Show/hide place line (hidden on xs, visible on sm+) */}
+          {place}
+        </div>
       </div>
 
-      {/* Desktop: Figma Welcome */}
+      {/* ────────────────────────────────────────────────────────
+          DESKTOP (single line, aligned right)
+          Visible: ≥ md
+      ───────────────────────────────────────────────────────── */}
       <div className="hidden md:flex items-center justify-end gap-[8px] text-black text-[14px] leading-[21px] tracking-[0.01em] font-normal">
+        {/* STYLE: Desktop-only visibility (hidden → md:flex) */}
+        {/* STYLE: Layout (flex row) + vertical alignment (items-center) + right alignment (justify-end) */}
+        {/* STYLE: Spacing (gap) */}
+        {/* STYLE: Typography (size/leading/tracking/weight) + color */}
         <span>{line1}</span>
         <span>{place}</span>
       </div>
