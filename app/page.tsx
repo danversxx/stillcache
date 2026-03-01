@@ -3,6 +3,14 @@ import WelcomeClock from '@/components/WelcomeClock';
 import { getFilms } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
+   ALWAYS LIVE (no route caching)
+   - Forces a fresh server render on every request
+   - Prevents Vercel/Next from serving a cached HTML result for this route
+────────────────────────────────────────────────────────────── */
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+/* ──────────────────────────────────────────────────────────────
    HEADER (visual top)
    - Left: logo + title
    - Right: WelcomeClock

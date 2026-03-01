@@ -248,7 +248,7 @@ export default function FilmSection({ film }: Props) {
 
                 <div className="w-full mt-[0px] md:mt-[0px]">
                   {/* STYLE: Film title vertical offset (edit mt-* / -mt-* per breakpoint to move FilmTitle up/down without changing gap/gap-* above) */}
-                  <h2 className="text-[32px] md:text-[48px] font-bold leading-[50px] md:leading-[50px] text-black">
+                  <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
                     {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
                     {film.filmTitle}
                   </h2>
