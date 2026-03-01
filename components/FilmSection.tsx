@@ -246,18 +246,23 @@ export default function FilmSection({ film }: Props) {
                   </div>
                 </div>
 
-                <h2 className="text-[32px] md:text-[48px] font-bold leading-[50px] md:leading-[50px] text-black">
-                  {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
-                  {film.filmTitle}
-                </h2>
+                <div className="w-full mt-[0px] md:mt-[0px]">
+                  {/* STYLE: Film title vertical offset (edit mt-* / -mt-* per breakpoint to move FilmTitle up/down without changing gap/gap-* above) */}
+                  <h2 className="text-[32px] md:text-[48px] font-bold leading-[50px] md:leading-[50px] text-black">
+                    {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
+                    {film.filmTitle}
+                  </h2>
+                </div>
               </div>
 
               {/* Release / Copyright / Logo */}
-              <div className="flex w-full items-center justify-between gap-[16px] md:gap-[34px]">
+              <div className="flex w-full mt-[-8px] md:mt-[-8px] justify-between items-end gap-[16px] md:gap-[34px]">
                 {/* STYLE: Row layout + spacing between text block and studio mark + responsive gap */}
+                {/* STYLE: Bottom alignment (items-end) keeps studio mark anchored to the text block baseline */}
 
-                <div className="flex flex-1 min-w-0 flex-col gap-[8px] md:gap-[10px]">
+                <div className="flex flex-1 min-w-0 flex-col gap-[8px] md:gap-[10px] mt-[0px] md:mt-[0px]">
                   {/* STYLE: Text column flow + spacing + responsive spacing */}
+                  {/* STYLE: Vertical offset for Release Date + Copyright block (edit mt-* / -mt-* per breakpoint; does not affect gap rhythm above) */}
 
                   {releaseDate ? (
                     <div className="flex flex-col gap-0">
