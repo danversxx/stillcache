@@ -232,13 +232,13 @@ export default function FilmSection({ film }: Props) {
                     {/* STYLE: Text stack spacing + truncation support (min-w-0) + responsive gap */}
 
                     {/* H3: +2px line-height */}
-                    <h3 className="text-[24px] md:text-[28px] font-bold leading-[30px] md:leading-[32px] text-black truncate">
+                    <h3 className="text-[20px] md:text-[28px] font-bold leading-[24px] md:leading-[32px] text-black truncate">
                       {/* STYLE: Director name typography + responsive scale + truncation */}
                       {film.directorName}
                     </h3>
 
                     {directorMeta ? (
-                      <p className="text-[12px] md:text-[14px] leading-[18px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] leading-[12px] md:leading-[18px] tracking-[0.01em] text-black">
                         {/* STYLE: Director meta typography (size/leading/tracking) */}
                         {directorMeta}
                       </p>
@@ -246,7 +246,7 @@ export default function FilmSection({ film }: Props) {
                   </div>
                 </div>
 
-                <h2 className="text-[28px] md:text-[48px] font-bold leading-[32px] md:leading-[50px] text-black">
+                <h2 className="text-[32px] md:text-[48px] font-bold leading-[50px] md:leading-[50px] text-black">
                   {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
                   {film.filmTitle}
                 </h2>
@@ -262,7 +262,7 @@ export default function FilmSection({ film }: Props) {
                   {releaseDate ? (
                     <div className="flex flex-col gap-0">
                       {/* STYLE: Group label + value as a single unit (removes spacing between them) */}
-                      <p className="text-[12px] md:text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] font-bold leading-[20px] md:leading-[20px] tracking-[0.01em] text-black">
                         {/* STYLE: Release Date label typography (matches date styling; bold weight for hierarchy) */}
                         Release Date
                       </p>
@@ -274,7 +274,7 @@ export default function FilmSection({ film }: Props) {
                   ) : null}
 
                   {copyrightInfo ? (
-                    <p className="whitespace-pre-line text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-[#999999] max-w-[34ch] md:max-w-[270px]">
+                    <p className="whitespace-pre-line text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] tracking-[0.01em] text-[#999999] max-w-[34ch] md:max-w-[270px]">
                       {/* STYLE: Copy typography + muted color + width constraint + preserve line breaks */}
                       {copyrightInfo}
                     </p>
@@ -397,7 +397,7 @@ export default function FilmSection({ film }: Props) {
             <div className="w-full xl:w-auto xl:shrink-0">
               {/* STYLE: Poster column sizing (full width → auto at xl) + prevent shrink at xl */}
               {posterImageUrl ? (
-                <div className="w-full max-w-[420px] xl:max-w-none">
+                <div className="w-full max-w-[460px] xl:max-w-none">
                   {/* STYLE: Poster max width constraint + remove constraint at xl */}
                   <img
                     src={posterImageUrl}
