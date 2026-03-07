@@ -193,16 +193,14 @@ export default function FilmSection({ film }: Props) {
         <div className="w-full">
           {/* STYLE: Main content width (full) */}
 
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-10">
-            {/* STYLE: Layout (stacked on mobile → two columns on tablet/desktop) + alignment + inter-column gap */}
-            {/* STYLE: Desktop sizing remains controlled at xl; tablet uses the same composition with fluid widths */}
+          <div className="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8 xl:gap-10">
+            {/* STYLE: Layout (stacked → two columns at xl) + alignment + inter-column gap */}
 
             {/* ──────────────────────────────────────────────────
                 LEFT COLUMN: Data
             ────────────────────────────────────────────────── */}
-            <div className="w-full max-w-[614px] md:flex-1 md:min-w-0 md:max-w-none xl:max-w-[614px] flex flex-col items-start gap-[18px] md:gap-[32px]">
-              {/* STYLE: Column width constraints (max-w) + vertical flow + spacing + responsive gap */}
-              {/* STYLE: Tablet allows the data column to flex; desktop restores the original max width */}
+            <div className="w-full xl:max-w-[614px] flex flex-col items-start gap-[18px] md:gap-[32px]">
+              {/* STYLE: Column width constraints (full-width while stacked; original desktop max width at xl) + vertical flow + spacing + responsive gap */}
 
               {/* Director/Film */}
               <div className="flex w-full flex-col items-start gap-[12px] md:gap-[16px]">
@@ -401,11 +399,11 @@ export default function FilmSection({ film }: Props) {
             {/* ──────────────────────────────────────────────────
                 RIGHT COLUMN: Poster
             ────────────────────────────────────────────────── */}
-            <div className="w-full md:w-[clamp(220px,30vw,280px)] md:shrink-0 xl:w-auto xl:shrink-0">
-              {/* STYLE: Poster column sizing (full width on mobile → controlled fluid column on tablet → original desktop sizing at xl) */}
+            <div className="w-full flex justify-center xl:w-auto xl:block xl:shrink-0">
+              {/* STYLE: Poster column sizing (centered while stacked; original desktop sizing at xl) + prevent shrink at xl */}
               {posterImageUrl ? (
-                <div className="w-full max-w-[460px] md:max-w-none xl:max-w-none">
-                  {/* STYLE: Poster max width constraint + tablet/desktop column fill */}
+                <div className="w-full max-w-full md:max-w-[clamp(320px,38vw,460px)]">
+                  {/* STYLE: Poster max width constraint while stacked; desktop image sizing takes over at xl */}
                   <img
                     src={posterImageUrl}
                     alt={`${film.filmTitle} poster`}
@@ -417,7 +415,7 @@ export default function FilmSection({ film }: Props) {
                 </div>
               ) : (
                 <div
-                  className="w-full max-w-[420px] md:max-w-none aspect-[2/3] bg-black/10 xl:h-[600px] xl:w-[400px]"
+                  className="w-full max-w-[420px] aspect-[2/3] bg-black/10 xl:h-[600px] xl:w-[400px]"
                   /* STYLE: Poster placeholder sizing + aspect ratio + neutral fill + fixed xl dimensions */
                   aria-label="Poster unavailable"
                   role="img"

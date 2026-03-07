@@ -1,3 +1,9 @@
+#!/bin/bash
+
+set +H
+cd /Users/j/Downloads/stillcache
+
+cat <<'INNER' > components/WelcomeClock.tsx
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -23,7 +29,7 @@ function pad2(n: number) {
 }
 
 function formatTimeHM(d: Date) {
-  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+  return \`\${pad2(d.getHours())}:\${pad2(d.getMinutes())}\`;
 }
 
 function formatTzShort(d: Date) {
@@ -52,9 +58,7 @@ function writeCache(placeText: string) {
   try {
     const payload: CachedPlace = { placeText, expiresAt: Date.now() + CACHE_TTL_MS };
     sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-  } catch {
-    // Storage can be unavailable in some contexts; non-critical.
-  }
+  } catch {}
 }
 
 /* ──────────────────────────────────────────────────────────────
@@ -77,7 +81,7 @@ export default function WelcomeClock() {
 
       timeoutId = window.setTimeout(() => {
         setNow(new Date());
-        intervalId = window.setInterval(() => setNow(new Date()), 60_000);
+        intervalId = window.setInterval(() => setNow(new Date()), 60000);
       }, msToNextMinute);
     };
 
@@ -96,36 +100,21 @@ export default function WelcomeClock() {
     if (cached) setPlace(cached);
 
     async function loadPlace() {
-      const controller = new AbortController();
-      const timeoutId = window.setTimeout(() => controller.abort(), 3000);
-
       try {
-        const res = await fetch('https://ipapi.co/json/', {
-          cache: 'no-store',
-          signal: controller.signal,
-        });
+        const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
         if (!res.ok) return;
 
-        const data: unknown = await res.json();
+        const data: any = await res.json();
 
-        const city =
-          typeof (data as { city?: unknown }).city === 'string' ? (data as { city: string }).city : '';
-
-        const country =
-          typeof (data as { country_name?: unknown }).country_name === 'string'
-            ? (data as { country_name: string }).country_name
-            : '';
+        const city = typeof data.city === 'string' ? data.city : '';
+        const country = typeof data.country_name === 'string' ? data.country_name : '';
 
         const text = [city, country].filter(Boolean).join(', ');
         if (!text) return;
 
         writeCache(text);
         if (!cancelled) setPlace(text);
-      } catch {
-        // Non-critical UI enhancement; ignore failures silently.
-      } finally {
-        window.clearTimeout(timeoutId);
-      }
+      } catch {}
     }
 
     loadPlace();
@@ -139,45 +128,38 @@ export default function WelcomeClock() {
     const date = formatDate(now);
     const time = formatTimeHM(now);
     const tz = formatTzShort(now);
-    return `${date} ${time}${tz ? ` ${tz}` : ''}`;
+    return \`\${date} \${time}\${tz ? \` \${tz}\` : ''}\`;
   }, [now]);
 
   return (
     <div
       className="text-left"
-      /* STYLE: Text alignment for the overall block (e.g. text-left / text-right) */
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-        /* STYLE: Font family/stack (swap typeface here) */
       }}
     >
       {/* ────────────────────────────────────────────────────────
-          MOBILE / TABLET (stacked + muted)
+          MOBILE / TABLET
           Visible: < md
       ───────────────────────────────────────────────────────── */}
       <div className="md:hidden text-[13px] sm:text-[14px] font-medium leading-[18px] sm:leading-[22px] text-black">
-        {/* STYLE: Mobile-only visibility (md:hidden) */}
-        {/* STYLE: Typography (font size + line height) + responsive typography (sm:...) */}
-        {/* STYLE: Color (black for consistency with the rest of the layout) */}
         <div>{line1}</div>
         <div>
-          {/* STYLE: Place line remains visible across mobile/tablet widths */}
           {place}
         </div>
       </div>
 
       {/* ────────────────────────────────────────────────────────
-          DESKTOP (single line, aligned right)
+          DESKTOP
           Visible: ≥ md
       ───────────────────────────────────────────────────────── */}
-      <div className="hidden md:flex items-center justify-end gap-[8px] text-black font-medium text-[14px] leading-[21px] tracking-[0.01em] font-normal">
-        {/* STYLE: Desktop-only visibility (hidden → md:flex) */}
-        {/* STYLE: Layout (flex row) + vertical alignment (items-center) + right alignment (justify-end) */}
-        {/* STYLE: Spacing (gap) */}
-        {/* STYLE: Typography (size/leading/tracking/weight) + color */}
+      <div className="hidden md:flex items-center justify-end gap-[8px] text-black font-medium text-[14px] leading-[21px] tracking-[0.01em]">
         <span>{line1}</span>
         <span>{place}</span>
       </div>
     </div>
   );
 }
+INNER
+
+echo "WelcomeClock.tsx updated successfully."

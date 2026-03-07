@@ -12,7 +12,7 @@ export const revalidate = 0;
 
 /* ──────────────────────────────────────────────────────────────
    HEADER (visual top)
-   - Left: logo + title
+   - Left: title
    - Right: WelcomeClock
 ────────────────────────────────────────────────────────────── */
 function Header() {
@@ -21,16 +21,8 @@ function Header() {
       {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
       {/* STYLE: Layout (flex column → row at md) + alignment/justification + gap */}
 
-      <div className="flex items-center gap-[12px]">
-        {/* STYLE: Logo/title row layout + alignment + spacing (gap) */}
-
-        <img
-          src="https://pub-67d300fe11f74bb2b7b044b304971a5c.r2.dev/muybridge-horse.gif"
-          alt="Muybridge horse animation"
-          className="w-[62px] h-[42px] md:w-[90px] md:h-[60px] object-contain"
-          /* STYLE: Image sizing (w/h) + responsive sizing (md:...) + fit (object-contain) */
-          loading="eager"
-        />
+      <div className="flex items-center">
+        {/* STYLE: Title row layout + alignment */}
 
         <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
           {/* STYLE: Title typography (size/weight/tracking/leading) + responsive typography */}
