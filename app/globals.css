@@ -143,3 +143,39 @@ a {
     /* STYLE: Prevents hero exceeding viewport height */
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   THEME MODE OVERRIDES
+   Controls:
+   - Manual / auto appearance on html[data-theme]
+   - Shared utility overrides for light/dark surfaces
+   - Smooth appearance transitions
+────────────────────────────────────────────────────────────── */
+html[data-theme='light'] body,
+html[data-theme='dark'] body {
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease;
+  /* STYLE: Smooth theme transition */
+}
+
+html[data-theme='dark'] .bg-white {
+  background-color: #000000 !important;
+  /* STYLE: Dark surface override for white utility backgrounds */
+}
+
+html[data-theme='dark'] .text-black {
+  color: #ffffff !important;
+  /* STYLE: Dark surface override for black utility text */
+}
+
+html[data-theme='dark'] .border-black {
+  border-color: #ffffff !important;
+  /* STYLE: Dark surface override for black utility borders */
+}
+
+html[data-theme='dark'] .bg-black\/10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  /* STYLE: Dark surface override for placeholder fills */
+}

@@ -402,7 +402,7 @@ export default function FilmSection({ film }: Props) {
             <div className="w-full flex justify-center xl:w-auto xl:block xl:shrink-0">
               {/* STYLE: Poster column sizing (centered while stacked; original desktop sizing at xl) + prevent shrink at xl */}
               {posterImageUrl ? (
-                <div className="w-full max-w-full md:max-w-[clamp(320px,38vw,460px)]">
+                <div className="w-full max-w-full md:max-w-[clamp(460px,58vw,680px)]">
                   {/* STYLE: Poster max width constraint while stacked; desktop image sizing takes over at xl */}
                   <img
                     src={posterImageUrl}

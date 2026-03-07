@@ -1,5 +1,6 @@
 import FilmSection from '@/components/FilmSection';
 import WelcomeClock from '@/components/WelcomeClock';
+import AppearanceControl from '@/components/AppearanceControl';
 import { getFilms } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
@@ -13,11 +14,11 @@ export const revalidate = 0;
 /* ──────────────────────────────────────────────────────────────
    HEADER (visual top)
    - Left: title
-   - Right: WelcomeClock
+   - Right: WelcomeClock + AppearanceControl
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
-    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px] flex flex-col md:flex-row md:items-center md:justify-between gap-[14px] md:gap-0">
+    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px] flex flex-col md:flex-row md:items-start md:justify-between gap-[14px] md:gap-0">
       {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
       {/* STYLE: Layout (flex column → row at md) + alignment/justification + gap */}
 
@@ -30,9 +31,12 @@ function Header() {
         </div>
       </div>
 
-      <div className="self-start md:self-auto">
-        {/* STYLE: Clock alignment (self-start on mobile; normal flow at md+) */}
+      <div className="self-start md:self-auto flex flex-col items-start md:items-end gap-[6px] md:gap-[8px]">
+        {/* STYLE: Header utility stack alignment (self-start on mobile; normal flow at md+) */}
+        {/* STYLE: Utility stack layout + responsive alignment + spacing */}
+
         <WelcomeClock />
+        <AppearanceControl />
       </div>
     </header>
   );
