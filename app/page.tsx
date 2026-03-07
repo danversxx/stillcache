@@ -13,8 +13,8 @@ export const revalidate = 0;
 
 /* ──────────────────────────────────────────────────────────────
    HEADER (visual top)
-   - Left: title
-   - Right: WelcomeClock + AppearanceControl
+   - Left: title + AppearanceControl
+   - Right: WelcomeClock
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
@@ -22,21 +22,20 @@ function Header() {
       {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
       {/* STYLE: Layout (flex column → row at md) + alignment/justification + gap */}
 
-      <div className="flex items-center">
-        {/* STYLE: Title row layout + alignment */}
+      <div className="flex flex-col items-start gap-[6px] md:gap-[8px]">
+        {/* STYLE: Title + appearance stack */}
 
         <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
           {/* STYLE: Title typography (size/weight/tracking/leading) + responsive typography */}
           Still Cache
         </div>
+
+        <AppearanceControl />
       </div>
 
-      <div className="self-start md:self-auto flex flex-col items-start md:items-end gap-[6px] md:gap-[8px]">
-        {/* STYLE: Header utility stack alignment (self-start on mobile; normal flow at md+) */}
-        {/* STYLE: Utility stack layout + responsive alignment + spacing */}
-
+      <div className="self-start md:self-auto">
+        {/* STYLE: Clock alignment (self-start on mobile; normal flow at md+) */}
         <WelcomeClock />
-        <AppearanceControl />
       </div>
     </header>
   );
