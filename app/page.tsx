@@ -75,12 +75,13 @@ export default async function Page() {
 
       {/* Mobile: comfortable padding.
           Desktop+: fluid “Figma-like” padding. */}
-      <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(64px,13.2vw,260px)]">
+      <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
         {/* STYLE: Global container width + horizontal padding per breakpoint */}
         {/* STYLE: Desktop padding uses clamp(min, viewport-based, max) */}
+        {/* STYLE: Desktop padding reduced by 20px per side while preserving fluid scaling */}
 
         {/* Shared frame for Header / Film / Footer alignment */}
-        <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1240px)] flex flex-col gap-[40px] md:gap-[64px]">
+        <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
           {/* STYLE: Center container (mx-auto) + max width clamp */}
           {/* STYLE: Vertical stack layout + section spacing (gap) + responsive gap */}
 
