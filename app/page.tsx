@@ -13,29 +13,50 @@ export const revalidate = 0;
 
 /* ──────────────────────────────────────────────────────────────
    HEADER (visual top)
-   - Left: title + AppearanceControl
-   - Right: WelcomeClock
+   - Mobile/tablet: stacked flow
+   - Desktop: single horizontal row
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
-    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px] flex flex-col md:flex-row md:items-start md:justify-between gap-[14px] md:gap-0">
+    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
       {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
-      {/* STYLE: Layout (flex column → row at md) + alignment/justification + gap */}
 
-      <div className="flex flex-col items-start gap-[6px] md:gap-[8px]">
-        {/* STYLE: Title + appearance stack */}
+      {/* Mobile / tablet */}
+      <div className="flex flex-col gap-[14px] lg:hidden">
+        {/* STYLE: Stacked header flow below desktop breakpoint */}
 
         <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
-          {/* STYLE: Title typography (size/weight/tracking/leading) + responsive typography */}
+          {/* STYLE: Title typography */}
           Still Cache
+        </div>
+
+        <div className="self-start">
+          {/* STYLE: Clock alignment while stacked */}
+          <WelcomeClock />
         </div>
 
         <AppearanceControl />
       </div>
 
-      <div className="self-start md:self-auto">
-        {/* STYLE: Clock alignment (self-start on mobile; normal flow at md+) */}
-        <WelcomeClock />
+      {/* Desktop */}
+      <div className="hidden lg:grid lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-center lg:gap-x-[16px]">
+        {/* STYLE: Desktop header grid with reduced spacing */}
+
+        <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
+          {/* STYLE: Title */}
+          Still Cache
+        </div>
+
+        <div className="justify-self-end self-center">
+          {/* STYLE: Clock */}
+          <WelcomeClock />
+        </div>
+
+        <div className="self-center">
+          {/* STYLE: AppearanceControls */}
+          <AppearanceControl />
+        </div>
+
       </div>
     </header>
   );
@@ -47,9 +68,8 @@ function Header() {
 function Footer() {
   return (
     <footer className="py-[22px] md:py-[32px]">
-      {/* STYLE: Footer vertical padding + responsive padding */}
+      {/* STYLE: Footer vertical padding */}
       <div className="text-[10px] md:text-[14px] font-medium leading-[14px]">
-        {/* STYLE: Footer typography (size/leading) + responsive typography */}
         © 2026 · Still Cache
       </div>
     </footer>
@@ -62,27 +82,27 @@ function Footer() {
 ────────────────────────────────────────────────────────────── */
 export default async function Page() {
   const films = await getFilms();
-  const film = films[0] ?? null;
 
   return (
     <main className="bg-white text-black antialiased">
-      {/* STYLE: Global surface + typography color + font smoothing (antialiased) */}
+      {/* STYLE: Global surface */}
 
-      {/* Mobile: comfortable padding.
-          Desktop+: fluid “Figma-like” padding. */}
       <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
-        {/* STYLE: Global container width + horizontal padding per breakpoint */}
-        {/* STYLE: Desktop padding uses clamp(min, viewport-based, max) */}
-        {/* STYLE: Desktop padding reduced by 20px per side while preserving fluid scaling */}
+        {/* STYLE: Global container padding */}
 
-        {/* Shared frame for Header / Film / Footer alignment */}
         <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
-          {/* STYLE: Center container (mx-auto) + max width clamp */}
-          {/* STYLE: Vertical stack layout + section spacing (gap) + responsive gap */}
+          {/* STYLE: Shared frame */}
 
           <Header />
-          <FilmSection film={film} />
+
+          <div className="flex flex-col gap-[40px] md:gap-[64px]">
+            {films.map((film) => (
+              <FilmSection key={film._id} film={film} />
+            ))}
+          </div>
+
           <Footer />
+
         </div>
       </div>
     </main>

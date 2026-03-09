@@ -7,6 +7,10 @@ type ResolvedTheme = 'light' | 'dark';
 
 const STORAGE_KEY = 'stillcache_appearance_mode';
 
+/* ──────────────────────────────────────────────────────────────
+   STORAGE HELPERS
+────────────────────────────────────────────────────────────── */
+
 function getStoredMode(): AppearanceMode {
   try {
     const v = localStorage.getItem(STORAGE_KEY);
@@ -21,6 +25,22 @@ function setStoredMode(mode: AppearanceMode) {
   } catch {}
 }
 
+/* ──────────────────────────────────────────────────────────────
+   TIME + GREETING LOGIC
+   Uses device clock (privacy-safe)
+────────────────────────────────────────────────────────────── */
+
+function getGreetingFromHour(hour: number) {
+  if (hour >= 5 && hour < 12) return 'Good Morning';
+  if (hour >= 12 && hour < 18) return 'Good Afternoon';
+  if (hour >= 18 && hour < 22) return 'Good Evening';
+  return 'Good Night';
+}
+
+/* ──────────────────────────────────────────────────────────────
+   THEME RESOLUTION
+────────────────────────────────────────────────────────────── */
+
 function resolveAutoTheme(): ResolvedTheme {
   const hour = new Date().getHours();
   return hour >= 7 && hour < 19 ? 'light' : 'dark';
@@ -31,15 +51,76 @@ function applyTheme(theme: ResolvedTheme) {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   APPEARANCE CONTROL (Header → under WelcomeClock)
+   ICONS
+────────────────────────────────────────────────────────────── */
+
+function AutoIcon() {
+  return (
+    <svg width="15" height="14" viewBox="0 0 22 20" fill="none">
+      <path
+        d="M7 19H15M11 15V19M5.8 15H16.2C17.8802 15 18.7202 15 19.362 14.673C19.9265 14.3854 20.3854 13.9265 20.673 13.362C21 12.7202 21 11.8802 21 10.2V5.8C21 4.11984 21 3.27976 20.673 2.63803C20.3854 2.07354 19.9265 1.6146 19.362 1.32698C18.7202 1 17.8802 1 16.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V10.2C1 11.8802 1 12.7202 1.32698 13.362C1.6146 13.9265 2.07354 14.3854 2.63803 14.673C3.27976 15 4.11984 15 5.8 15Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function LightIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 22 22" fill="none">
+      <path
+        d="M11 1V3M11 19V21M3 11H1M5.31412 5.31412L3.8999 3.8999M16.6859 5.31412L18.1001 3.8999M5.31412 16.69L3.8999 18.1042M16.6859 16.69L18.1001 18.1042M21 11H19M16 11C16 13.7614 13.7614 16 11 16C8.23858 16 6 13.7614 6 11C6 8.23858 8.23858 6 11 6C13.7614 6 16 8.23858 16 11Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DarkIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 22 22" fill="none">
+      <path
+        d="M21 14.8442C19.6866 15.4382 18.2286 15.7688 16.6935 15.7688C10.9153 15.7688 6.23116 11.0847 6.23116 5.30654C6.23116 3.77135 6.5618 2.3134 7.15577 1C3.52576 2.64163 1 6.2947 1 10.5377C1 16.3159 5.68414 21 11.4623 21C15.7053 21 19.3584 18.4742 21 14.8442Z"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────
+   APPEARANCE CONTROL
 ────────────────────────────────────────────────────────────── */
 
 export default function AppearanceControl() {
   const [mode, setMode] = useState<AppearanceMode>('auto');
+  const [greeting, setGreeting] = useState(() =>
+    getGreetingFromHour(new Date().getHours())
+  );
 
   useEffect(() => {
     const stored = getStoredMode();
     setMode(stored);
+  }, []);
+
+  useEffect(() => {
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      setGreeting(getGreetingFromHour(hour));
+    }
+
+    updateGreeting();
+    const interval = setInterval(updateGreeting, 60 * 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   const resolved = useMemo<ResolvedTheme>(() => {
@@ -58,29 +139,41 @@ export default function AppearanceControl() {
   }
 
   return (
-    <div className="flex items-center gap-[10px] text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-black">
-      {/* STYLE: Inline control layout + spacing + typography */}
+    <div className="flex items-center gap-[8px] text-black">
 
-      <p className="font-medium">
-        {/* STYLE: Label weight */}
-        Appearance
-      </p>
+      {/* Greeting */}
+      <span className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px]">
+        {greeting}
+      </span>
 
-      <div className="flex items-center gap-[8px]">
-        {(['auto','light','dark'] as AppearanceMode[]).map(v => {
+      {/* Divider */}
+      <span>·</span>
+
+      {/* Appearance Icons */}
+      <div className="inline-flex items-center gap-[10px] md:gap-[12px]">
+        {(['auto', 'light', 'dark'] as AppearanceMode[]).map((v) => {
           const active = mode === v;
 
           return (
             <button
               key={v}
+              type="button"
+              aria-label={`Set appearance to ${v}`}
+              aria-pressed={active}
               onClick={() => updateMode(v)}
-              className={active ? 'opacity-100' : 'opacity-50'}
+              className={[
+                'inline-flex h-[18px] w-[18px] items-center justify-center transition-opacity duration-150',
+                active ? 'opacity-100' : 'opacity-[0.25] hover:opacity-[0.55]',
+              ].join(' ')}
             >
-              {v === 'auto' ? 'Auto' : v === 'light' ? 'Light' : 'Dark'}
+              <span className="relative -top-[1px]">
+                {v === 'auto' ? <AutoIcon /> : v === 'light' ? <LightIcon /> : <DarkIcon />}
+              </span>
             </button>
           );
         })}
       </div>
+
     </div>
   );
 }

@@ -43,6 +43,44 @@ export type Film = {
   displayOrder: number;
 };
 
+type RawStill = {
+  _key?: unknown;
+  url?: unknown;
+  alt?: unknown;
+};
+
+type RawFilm = {
+  _id?: unknown;
+
+  filmTitle?: unknown;
+
+  directorName?: unknown;
+  directorAvatarUrl?: unknown;
+  directorBirthYear?: unknown;
+  directorNationality?: unknown;
+
+  releaseDate?: unknown;
+
+  copyrightInformation?: unknown;
+
+  rating?: unknown;
+  genreRuntime?: unknown;
+
+  studio?: unknown;
+  studioLogoUrl?: unknown;
+
+  country?: unknown;
+
+  trailerUrl?: unknown;
+  letterboxdUrl?: unknown;
+
+  posterImageUrl?: unknown;
+
+  homepageStills?: unknown;
+
+  displayOrder?: unknown;
+};
+
 const FILMS_QUERY = /* groq */ `
   *[_type == "film"] | order(order asc) {
     _id,
@@ -89,58 +127,62 @@ function asString(v: unknown): string {
   return typeof v === 'string' ? v : '';
 }
 
+function asOptionalString(v: unknown): string | undefined {
+  return typeof v === 'string' ? v : undefined;
+}
+
 function asNumber(v: unknown): number | undefined {
   return typeof v === 'number' && Number.isFinite(v) ? v : undefined;
 }
 
-function normalizeFilm(input: any): Film {
-  const stills = asArray(input?.homepageStills)
-    .map((s: any) => ({
-      _key: asString(s?._key) || cryptoRandomKey(),
-      url: asString(s?.url),
-      alt: typeof s?.alt === 'string' ? s.alt : undefined,
+function normalizeFilm(input: RawFilm): Film {
+  const stills = asArray<RawStill>(input.homepageStills)
+    .map((s) => ({
+      _key: asString(s._key) || cryptoRandomKey(),
+      url: asString(s.url),
+      alt: asOptionalString(s.alt),
     }))
     .filter((s) => Boolean(s.url));
 
   const directorNationality =
-    typeof input?.directorNationality === 'string' ? input.directorNationality.trim() : '';
+    typeof input.directorNationality === 'string' ? input.directorNationality.trim() : '';
 
   return {
-    _id: asString(input?._id),
+    _id: asString(input._id),
 
-    filmTitle: asString(input?.filmTitle),
+    filmTitle: asString(input.filmTitle),
 
-    directorName: asString(input?.directorName),
-    directorAvatarUrl: typeof input?.directorAvatarUrl === 'string' ? input.directorAvatarUrl : undefined,
-    directorBirthYear: asNumber(input?.directorBirthYear),
+    directorName: asString(input.directorName),
+    directorAvatarUrl: asOptionalString(input.directorAvatarUrl),
+    directorBirthYear: asNumber(input.directorBirthYear),
     directorNationality: directorNationality || undefined,
 
-    releaseDate: typeof input?.releaseDate === 'string' ? input.releaseDate : undefined,
+    releaseDate: asOptionalString(input.releaseDate),
 
-    copyrightInformation: typeof input?.copyrightInformation === 'string' ? input.copyrightInformation : undefined,
+    copyrightInformation: asOptionalString(input.copyrightInformation),
 
-    rating: asString(input?.rating),
-    genreRuntime: asString(input?.genreRuntime),
+    rating: asString(input.rating),
+    genreRuntime: asString(input.genreRuntime),
 
-    studio: asString(input?.studio),
-    studioLogoUrl: typeof input?.studioLogoUrl === 'string' ? input.studioLogoUrl : undefined,
+    studio: asString(input.studio),
+    studioLogoUrl: asOptionalString(input.studioLogoUrl),
 
-    country: asString(input?.country),
+    country: asString(input.country),
 
-    trailerUrl: typeof input?.trailerUrl === 'string' ? input.trailerUrl : undefined,
-    letterboxdUrl: typeof input?.letterboxdUrl === 'string' ? input.letterboxdUrl : undefined,
+    trailerUrl: asOptionalString(input.trailerUrl),
+    letterboxdUrl: asOptionalString(input.letterboxdUrl),
 
-    posterImageUrl: asString(input?.posterImageUrl),
+    posterImageUrl: asString(input.posterImageUrl),
 
     homepageStills: stills,
 
-    displayOrder: typeof input?.displayOrder === 'number' ? input.displayOrder : 0,
+    displayOrder: asNumber(input.displayOrder) ?? 0,
   };
 }
 
 export async function getFilms(): Promise<Film[]> {
-  const raw = await client.fetch(FILMS_QUERY);
-  return asArray(raw)
+  const raw = await client.fetch<RawFilm[]>(FILMS_QUERY);
+  return asArray<RawFilm>(raw)
     .map(normalizeFilm)
     .filter((f) => Boolean(f._id && f.filmTitle && f.posterImageUrl));
 }

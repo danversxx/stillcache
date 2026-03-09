@@ -22,8 +22,8 @@ function pad2(n: number) {
   return String(n).padStart(2, '0');
 }
 
-function formatTimeHM(d: Date) {
-  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+function formatTimeHMS(d: Date) {
+  return `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
 }
 
 function formatTzShort(d: Date) {
@@ -59,7 +59,8 @@ function writeCache(placeText: string) {
 
 /* ──────────────────────────────────────────────────────────────
    WELCOME CLOCK (Header → right side)
-   Visual output order: Mobile/Tablet block → Desktop block
+   - Desktop: single line
+   - Mobile: wraps naturally
 ────────────────────────────────────────────────────────────── */
 export default function WelcomeClock() {
   const [now, setNow] = useState(() => new Date());
@@ -73,12 +74,12 @@ export default function WelcomeClock() {
       const d = new Date();
       setNow(d);
 
-      const msToNextMinute = (60 - d.getSeconds()) * 1000 - d.getMilliseconds();
+      const msToNextSecond = (1000 - d.getMilliseconds()) % 1000 || 1000;
 
       timeoutId = window.setTimeout(() => {
         setNow(new Date());
-        intervalId = window.setInterval(() => setNow(new Date()), 60_000);
-      }, msToNextMinute);
+        intervalId = window.setInterval(() => setNow(new Date()), 1000);
+      }, msToNextSecond);
     };
 
     schedule();
@@ -109,7 +110,9 @@ export default function WelcomeClock() {
         const data: unknown = await res.json();
 
         const city =
-          typeof (data as { city?: unknown }).city === 'string' ? (data as { city: string }).city : '';
+          typeof (data as { city?: unknown }).city === 'string'
+            ? (data as { city: string }).city
+            : '';
 
         const country =
           typeof (data as { country_name?: unknown }).country_name === 'string'
@@ -135,48 +138,33 @@ export default function WelcomeClock() {
     };
   }, []);
 
-  const line1 = useMemo(() => {
+  const dateTimeText = useMemo(() => {
     const date = formatDate(now);
-    const time = formatTimeHM(now);
+    const time = formatTimeHMS(now);
     const tz = formatTzShort(now);
     return `${date} ${time}${tz ? ` ${tz}` : ''}`;
   }, [now]);
 
   return (
     <div
-      className="text-left"
-      /* STYLE: Text alignment for the overall block (e.g. text-left / text-right) */
+      className="text-left lg:text-right tabular-nums"
+      /* STYLE: Left aligned while stacked, right aligned on desktop */
+      /* STYLE: tabular-nums prevents time jitter */
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-        /* STYLE: Font family/stack (swap typeface here) */
+        /* STYLE: Font family/stack */
       }}
     >
-      {/* ────────────────────────────────────────────────────────
-          MOBILE / TABLET (stacked + muted)
-          Visible: < md
-      ───────────────────────────────────────────────────────── */}
-      <div className="md:hidden text-[13px] sm:text-[14px] font-medium leading-[18px] sm:leading-[22px] text-black">
-        {/* STYLE: Mobile-only visibility (md:hidden) */}
-        {/* STYLE: Typography (font size + line height) + responsive typography (sm:...) */}
-        {/* STYLE: Color (black for consistency with the rest of the layout) */}
-        <div>{line1}</div>
-        <div>
-          {/* STYLE: Place line remains visible across mobile/tablet widths */}
-          {place}
-        </div>
-      </div>
+      <div className="flex flex-wrap items-center gap-[8px] lg:flex-nowrap lg:justify-end text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
+        {/* STYLE: Inline clock row with matched separator spacing + natural wrap on mobile + single line on desktop */}
+        <span>{dateTimeText}</span>
 
-      {/* ────────────────────────────────────────────────────────
-          DESKTOP (single line, aligned right)
-          Visible: ≥ md
-      ───────────────────────────────────────────────────────── */}
-      <div className="hidden md:flex items-center justify-end gap-[8px] text-black font-medium text-[14px] leading-[21px] tracking-[0.01em] font-normal">
-        {/* STYLE: Desktop-only visibility (hidden → md:flex) */}
-        {/* STYLE: Layout (flex row) + vertical alignment (items-center) + right alignment (justify-end) */}
-        {/* STYLE: Spacing (gap) */}
-        {/* STYLE: Typography (size/leading/tracking/weight) + color */}
-        <span>{line1}</span>
-        <span>{place}</span>
+        {place ? (
+          <>
+            <span>·</span>
+            <span>{place}</span>
+          </>
+        ) : null}
       </div>
     </div>
   );
