@@ -19,17 +19,23 @@ function Header() {
     <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
 
       {/* Mobile / tablet */}
-      <div className="flex flex-col gap-[12px] lg:hidden">
-        {/* STYLE: Mobile vertical header stack (reduced gap by 2px) */}
+      <div className="flex flex-col gap-[10px] lg:hidden">
+        {/* STYLE: Mobile vertical header stack */}
 
-        <div className="text-[24px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
-          {/* STYLE: Mobile title increased by +4px */}
+        <div className="text-[28px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
+          {/* STYLE: Mobile title increased */}
           Still Cache
         </div>
 
-        <WelcomeClock mobileStack />
+        <div className="flex flex-col">
+          {/* STYLE: Clock and controls share typographic rhythm */}
+          <WelcomeClock mobileStack />
 
-        <AppearanceControl />
+          <div className="mt-[1px] lg:mt-0">
+            {/* STYLE: +1px vertical breathing space for mobile rhythm */}
+            <AppearanceControl />
+          </div>
+        </div>
 
       </div>
 
