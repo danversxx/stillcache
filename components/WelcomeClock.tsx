@@ -63,8 +63,8 @@ function writeCache(placeText: string) {
 
 /* ──────────────────────────────────────────────────────────────
    WELCOME CLOCK (Header → right side)
-   - Desktop: single line
-   - Mobile: wraps naturally
+   - Desktop: split into date/time + location groups
+   - Mobile: stacked date/time + location
 ────────────────────────────────────────────────────────────── */
 export default function WelcomeClock({ mobileStack = false }: Props) {
   const [now, setNow] = useState(() => new Date());
@@ -182,16 +182,11 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
         /* STYLE: Font family/stack */
       }}
     >
-      <div className="flex flex-wrap items-center gap-[8px] lg:flex-nowrap lg:justify-end text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
-        {/* STYLE: Inline clock row with matched separator spacing + natural wrap on mobile + single line on desktop */}
+      <div className="flex flex-wrap items-center gap-[10px] lg:flex-nowrap lg:justify-end text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
+        {/* STYLE: Desktop clock row split into spaced groups; mobile natural wrap if reused */}
         <span>{dateTimeText}</span>
 
-        {place ? (
-          <>
-            <span>·</span>
-            <span>{place}</span>
-          </>
-        ) : null}
+        {place ? <span>{place}</span> : null}
       </div>
     </div>
   );

@@ -4,6 +4,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 type AppearanceMode = 'auto' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
+type Props = {
+  mobileSplit?: boolean;
+};
 
 const STORAGE_KEY = 'stillcache_appearance_mode';
 
@@ -100,7 +103,7 @@ function DarkIcon() {
    APPEARANCE CONTROL
 ────────────────────────────────────────────────────────────── */
 
-export default function AppearanceControl() {
+export default function AppearanceControl({ mobileSplit = false }: Props) {
   const [mode, setMode] = useState<AppearanceMode>('auto');
   const [greeting, setGreeting] = useState(() =>
     getGreetingFromHour(new Date().getHours())
@@ -138,42 +141,53 @@ export default function AppearanceControl() {
     setStoredMode(next);
   }
 
-  return (
-    <div className="flex items-center gap-[8px] text-black">
+  const icons = (
+    <div className="inline-flex items-center gap-[10px] md:gap-[12px]">
+      {/* STYLE: Appearance Icons */}
+      {(['auto', 'light', 'dark'] as AppearanceMode[]).map((v) => {
+        const active = mode === v;
 
+        return (
+          <button
+            key={v}
+            type="button"
+            aria-label={`Set appearance to ${v}`}
+            aria-pressed={active}
+            onClick={() => updateMode(v)}
+            className={[
+              'inline-flex h-[18px] w-[18px] items-center justify-center transition-opacity duration-150',
+              active ? 'opacity-100' : 'opacity-[0.25] hover:opacity-[0.55]',
+            ].join(' ')}
+          >
+            <span className="relative -top-[1px]">
+              {v === 'auto' ? <AutoIcon /> : v === 'light' ? <LightIcon /> : <DarkIcon />}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+
+  if (mobileSplit) {
+    return (
+      <div className="flex items-center justify-between gap-[12px] text-black">
+        {/* STYLE: Mobile split layout with greeting left and controls right */}
+        <span className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px]">
+          {greeting}
+        </span>
+        {icons}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-[10px] text-black">
       {/* Greeting */}
       <span className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px]">
         {greeting}
       </span>
 
-      {/* Divider */}
-      <span>·</span>
-
-      {/* Appearance Icons */}
-      <div className="inline-flex items-center gap-[10px] md:gap-[12px]">
-        {(['auto', 'light', 'dark'] as AppearanceMode[]).map((v) => {
-          const active = mode === v;
-
-          return (
-            <button
-              key={v}
-              type="button"
-              aria-label={`Set appearance to ${v}`}
-              aria-pressed={active}
-              onClick={() => updateMode(v)}
-              className={[
-                'inline-flex h-[18px] w-[18px] items-center justify-center transition-opacity duration-150',
-                active ? 'opacity-100' : 'opacity-[0.25] hover:opacity-[0.55]',
-              ].join(' ')}
-            >
-              <span className="relative -top-[1px]">
-                {v === 'auto' ? <AutoIcon /> : v === 'light' ? <LightIcon /> : <DarkIcon />}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
+      {icons}
     </div>
   );
 }
