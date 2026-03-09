@@ -7,6 +7,10 @@ type CachedPlace = {
   expiresAt: number;
 };
 
+type Props = {
+  mobileStack?: boolean;
+};
+
 const CACHE_KEY = 'stillcache_place_v3';
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
@@ -62,7 +66,7 @@ function writeCache(placeText: string) {
    - Desktop: single line
    - Mobile: wraps naturally
 ────────────────────────────────────────────────────────────── */
-export default function WelcomeClock() {
+export default function WelcomeClock({ mobileStack = false }: Props) {
   const [now, setNow] = useState(() => new Date());
   const [place, setPlace] = useState('');
 
@@ -144,6 +148,29 @@ export default function WelcomeClock() {
     const tz = formatTzShort(now);
     return `${date} ${time}${tz ? ` ${tz}` : ''}`;
   }, [now]);
+
+  if (mobileStack) {
+    return (
+      <div
+        className="text-left tabular-nums"
+        /* STYLE: Left aligned stacked mobile header clock + stable numeral widths */
+        style={{
+          fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
+          /* STYLE: Font family/stack */
+        }}
+      >
+        <div className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
+          {dateTimeText}
+        </div>
+
+        {place ? (
+          <div className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
+            {place}
+          </div>
+        ) : null}
+      </div>
+    );
+  }
 
   return (
     <div
