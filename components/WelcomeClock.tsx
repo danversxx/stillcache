@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from 'react';
 
 type CachedPlace = {
   placeText: string;
-  countryCode: string;
   expiresAt: number;
 };
 
@@ -40,35 +39,27 @@ function formatTzShort(d: Date) {
   }
 }
 
-function readCache(): { placeText: string; countryCode: string } {
+function readCache(): string {
   try {
     const raw = sessionStorage.getItem(CACHE_KEY);
-    if (!raw) return { placeText: '', countryCode: '' };
-
+    if (!raw) return '';
     const parsed = JSON.parse(raw) as CachedPlace;
-    if (!parsed?.placeText || !parsed?.expiresAt) return { placeText: '', countryCode: '' };
-    if (Date.now() > parsed.expiresAt) return { placeText: '', countryCode: '' };
-
-    return {
-      placeText: parsed.placeText,
-      countryCode: typeof parsed.countryCode === 'string' ? parsed.countryCode : '',
-    };
+    if (!parsed?.placeText || !parsed?.expiresAt) return '';
+    if (Date.now() > parsed.expiresAt) return '';
+    return parsed.placeText;
   } catch {
-    return { placeText: '', countryCode: '' };
+    return '';
   }
 }
 
-function writeCache(placeText: string, countryCode: string) {
+function writeCache(placeText: string) {
   try {
     const payload: CachedPlace = {
       placeText,
-      countryCode,
       expiresAt: Date.now() + CACHE_TTL_MS,
     };
     sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
-  } catch {
-    // Storage can be unavailable in some contexts; non-critical.
-  }
+  } catch {}
 }
 
 /* ──────────────────────────────────────────────────────────────
@@ -77,7 +68,6 @@ function writeCache(placeText: string, countryCode: string) {
 export default function WelcomeClock({ mobileStack = false }: Props) {
   const [now, setNow] = useState(() => new Date());
   const [place, setPlace] = useState('');
-  const [countryCode, setCountryCode] = useState('');
 
   useEffect(() => {
     let intervalId: number | undefined;
@@ -107,8 +97,7 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
     let cancelled = false;
 
     const cached = readCache();
-    if (cached.placeText) setPlace(cached.placeText);
-    if (cached.countryCode) setCountryCode(cached.countryCode);
+    if (cached) setPlace(cached);
 
     async function loadPlace() {
       const controller = new AbortController();
@@ -121,35 +110,18 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
         });
         if (!res.ok) return;
 
-        const data: unknown = await res.json();
+        const data: any = await res.json();
 
-        const city =
-          typeof (data as { city?: unknown }).city === 'string'
-            ? (data as { city: string }).city
-            : '';
-
-        const country =
-          typeof (data as { country_name?: unknown }).country_name === 'string'
-            ? (data as { country_name: string }).country_name
-            : '';
-
-        const code =
-          typeof (data as { country_code?: unknown }).country_code === 'string'
-            ? (data as { country_code: string }).country_code
-            : '';
+        const city = typeof data.city === 'string' ? data.city : '';
+        const country = typeof data.country_name === 'string' ? data.country_name : '';
 
         const text = [city, country].filter(Boolean).join(', ');
         if (!text) return;
 
-        writeCache(text, code);
+        writeCache(text);
 
-        if (!cancelled) {
-          setPlace(text);
-          setCountryCode(code);
-        }
-      } catch {
-        // Non-critical UI enhancement; ignore failures silently.
-      } finally {
+        if (!cancelled) setPlace(text);
+      } catch {} finally {
         window.clearTimeout(timeoutId);
       }
     }
@@ -161,23 +133,25 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
     };
   }, []);
 
-  const dateTimeText = useMemo(() => {
+  const line1 = useMemo(() => {
     const date = formatDate(now);
     const time = formatTimeHMS(now);
     const tz = formatTzShort(now);
     return `${date} ${time}${tz ? ` ${tz}` : ''}`;
   }, [now]);
 
+  const typography =
+    "text-[12px] md:text-[14px] leading-[20px] font-bold tracking-[0.01em] text-black";
+
   if (mobileStack) {
     return (
       <div
-        className="text-left tabular-nums text-[12px] leading-[16px] text-black"
+        className={`${typography} tabular-nums`}
         style={{
           fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-          fontWeight: 400,
         }}
       >
-        <div>{dateTimeText}</div>
+        <div>{line1}</div>
         {place ? <div>{place}</div> : null}
       </div>
     );
@@ -185,13 +159,12 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
 
   return (
     <div
-      className="text-left tabular-nums text-[14px] leading-[20px] text-black"
+      className={`${typography} tabular-nums`}
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-        fontWeight: 400,
       }}
     >
-      <div>{dateTimeText}</div>
+      <div>{line1}</div>
       {place ? <div>{place}</div> : null}
     </div>
   );
