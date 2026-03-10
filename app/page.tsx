@@ -12,12 +12,11 @@ export const revalidate = 0;
    HEADER
    - Desktop: title + appearance controls on one row
    - Mobile: title + appearance controls on one row
-   - Sticky at top during scroll
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
-    <header className="sticky top-0 z-30 bg-white pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
-      {/* STYLE: Sticky header positioning + white surface + header spacing */}
+    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
+      {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
 
       <div className="flex items-center justify-between gap-[16px]">
         {/* STYLE: Single-row header layout across all breakpoints */}
@@ -57,9 +56,27 @@ export default async function Page() {
 
   return (
     <main className="bg-white text-black antialiased">
+      {/* ────────────────────────────────────────────────────────
+          STICKY HEADER LAYER
+      ───────────────────────────────────────────────────────── */}
+      <div className="sticky top-0 z-30 bg-white">
+        {/* STYLE: Sticky header wrapper pinned to viewport top + white surface */}
+        <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
+          {/* STYLE: Shared horizontal padding system */}
+          <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)]">
+            {/* STYLE: Shared centered frame width */}
+            <Header />
+          </div>
+        </div>
+      </div>
+
+      {/* ────────────────────────────────────────────────────────
+          PAGE CONTENT LAYER
+      ───────────────────────────────────────────────────────── */}
       <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
-        <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[36px] md:gap-[64px]">
-          <Header />
+        {/* STYLE: Shared horizontal padding system */}
+        <div className="mx-auto mt-[36px] md:mt-[64px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
+          {/* STYLE: Shared centered frame + preserved header-to-content spacing */}
 
           <div className="flex flex-col gap-[40px] md:gap-[64px]">
             {films.map((film) => (
