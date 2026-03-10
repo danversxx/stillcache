@@ -71,12 +71,6 @@ function writeCache(placeText: string, countryCode: string) {
   }
 }
 
-function getFlagUrl(countryCode: string) {
-  const code = countryCode.trim().toLowerCase();
-  if (!code) return '';
-  return `https://flagcdn.com/${code}.svg`;
-}
-
 /* ──────────────────────────────────────────────────────────────
    WELCOME CLOCK
 ────────────────────────────────────────────────────────────── */
@@ -174,54 +168,31 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
     return `${date} ${time}${tz ? ` ${tz}` : ''}`;
   }, [now]);
 
-  const flagUrl = useMemo(() => getFlagUrl(countryCode), [countryCode]);
-
-  const locationGroup = place ? (
-    <span className="inline-flex items-center gap-[6px] min-w-0">
-      {/* STYLE: Flat flag + location text grouping */}
-      {flagUrl ? (
-        <img
-          src={flagUrl}
-          alt=""
-          aria-hidden="true"
-          className="h-[10px] w-auto shrink-0"
-          /* STYLE: Flat SVG flag size tuned for readability on mobile and subtlety on desktop */
-          loading="lazy"
-          decoding="async"
-        />
-      ) : null}
-      <span className="min-w-0 truncate">{place}</span>
-    </span>
-  ) : null;
-
   if (mobileStack) {
     return (
       <div
-        className="text-left tabular-nums text-[14px] leading-[21px] text-black"
+        className="text-left tabular-nums text-[12px] leading-[16px] text-black"
         style={{
           fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
           fontWeight: 400,
         }}
       >
         <div>{dateTimeText}</div>
-
-        {place ? (
-          <div>{locationGroup}</div>
-        ) : null}
+        {place ? <div>{place}</div> : null}
       </div>
     );
   }
 
   return (
     <div
-      className="text-left tabular-nums text-[14px] leading-[21px] text-black"
+      className="text-left tabular-nums text-[14px] leading-[20px] text-black"
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
         fontWeight: 400,
       }}
     >
       <div>{dateTimeText}</div>
-      {place ? <div>{locationGroup}</div> : null}
+      {place ? <div>{place}</div> : null}
     </div>
   );
 }

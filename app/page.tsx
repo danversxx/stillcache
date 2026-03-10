@@ -22,7 +22,7 @@ function Header() {
       <div className="flex flex-col gap-[10px] lg:hidden">
         {/* STYLE: Mobile vertical header stack */}
 
-        <div className="text-[32px] md:text-[28px] font-bold tracking-[-0.02em] leading-none md:leading-[41px]">
+        <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
           Still Cache
         </div>
 

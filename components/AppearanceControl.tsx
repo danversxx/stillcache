@@ -172,13 +172,12 @@ export default function AppearanceControl({ mobileSplit = false }: Props) {
   if (mobileSplit) {
     return (
       <div
-        className="flex items-center justify-between gap-[12px] text-[14px] text-black"
+        className="flex items-center justify-between gap-[12px] text-[12px] leading-[16px] text-black"
         style={{
           fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
           fontWeight: 400,
         }}
       >
-        {/* STYLE: Mobile split layout with greeting left and controls right */}
         <span>{greeting}</span>
         {icons}
       </div>
@@ -187,7 +186,7 @@ export default function AppearanceControl({ mobileSplit = false }: Props) {
 
   return (
     <div
-      className="flex items-center gap-[10px] text-[14px] text-black"
+      className="flex items-center gap-[10px] text-[14px] leading-[20px] text-black"
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
         fontWeight: 400,
