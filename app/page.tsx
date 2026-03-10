@@ -12,11 +12,12 @@ export const revalidate = 0;
    HEADER
    - Desktop: title + appearance controls on one row
    - Mobile: title + appearance controls on one row
+   - Sticky at top during scroll
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
-    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
-      {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
+    <header className="sticky top-0 z-30 bg-white pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
+      {/* STYLE: Sticky header positioning + white surface + header spacing */}
 
       <div className="flex items-center justify-between gap-[16px]">
         {/* STYLE: Single-row header layout across all breakpoints */}
