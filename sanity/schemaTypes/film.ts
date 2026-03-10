@@ -10,6 +10,16 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'title',
+        maxLength: 200,
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: 'director',
       title: 'Director Name',
       type: 'string',
@@ -113,6 +123,20 @@ export default {
         },
       ],
       validation: (Rule: any) => Rule.required().length(6),
+    },
+    {
+      name: 'galleryImages',
+      title: 'Gallery Images',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'url', title: 'Image URL', type: 'url' },
+            { name: 'alt', title: 'Alt Text', type: 'string' },
+          ],
+        },
+      ],
     },
     {
       name: 'order',

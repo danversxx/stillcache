@@ -9,6 +9,7 @@ export const client = createClient({
 
 export type Film = {
   _id: string;
+  slug?: string;
 
   filmTitle: string;
 
@@ -40,6 +41,12 @@ export type Film = {
     alt?: string;
   }>;
 
+  galleryImages: Array<{
+    _key: string;
+    url: string;
+    alt?: string;
+  }>;
+
   displayOrder: number;
 };
 
@@ -49,8 +56,15 @@ type RawStill = {
   alt?: unknown;
 };
 
+type RawGalleryImage = {
+  _key?: unknown;
+  url?: unknown;
+  alt?: unknown;
+};
+
 type RawFilm = {
   _id?: unknown;
+  slug?: unknown;
 
   filmTitle?: unknown;
 
@@ -77,6 +91,7 @@ type RawFilm = {
   posterImageUrl?: unknown;
 
   homepageStills?: unknown;
+  galleryImages?: unknown;
 
   displayOrder?: unknown;
 };
@@ -84,6 +99,7 @@ type RawFilm = {
 const FILMS_QUERY = /* groq */ `
   *[_type == "film"] | order(order asc) {
     _id,
+    "slug": slug.current,
 
     "filmTitle": title,
 
@@ -110,6 +126,57 @@ const FILMS_QUERY = /* groq */ `
     "posterImageUrl": coalesce(posterUrl, posterImageUrl),
 
     "homepageStills": homepageStills[]{
+      _key,
+      "url": coalesce(url, asset->url),
+      alt
+    },
+
+    "galleryImages": galleryImages[]{
+      _key,
+      "url": coalesce(url, asset->url),
+      alt
+    },
+
+    "displayOrder": order
+  }
+`;
+
+const FILM_BY_SLUG_QUERY = /* groq */ `
+  *[_type == "film" && slug.current == $slug][0] {
+    _id,
+    "slug": slug.current,
+
+    "filmTitle": title,
+
+    "directorName": director,
+    "directorAvatarUrl": directorAvatarUrl,
+    directorBirthYear,
+    directorNationality,
+
+    releaseDate,
+
+    "copyrightInformation": copyrightInfo,
+
+    rating,
+    genreRuntime,
+
+    studio,
+    "studioLogoUrl": studioLogoUrl,
+
+    country,
+
+    trailerUrl,
+    letterboxdUrl,
+
+    "posterImageUrl": coalesce(posterUrl, posterImageUrl),
+
+    "homepageStills": homepageStills[]{
+      _key,
+      "url": coalesce(url, asset->url),
+      alt
+    },
+
+    "galleryImages": galleryImages[]{
       _key,
       "url": coalesce(url, asset->url),
       alt
@@ -144,11 +211,22 @@ function normalizeFilm(input: RawFilm): Film {
     }))
     .filter((s) => Boolean(s.url));
 
+  const galleryImages = asArray<RawGalleryImage>(input.galleryImages)
+    .map((image) => ({
+      _key: asString(image._key) || cryptoRandomKey(),
+      url: asString(image.url),
+      alt: asOptionalString(image.alt),
+    }))
+    .filter((image) => Boolean(image.url));
+
   const directorNationality =
     typeof input.directorNationality === 'string' ? input.directorNationality.trim() : '';
 
+  const slug = asOptionalString(input.slug)?.trim();
+
   return {
     _id: asString(input._id),
+    slug: slug || undefined,
 
     filmTitle: asString(input.filmTitle),
 
@@ -175,6 +253,7 @@ function normalizeFilm(input: RawFilm): Film {
     posterImageUrl: asString(input.posterImageUrl),
 
     homepageStills: stills,
+    galleryImages,
 
     displayOrder: asNumber(input.displayOrder) ?? 0,
   };
@@ -185,6 +264,15 @@ export async function getFilms(): Promise<Film[]> {
   return asArray<RawFilm>(raw)
     .map(normalizeFilm)
     .filter((f) => Boolean(f._id && f.filmTitle && f.posterImageUrl));
+}
+
+export async function getFilmBySlug(slug: string): Promise<Film | null> {
+  const raw = await client.fetch<RawFilm | null>(FILM_BY_SLUG_QUERY, { slug });
+
+  if (!raw) return null;
+
+  const film = normalizeFilm(raw);
+  return film._id && film.filmTitle && film.posterImageUrl ? film : null;
 }
 
 function cryptoRandomKey() {

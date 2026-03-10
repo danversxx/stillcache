@@ -1,8 +1,13 @@
+import Link from "next/link";
 import React from "react";
 import type { Film } from "@/lib/sanity";
 
 type Props = {
   film?: Film | null;
+  imageSet?: "homepage" | "gallery";
+  hideGalleryButton?: boolean;
+  filmHref?: string;
+  galleryHref?: string;
 };
 
 /* ──────────────────────────────────────────────────────────────
@@ -148,7 +153,13 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
    2) Poster (right column on xl)
    3) Stills grid (below)
 ────────────────────────────────────────────────────────────── */
-export default function FilmSection({ film }: Props) {
+export default function FilmSection({
+  film,
+  imageSet = "homepage",
+  hideGalleryButton = false,
+  filmHref,
+  galleryHref,
+}: Props) {
   if (!film) {
     return (
       <section className="w-full bg-white text-black">
@@ -181,7 +192,12 @@ export default function FilmSection({ film }: Props) {
 
   const posterImageUrl = typeof film.posterImageUrl === "string" ? film.posterImageUrl.trim() : "";
 
-  const stills = Array.isArray(film.homepageStills) ? film.homepageStills.slice(0, 6) : [];
+  const stillsSource = imageSet === "gallery" ? film.galleryImages : film.homepageStills;
+  const stills = Array.isArray(stillsSource)
+    ? imageSet === "homepage"
+      ? stillsSource.slice(0, 6)
+      : stillsSource
+    : [];
 
   return (
     <section className="w-full bg-white text-black">
@@ -248,10 +264,19 @@ export default function FilmSection({ film }: Props) {
 
                 <div className="w-full mt-[0px] md:mt-[0px]">
                   {/* STYLE: Film title vertical offset (edit mt-* / -mt-* per breakpoint to move FilmTitle up/down without changing gap/gap-* above) */}
-                  <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
-                    {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
-                    {film.filmTitle}
-                  </h2>
+                  {filmHref ? (
+                    <Link href={filmHref} className="block transition-opacity hover:opacity-70">
+                      <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
+                        {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
+                        {film.filmTitle}
+                      </h2>
+                    </Link>
+                  ) : (
+                    <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
+                      {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
+                      {film.filmTitle}
+                    </h2>
+                  )}
                 </div>
               </div>
 
@@ -299,16 +324,39 @@ export default function FilmSection({ film }: Props) {
               </div>
 
               {/* Gallery */}
-              <button
-                type="button"
-                className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[8px] border border-black p-[12px] transition-opacity hover:opacity-70"
-              >
-                {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
-                <span className="text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
-                  {/* STYLE: CTA label typography */}
-                  {film.filmTitle} Stills
-                </span>
-              </button>
+              {!hideGalleryButton ? (
+                galleryHref ? (
+                  <Link
+                    href={galleryHref}
+                    className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
+                  >
+                    {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
+                    <span className="min-w-0 truncate text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
+                      {/* STYLE: CTA title typography + truncation */}
+                      {film.filmTitle}
+                    </span>
+                    <span className="shrink-0 text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
+                      {/* STYLE: CTA suffix typography + keep visible */}
+                      Stills
+                    </span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
+                  >
+                    {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
+                    <span className="min-w-0 truncate text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
+                      {/* STYLE: CTA title typography + truncation */}
+                      {film.filmTitle}
+                    </span>
+                    <span className="shrink-0 text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
+                      {/* STYLE: CTA suffix typography + keep visible */}
+                      Stills
+                    </span>
+                  </button>
+                )
+              ) : null}
 
               {/* Mobile info rows */}
               <div className="w-full flex flex-col gap-[10px] md:hidden">
