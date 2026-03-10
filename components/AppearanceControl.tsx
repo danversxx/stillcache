@@ -193,7 +193,6 @@ export default function AppearanceControl({ mobileSplit = false }: Props) {
         fontWeight: 400,
       }}
     >
-      {/* Greeting */}
       <span>{greeting}</span>
       {icons}
     </div>

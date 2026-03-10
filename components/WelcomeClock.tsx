@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 type CachedPlace = {
   placeText: string;
+  countryCode: string;
   expiresAt: number;
 };
 
@@ -39,36 +40,50 @@ function formatTzShort(d: Date) {
   }
 }
 
-function readCache(): string {
+function readCache(): { placeText: string; countryCode: string } {
   try {
     const raw = sessionStorage.getItem(CACHE_KEY);
-    if (!raw) return '';
+    if (!raw) return { placeText: '', countryCode: '' };
+
     const parsed = JSON.parse(raw) as CachedPlace;
-    if (!parsed?.placeText || !parsed?.expiresAt) return '';
-    if (Date.now() > parsed.expiresAt) return '';
-    return parsed.placeText;
+    if (!parsed?.placeText || !parsed?.expiresAt) return { placeText: '', countryCode: '' };
+    if (Date.now() > parsed.expiresAt) return { placeText: '', countryCode: '' };
+
+    return {
+      placeText: parsed.placeText,
+      countryCode: typeof parsed.countryCode === 'string' ? parsed.countryCode : '',
+    };
   } catch {
-    return '';
+    return { placeText: '', countryCode: '' };
   }
 }
 
-function writeCache(placeText: string) {
+function writeCache(placeText: string, countryCode: string) {
   try {
-    const payload: CachedPlace = { placeText, expiresAt: Date.now() + CACHE_TTL_MS };
+    const payload: CachedPlace = {
+      placeText,
+      countryCode,
+      expiresAt: Date.now() + CACHE_TTL_MS,
+    };
     sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
   } catch {
     // Storage can be unavailable in some contexts; non-critical.
   }
 }
 
+function getFlagUrl(countryCode: string) {
+  const code = countryCode.trim().toLowerCase();
+  if (!code) return '';
+  return `https://flagcdn.com/${code}.svg`;
+}
+
 /* ──────────────────────────────────────────────────────────────
-   WELCOME CLOCK (Header → right side)
-   - Desktop: split into date/time + location groups
-   - Mobile: stacked date/time + location
+   WELCOME CLOCK
 ────────────────────────────────────────────────────────────── */
 export default function WelcomeClock({ mobileStack = false }: Props) {
   const [now, setNow] = useState(() => new Date());
   const [place, setPlace] = useState('');
+  const [countryCode, setCountryCode] = useState('');
 
   useEffect(() => {
     let intervalId: number | undefined;
@@ -98,7 +113,8 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
     let cancelled = false;
 
     const cached = readCache();
-    if (cached) setPlace(cached);
+    if (cached.placeText) setPlace(cached.placeText);
+    if (cached.countryCode) setCountryCode(cached.countryCode);
 
     async function loadPlace() {
       const controller = new AbortController();
@@ -123,11 +139,20 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
             ? (data as { country_name: string }).country_name
             : '';
 
+        const code =
+          typeof (data as { country_code?: unknown }).country_code === 'string'
+            ? (data as { country_code: string }).country_code
+            : '';
+
         const text = [city, country].filter(Boolean).join(', ');
         if (!text) return;
 
-        writeCache(text);
-        if (!cancelled) setPlace(text);
+        writeCache(text, code);
+
+        if (!cancelled) {
+          setPlace(text);
+          setCountryCode(code);
+        }
       } catch {
         // Non-critical UI enhancement; ignore failures silently.
       } finally {
@@ -149,24 +174,39 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
     return `${date} ${time}${tz ? ` ${tz}` : ''}`;
   }, [now]);
 
+  const flagUrl = useMemo(() => getFlagUrl(countryCode), [countryCode]);
+
+  const locationGroup = place ? (
+    <span className="inline-flex items-center gap-[6px] min-w-0">
+      {/* STYLE: Flat flag + location text grouping */}
+      {flagUrl ? (
+        <img
+          src={flagUrl}
+          alt=""
+          aria-hidden="true"
+          className="h-[10px] w-auto shrink-0"
+          /* STYLE: Flat SVG flag size tuned for readability on mobile and subtlety on desktop */
+          loading="lazy"
+          decoding="async"
+        />
+      ) : null}
+      <span className="min-w-0 truncate">{place}</span>
+    </span>
+  ) : null;
+
   if (mobileStack) {
     return (
       <div
-        className="text-left tabular-nums"
-        /* STYLE: Left aligned stacked mobile header clock + stable numeral widths */
+        className="text-left tabular-nums text-[14px] leading-[21px] text-black"
         style={{
           fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-          /* STYLE: Font family/stack */
+          fontWeight: 400,
         }}
       >
-        <div className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
-          {dateTimeText}
-        </div>
+        <div>{dateTimeText}</div>
 
         {place ? (
-          <div className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
-            {place}
-          </div>
+          <div>{locationGroup}</div>
         ) : null}
       </div>
     );
@@ -174,20 +214,14 @@ export default function WelcomeClock({ mobileStack = false }: Props) {
 
   return (
     <div
-      className="text-left lg:text-right tabular-nums"
-      /* STYLE: Left aligned while stacked, right aligned on desktop */
-      /* STYLE: tabular-nums prevents time jitter */
+      className="text-left tabular-nums text-[14px] leading-[21px] text-black"
       style={{
         fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
-        /* STYLE: Font family/stack */
+        fontWeight: 400,
       }}
     >
-      <div className="flex flex-wrap items-center gap-[10px] lg:flex-nowrap lg:justify-end text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px] text-black">
-        {/* STYLE: Desktop clock row split into spaced groups; mobile natural wrap if reused */}
-        <span>{dateTimeText}</span>
-
-        {place ? <span>{place}</span> : null}
-      </div>
+      <div>{dateTimeText}</div>
+      {place ? <div>{locationGroup}</div> : null}
     </div>
   );
 }
