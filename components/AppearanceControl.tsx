@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 type AppearanceMode = 'auto' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
+
 type Props = {
   mobileSplit?: boolean;
 };
@@ -170,23 +171,30 @@ export default function AppearanceControl({ mobileSplit = false }: Props) {
 
   if (mobileSplit) {
     return (
-      <div className="flex items-center justify-between gap-[12px] text-black">
+      <div
+        className="flex items-center justify-between gap-[12px] text-[14px] text-black"
+        style={{
+          fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
+          fontWeight: 400,
+        }}
+      >
         {/* STYLE: Mobile split layout with greeting left and controls right */}
-        <span className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px]">
-          {greeting}
-        </span>
+        <span>{greeting}</span>
         {icons}
       </div>
     );
   }
 
   return (
-    <div className="flex items-center gap-[10px] text-black">
+    <div
+      className="flex items-center gap-[10px] text-[14px] text-black"
+      style={{
+        fontFamily: '"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif',
+        fontWeight: 400,
+      }}
+    >
       {/* Greeting */}
-      <span className="text-[13px] sm:text-[14px] md:text-[14px] font-medium leading-[18px] sm:leading-[22px] md:leading-[21px]">
-        {greeting}
-      </span>
-
+      <span>{greeting}</span>
       {icons}
     </div>
   );
