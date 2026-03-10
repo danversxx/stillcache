@@ -57,10 +57,10 @@ export default async function Page() {
   return (
     <main className="bg-white text-black antialiased">
       {/* ────────────────────────────────────────────────────────
-          STICKY HEADER LAYER
+          FIXED HEADER LAYER
       ───────────────────────────────────────────────────────── */}
-      <div className="sticky top-0 z-30 bg-white">
-        {/* STYLE: Sticky header wrapper pinned to viewport top + white surface */}
+      <div className="fixed inset-x-0 top-0 z-30 bg-white">
+        {/* STYLE: Fixed header wrapper pinned to viewport top + white surface */}
         <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
           {/* STYLE: Shared horizontal padding system */}
           <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)]">
@@ -75,8 +75,8 @@ export default async function Page() {
       ───────────────────────────────────────────────────────── */}
       <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
         {/* STYLE: Shared horizontal padding system */}
-        <div className="mx-auto mt-[36px] md:mt-[64px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
-          {/* STYLE: Shared centered frame + preserved header-to-content spacing */}
+        <div className="mx-auto pt-[88px] md:pt-[169px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
+          {/* STYLE: Shared centered frame + top padding to clear fixed header */}
 
           <div className="flex flex-col gap-[40px] md:gap-[64px]">
             {films.map((film) => (
