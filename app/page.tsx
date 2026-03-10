@@ -1,5 +1,4 @@
 import FilmSection from '@/components/FilmSection';
-import WelcomeClock from '@/components/WelcomeClock';
 import AppearanceControl from '@/components/AppearanceControl';
 import { getFilms } from '@/lib/sanity';
 
@@ -11,44 +10,25 @@ export const revalidate = 0;
 
 /* ──────────────────────────────────────────────────────────────
    HEADER
-   - Desktop: Title + AppearanceControls
-              Clock below on the left
-   - Mobile: stacked editorial layout
+   - Desktop: title + appearance controls on one row
+   - Mobile: title + appearance controls on one row
 ────────────────────────────────────────────────────────────── */
 function Header() {
   return (
     <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
-      {/* Mobile / tablet */}
-      <div className="flex flex-col gap-[10px] lg:hidden">
-        {/* STYLE: Mobile vertical header stack */}
+      {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
+
+      <div className="flex items-center justify-between gap-[16px]">
+        {/* STYLE: Single-row header layout across all breakpoints */}
 
         <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
+          {/* STYLE: Title typography aligned with appearance controls */}
           Still Cache
         </div>
 
-        <div className="flex flex-col">
-          <WelcomeClock mobileStack />
-
-          <div className="mt-[1px]">
-            <AppearanceControl mobileSplit />
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop */}
-      <div className="hidden lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:grid-rows-[auto_auto] lg:items-start lg:gap-x-[16px] lg:gap-y-[6px]">
-        {/* STYLE: Desktop header grid with top row title + controls and left-aligned clock row */}
-
-        <div className="text-[28px] font-bold tracking-[-0.02em] leading-[41px]">
-          Still Cache
-        </div>
-
-        <div className="justify-self-end self-center">
+        <div className="self-center">
+          {/* STYLE: Appearance controls aligned horizontally with title */}
           <AppearanceControl />
-        </div>
-
-        <div className="col-start-1 row-start-2">
-          <WelcomeClock />
         </div>
       </div>
     </header>
