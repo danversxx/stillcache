@@ -16,7 +16,7 @@ export const revalidate = 0;
 function Header({ filmTitle }: { filmTitle?: string }) {
   return (
     <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
-      <div className="flex flex-col gap-[8px] md:gap-0">
+      <div className="flex flex-col gap-[4px] md:gap-0">
         <div className="flex items-center justify-between gap-[16px]">
           <div className="min-w-0 flex items-center gap-x-[8px] md:gap-x-[10px] text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
             <BackLink
@@ -30,7 +30,7 @@ function Header({ filmTitle }: { filmTitle?: string }) {
               /
             </span>
 
-            <span className="hidden md:inline min-w-0 break-words">
+            <span className="hidden md:inline min-w-0 break-words leading-[41px]">
               {filmTitle || 'Film'}
             </span>
           </div>
@@ -40,8 +40,8 @@ function Header({ filmTitle }: { filmTitle?: string }) {
           </div>
         </div>
 
-        <div className="md:hidden text-[20px] font-bold tracking-[-0.02em] leading-[24px]">
-          <span className="break-words">
+        <div className="md:hidden min-w-0 text-[20px] font-bold tracking-[-0.02em] leading-[22px]">
+          <span className="block break-words max-w-[22ch]">
             {filmTitle || 'Film'}
           </span>
         </div>
@@ -93,7 +93,7 @@ export default async function Page({
 
       {/* PAGE CONTENT */}
       <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
-        <div className="mx-auto pt-[120px] md:pt-[169px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
+        <div className="mx-auto pt-[116px] md:pt-[169px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
 
           <div className="flex flex-col gap-[40px] md:gap-[64px]">
             <FilmSection
