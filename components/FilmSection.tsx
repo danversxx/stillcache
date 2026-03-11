@@ -315,7 +315,7 @@ export default function FilmSection({
                   <img
                     src={studioLogoUrl}
                     alt={film.studio ? `${film.studio} logo` : "Studio logo"}
-                    className="h-[38px] md:h-[57px] w-auto shrink-0"
+                    className="studio-logo-mark h-[38px] md:h-[57px] w-auto shrink-0"
                     /* STYLE: Studio mark sizing (height) + responsive height + prevent shrink */
                     loading="lazy"
                     decoding="async"
