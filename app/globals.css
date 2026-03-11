@@ -179,3 +179,20 @@ html[data-theme='dark'] .bg-black\/10 {
   background-color: rgba(255, 255, 255, 0.1) !important;
   /* STYLE: Dark surface override for placeholder fills */
 }
+
+/* ──────────────────────────────────────────────────────────────
+   STUDIO LOGO THEME TREATMENT
+   Controls:
+   - Preserve black SVG studio marks in light mode
+   - Convert black SVG studio marks to white in dark mode
+   - Smooth filter transition during appearance changes
+────────────────────────────────────────────────────────────── */
+.studio-logo-mark {
+  transition: filter 220ms ease;
+  /* STYLE: Smooth theme transition for logo treatment */
+}
+
+html[data-theme='dark'] .studio-logo-mark {
+  filter: brightness(0) invert(1);
+  /* STYLE: Converts black SVG marks to white in dark mode */
+}
