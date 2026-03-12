@@ -1,6 +1,7 @@
 import FilmSection from '@/components/FilmSection';
 import AppearanceControl from '@/components/AppearanceControl';
 import ScrollRestoration from '@/components/ScrollRestoration';
+import FloatingActions from '@/components/FloatingActions';
 import { getFilms } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
@@ -58,6 +59,7 @@ export default async function Page() {
   return (
     <main className="bg-white text-black antialiased">
       <ScrollRestoration />
+      <FloatingActions />
 
       {/* ────────────────────────────────────────────────────────
           FIXED HEADER LAYER

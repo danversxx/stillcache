@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import FilmSection from '@/components/FilmSection';
 import AppearanceControl from '@/components/AppearanceControl';
 import BackLink from '@/components/BackLink';
+import FloatingActions from '@/components/FloatingActions';
 import { getFilmBySlug } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
@@ -81,6 +82,7 @@ export default async function Page({
 
   return (
     <main className="bg-white text-black antialiased">
+      <FloatingActions showHome />
 
       {/* HEADER */}
       <div className="fixed inset-x-0 top-0 z-30 bg-white">
@@ -107,7 +109,6 @@ export default async function Page({
 
         </div>
       </div>
-
     </main>
   );
 }

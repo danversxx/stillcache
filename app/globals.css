@@ -196,3 +196,86 @@ html[data-theme='dark'] .studio-logo-mark {
   filter: brightness(0) invert(1);
   /* STYLE: Converts black SVG marks to white in dark mode */
 }
+
+/* ──────────────────────────────────────────────────────────────
+   FLOATING ACTION CONTROLS
+   Controls:
+   - Fixed bottom-right action stack
+   - Premium translucent / glass treatment
+   - Light / dark theme adaptation
+   - Mobile-safe hit area sizing
+────────────────────────────────────────────────────────────── */
+.floating-actions-stack {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  pointer-events: none;
+  /* STYLE: Stack stays fixed and allows only buttons to receive interaction */
+}
+
+.floating-action-button {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.54);
+  color: #000000;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.10),
+    0 1px 0 rgba(255, 255, 255, 0.45) inset;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+  /* STYLE: Premium translucent action surface + soft glass shadow + smooth feedback */
+}
+
+.floating-action-button:hover {
+  transform: translateY(-1px);
+  /* STYLE: Light hover lift */
+}
+
+.floating-action-button:active {
+  transform: translateY(0);
+  /* STYLE: Pressed state resets lift */
+}
+
+html[data-theme='dark'] .floating-action-button {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(16, 16, 16, 0.56);
+  color: #ffffff;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  /* STYLE: Dark-mode glass treatment with white icon contrast */
+}
+
+@media (min-width: 768px) {
+  .floating-actions-stack {
+    right: 24px;
+    bottom: 24px;
+    gap: 12px;
+    /* STYLE: Desktop edge offset + slightly airier stack spacing */
+  }
+
+  .floating-action-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    /* STYLE: Slightly larger desktop button scale */
+  }
+}
