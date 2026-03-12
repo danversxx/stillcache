@@ -226,14 +226,14 @@ html[data-theme='dark'] .studio-logo-mark {
   width: 40px;
   height: 40px;
   border-radius: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.54);
-  color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.10),
-    0 1px 0 rgba(255, 255, 255, 0.45) inset;
+    0 1px 0 rgba(255, 255, 255, 0.30) inset;
   transition:
     background-color 220ms ease,
     border-color 220ms ease,
@@ -241,7 +241,7 @@ html[data-theme='dark'] .studio-logo-mark {
     box-shadow 220ms ease,
     transform 180ms ease,
     opacity 180ms ease;
-  /* STYLE: Premium translucent action surface + soft glass shadow + smooth feedback */
+  /* STYLE: White icon treatment + lighter translucent surface so underlying image colour reads through more strongly */
 }
 
 .floating-action-button:hover {
@@ -255,13 +255,13 @@ html[data-theme='dark'] .studio-logo-mark {
 }
 
 html[data-theme='dark'] .floating-action-button {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(16, 16, 16, 0.56);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.10);
   color: #ffffff;
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.28),
-    0 1px 0 rgba(255, 255, 255, 0.08) inset;
-  /* STYLE: Dark-mode glass treatment with white icon contrast */
+    0 10px 30px rgba(0, 0, 0, 0.24),
+    0 1px 0 rgba(255, 255, 255, 0.10) inset;
+  /* STYLE: Dark-mode glass stays lighter and more open so image detail remains visible beneath the control */
 }
 
 @media (min-width: 768px) {
@@ -276,6 +276,6 @@ html[data-theme='dark'] .floating-action-button {
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    /* STYLE: Slightly larger desktop button scale */
+    /* STYLE: Desktop scale remains compact while preserving the same glass treatment */
   }
 }
