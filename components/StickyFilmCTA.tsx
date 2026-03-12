@@ -31,6 +31,8 @@ export default function StickyFilmCTA() {
   });
 
   useEffect(() => {
+    let rafId = 0;
+
     const updateActiveCTA = () => {
       const sections = Array.from(
         document.querySelectorAll<HTMLElement>('[data-film-section]')
@@ -65,18 +67,45 @@ export default function StickyFilmCTA() {
       });
     };
 
-    /* STYLE: Delay first measurement until after paint so production layout has settled before CTA bounds are read */
-    const frame = window.requestAnimationFrame(() => {
-      updateActiveCTA();
+    const scheduleUpdate = () => {
+      window.cancelAnimationFrame(rafId);
+      rafId = window.requestAnimationFrame(updateActiveCTA);
+    };
+
+    /* STYLE: Perform multiple startup passes so the CTA system remains correct across dev, local production, and delayed production hydration on Vercel */
+    scheduleUpdate();
+
+    const startupTimers = [
+      window.setTimeout(scheduleUpdate, 0),
+      window.setTimeout(scheduleUpdate, 120),
+      window.setTimeout(scheduleUpdate, 360),
+      window.setTimeout(scheduleUpdate, 800),
+    ];
+
+    const mutationObserver = new MutationObserver(() => {
+      scheduleUpdate();
     });
 
-    window.addEventListener('scroll', updateActiveCTA, { passive: true });
-    window.addEventListener('resize', updateActiveCTA);
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('load', scheduleUpdate);
 
     return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener('scroll', updateActiveCTA);
-      window.removeEventListener('resize', updateActiveCTA);
+      window.cancelAnimationFrame(rafId);
+
+      startupTimers.forEach((timer) => {
+        window.clearTimeout(timer);
+      });
+
+      mutationObserver.disconnect();
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('load', scheduleUpdate);
     };
   }, []);
 
