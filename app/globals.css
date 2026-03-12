@@ -285,12 +285,12 @@ html[data-theme='dark'] .floating-action-button {
    Controls:
    - Shared homepage CTA that activates when a film's inline CTA passes under the fixed header
    - CTA remains inside the header frame instead of becoming a detached overlay
-   - Width and typography stay aligned with the site's existing CTA system
+   - Visual style mirrors the inline CTA with subtle elevation for header context
 ────────────────────────────────────────────────────────────── */
 .header-sticky-film-cta-slot {
   width: 100%;
   margin-top: 4px;
-  /* STYLE: Adds a small visual separation from the title row so temporary CTA debugging reads clearly inside the fixed header */
+  /* STYLE: Slight separation from the title row maintains header rhythm when CTA appears */
 }
 
 .header-sticky-film-cta-button {
@@ -301,11 +301,16 @@ html[data-theme='dark'] .floating-action-button {
   gap: 4px;
   height: 44px;
   padding: 12px;
-  border: 1px solid #000000;
-  color: #ffffff;
-  background: #000000;
-  transition: opacity 180ms ease;
-  /* STYLE: Temporary high-contrast treatment makes the promoted CTA impossible to miss while confirming placement inside the header frame */
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #000000;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition:
+    opacity 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+  /* STYLE: Maintains inline CTA visual language while adding a subtle surface lift appropriate for fixed header UI */
 }
 
 .header-sticky-film-cta-button:hover {
