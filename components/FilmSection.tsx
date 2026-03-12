@@ -200,7 +200,12 @@ export default function FilmSection({
     : [];
 
   return (
-    <section className="w-full bg-white text-black">
+    <section
+      className="film-section w-full bg-white text-black"
+      data-film-section
+      data-film-title={film.filmTitle}
+      data-film-href={galleryHref || ""}
+    >
       {/* STYLE: Section surface (background + text color) */}
 
       <div className="flex flex-col items-center gap-[24px] md:gap-[32px]">
@@ -328,6 +333,7 @@ export default function FilmSection({
                 galleryHref ? (
                   <Link
                     href={galleryHref}
+                    data-film-cta
                     className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
                   >
                     {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
@@ -343,6 +349,7 @@ export default function FilmSection({
                 ) : (
                   <button
                     type="button"
+                    data-film-cta
                     className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
                   >
                     {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
