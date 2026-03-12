@@ -226,9 +226,9 @@ html[data-theme='dark'] .studio-logo-mark {
   width: 40px;
   height: 40px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   background: rgba(255, 255, 255, 0.18);
-  color: #ffffff;
+  color: #000000;
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   box-shadow:
@@ -241,7 +241,7 @@ html[data-theme='dark'] .studio-logo-mark {
     box-shadow 220ms ease,
     transform 180ms ease,
     opacity 180ms ease;
-  /* STYLE: White icon treatment + lighter translucent surface so underlying image colour reads through more strongly */
+  /* STYLE: Light-mode treatment keeps icons readable against pale surfaces while preserving a restrained translucent glass effect */
 }
 
 .floating-action-button:hover {
@@ -261,7 +261,7 @@ html[data-theme='dark'] .floating-action-button {
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.24),
     0 1px 0 rgba(255, 255, 255, 0.10) inset;
-  /* STYLE: Dark-mode glass stays lighter and more open so image detail remains visible beneath the control */
+  /* STYLE: Dark-mode treatment switches icon colour to white while keeping the glass surface open enough for underlying imagery to read through */
 }
 
 @media (min-width: 768px) {
