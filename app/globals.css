@@ -285,12 +285,12 @@ html[data-theme='dark'] .floating-action-button {
    Controls:
    - Shared homepage CTA that activates when a film's inline CTA passes under the fixed header
    - CTA remains inside the header frame instead of becoming a detached overlay
-   - Visual style mirrors the inline CTA with subtle elevation for header context
+   - Visual style intentionally mirrors the authored inline CTA so the component reads as one CTA with two modes
 ────────────────────────────────────────────────────────────── */
 .header-sticky-film-cta-slot {
   width: 100%;
   margin-top: 4px;
-  /* STYLE: Slight separation from the title row maintains header rhythm when CTA appears */
+  /* STYLE: Slight separation from the title row preserves header rhythm when the CTA enters its triggered state */
 }
 
 .header-sticky-film-cta-button {
@@ -301,21 +301,19 @@ html[data-theme='dark'] .floating-action-button {
   gap: 4px;
   height: 44px;
   padding: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid #000000;
   color: #000000;
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: transparent;
   transition:
     opacity 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease;
-  /* STYLE: Maintains inline CTA visual language while adding a subtle surface lift appropriate for fixed header UI */
+    border-color 180ms ease,
+    color 180ms ease;
+  /* STYLE: Header CTA deliberately matches the inline CTA language instead of introducing a second utility surface */
 }
 
 .header-sticky-film-cta-button:hover {
   opacity: 0.7;
-  /* STYLE: Hover state stays identical to the inline CTA interaction model */
+  /* STYLE: Hover state remains identical to the inline CTA interaction model */
 }
 
 .header-sticky-film-cta-title,
@@ -324,7 +322,14 @@ html[data-theme='dark'] .floating-action-button {
   line-height: 24px;
   letter-spacing: 0.01em;
   color: inherit;
-  /* STYLE: Typography mirrors the inline CTA exactly to keep the transition from section CTA to header CTA visually calm */
+  /* STYLE: Typography mirrors the inline CTA exactly to preserve the one-component/two-state illusion */
+}
+
+html[data-theme='dark'] .header-sticky-film-cta-button {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: transparent;
+  /* STYLE: Dark-mode header CTA mirrors the inline CTA's theme inversion while staying visually clean and flat */
 }
 
 @media (min-width: 768px) {
