@@ -8,12 +8,6 @@ type ActiveCTA = {
   href: string;
 };
 
-type DebugState = {
-  sectionsFound: number;
-  activeTitle: string;
-  triggerOffset: number;
-};
-
 const HEADER_OFFSET_MOBILE = 88;
 const HEADER_OFFSET_DESKTOP = 169;
 
@@ -24,11 +18,6 @@ function getHeaderTriggerOffset() {
 
 export default function StickyFilmCTA() {
   const [activeCTA, setActiveCTA] = useState<ActiveCTA | null>(null);
-  const [debugState, setDebugState] = useState<DebugState>({
-    sectionsFound: 0,
-    activeTitle: 'none',
-    triggerOffset: HEADER_OFFSET_MOBILE,
-  });
 
   useEffect(() => {
     let rafId = 0;
@@ -60,11 +49,6 @@ export default function StickyFilmCTA() {
       }
 
       setActiveCTA(nextActiveCTA);
-      setDebugState({
-        sectionsFound: sections.length,
-        activeTitle: nextActiveCTA?.title ?? 'none',
-        triggerOffset: headerTriggerOffset,
-      });
     };
 
     const scheduleUpdate = () => {
@@ -109,45 +93,18 @@ export default function StickyFilmCTA() {
     };
   }, []);
 
-  return (
-    <>
-      {activeCTA ? (
-        <div className="header-sticky-film-cta-slot" aria-label="Active film stills">
-          <Link href={activeCTA.href} className="header-sticky-film-cta-button">
-            <span className="min-w-0 truncate header-sticky-film-cta-title">
-              {activeCTA.title}
-            </span>
-            <span className="shrink-0 header-sticky-film-cta-label">
-              Stills
-            </span>
-          </Link>
-        </div>
-      ) : null}
+  if (!activeCTA) return null;
 
-      <div
-        style={{
-          position: 'fixed',
-          left: 12,
-          bottom: 12,
-          zIndex: 9999,
-          background: 'rgba(0,0,0,0.85)',
-          color: '#fff',
-          padding: '8px 10px',
-          fontSize: '11px',
-          lineHeight: '1.4',
-          borderRadius: '8px',
-          fontFamily:
-            "'Helvetica Now Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-          pointerEvents: 'none',
-        }}
-        aria-hidden="true"
-      >
-        sections: {debugState.sectionsFound}
-        <br />
-        active: {debugState.activeTitle}
-        <br />
-        offset: {debugState.triggerOffset}
-      </div>
-    </>
+  return (
+    <div className="header-sticky-film-cta-slot" aria-label="Active film stills">
+      <Link href={activeCTA.href} className="header-sticky-film-cta-button">
+        <span className="min-w-0 truncate header-sticky-film-cta-title">
+          {activeCTA.title}
+        </span>
+        <span className="shrink-0 header-sticky-film-cta-label">
+          Stills
+        </span>
+      </Link>
+    </div>
   );
 }
