@@ -279,3 +279,59 @@ html[data-theme='dark'] .floating-action-button {
     /* STYLE: Desktop scale remains compact while preserving the same glass treatment */
   }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   HEADER-INTEGRATED FILM CTA
+   Controls:
+   - Shared homepage CTA that activates when a film's inline CTA passes under the fixed header
+   - CTA remains inside the header frame instead of becoming a detached overlay
+   - Width and typography stay aligned with the site's existing CTA system
+────────────────────────────────────────────────────────────── */
+.header-sticky-film-cta-slot {
+  width: 100%;
+  margin-top: 4px;
+  /* STYLE: Adds a small visual separation from the title row so temporary CTA debugging reads clearly inside the fixed header */
+}
+
+.header-sticky-film-cta-button {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 44px;
+  padding: 12px;
+  border: 1px solid #000000;
+  color: #ffffff;
+  background: #000000;
+  transition: opacity 180ms ease;
+  /* STYLE: Temporary high-contrast treatment makes the promoted CTA impossible to miss while confirming placement inside the header frame */
+}
+
+.header-sticky-film-cta-button:hover {
+  opacity: 0.7;
+  /* STYLE: Hover state stays identical to the inline CTA interaction model */
+}
+
+.header-sticky-film-cta-title,
+.header-sticky-film-cta-label {
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: inherit;
+  /* STYLE: Typography mirrors the inline CTA exactly to keep the transition from section CTA to header CTA visually calm */
+}
+
+@media (min-width: 768px) {
+  .header-sticky-film-cta-button {
+    height: 42px;
+    /* STYLE: Desktop height mirrors the inline CTA's desktop scale */
+  }
+
+  .header-sticky-film-cta-title,
+  .header-sticky-film-cta-label {
+    font-size: 14px;
+    line-height: 20px;
+    /* STYLE: Desktop typography mirrors the inline CTA's desktop scale */
+  }
+}
