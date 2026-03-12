@@ -2,6 +2,7 @@ import FilmSection from '@/components/FilmSection';
 import AppearanceControl from '@/components/AppearanceControl';
 import ScrollRestoration from '@/components/ScrollRestoration';
 import FloatingActions from '@/components/FloatingActions';
+import StickyFilmCTA from '@/components/StickyFilmCTA';
 import { getFilms } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
@@ -20,18 +21,24 @@ function Header() {
     <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
       {/* STYLE: Header spacing (pt/pb) + responsive spacing (md:...) */}
 
-      <div className="flex items-center justify-between gap-[16px]">
-        {/* STYLE: Single-row header layout across all breakpoints */}
+      <div className="flex flex-col gap-[12px] md:gap-[16px]">
+        {/* STYLE: Header stack creates a dedicated CTA slot beneath the title row without disturbing the shared page frame */}
 
-        <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
-          {/* STYLE: Title typography aligned with appearance controls */}
-          Still Cache
+        <div className="flex items-center justify-between gap-[16px]">
+          {/* STYLE: Single-row header layout across all breakpoints */}
+
+          <div className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
+            {/* STYLE: Title typography aligned with appearance controls */}
+            Still Cache
+          </div>
+
+          <div className="self-center">
+            {/* STYLE: Appearance controls aligned horizontally with title */}
+            <AppearanceControl />
+          </div>
         </div>
 
-        <div className="self-center">
-          {/* STYLE: Appearance controls aligned horizontally with title */}
-          <AppearanceControl />
-        </div>
+        <StickyFilmCTA />
       </div>
     </header>
   );
@@ -44,7 +51,7 @@ function Footer() {
   return (
     <footer className="py-[22px] md:py-[32px]">
       <div className="text-[10px] md:text-[14px] font-medium leading-[14px]">
-        © 2026 · Still Cache
+        © 2026 · Still Cache · TEST
       </div>
     </footer>
   );
