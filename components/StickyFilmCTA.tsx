@@ -97,11 +97,11 @@ export default function StickyFilmCTA() {
 
   return (
     <div className="header-sticky-film-cta-slot" aria-label="Active film stills">
-      <Link href={activeCTA.href} className="header-sticky-film-cta-button">
-        <span className="min-w-0 truncate header-sticky-film-cta-title">
+      <Link href={activeCTA.href} className="header-sticky-film-cta-button film-stills-cta">
+        <span className="min-w-0 truncate film-stills-cta-title">
           {activeCTA.title}
         </span>
-        <span className="shrink-0 header-sticky-film-cta-label">
+        <span className="shrink-0 film-stills-cta-label">
           Stills
         </span>
       </Link>

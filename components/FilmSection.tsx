@@ -74,13 +74,11 @@ function ExternalButton({
       target="_blank"
       rel="noreferrer"
       className={[
-        "inline-flex h-[34px] md:h-[30px] items-center justify-center border border-black px-[12px] py-[6px]",
-        // STYLE: Button layout (inline-flex + centering) + dimensions (h-*) + responsive height (md:...) + border + padding
-        // Regular text: +2px line-height
-        "text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black",
-        // STYLE: Typography (size/leading/tracking) + responsive typography + text color
+        "film-trailer-cta inline-flex items-center justify-center px-[14px]",
+        // STYLE: Trailer CTA layout (pill) + horizontal padding
+        "text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em]",
+        // STYLE: Typography scale aligned with other CTAs
         "transition-opacity hover:opacity-70",
-        // STYLE: Interaction (hover opacity + transition)
         className,
       ].join(" ")}
     >
@@ -334,15 +332,13 @@ export default function FilmSection({
                   <Link
                     href={galleryHref}
                     data-film-cta
-                    className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
+                    className="film-stills-cta flex w-full items-center justify-center gap-[4px]"
                   >
-                    {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
-                    <span className="min-w-0 truncate text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
-                      {/* STYLE: CTA title typography + truncation */}
+                    {/* STYLE: Primary Stills CTA — solid surface with rounded form and responsive scaling */}
+                    <span className="min-w-0 truncate film-stills-cta-title">
                       {film.filmTitle}
                     </span>
-                    <span className="shrink-0 text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
-                      {/* STYLE: CTA suffix typography + keep visible */}
+                    <span className="shrink-0 film-stills-cta-label">
                       Stills
                     </span>
                   </Link>
@@ -350,15 +346,13 @@ export default function FilmSection({
                   <button
                     type="button"
                     data-film-cta
-                    className="flex h-[44px] md:h-[42px] w-full items-center justify-center gap-[4px] border border-black p-[12px] transition-opacity hover:opacity-70"
+                    className="film-stills-cta flex w-full items-center justify-center gap-[4px]"
                   >
-                    {/* STYLE: CTA layout (flex + centering) + height + responsive height + full width + border + padding + hover transition */}
-                    <span className="min-w-0 truncate text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
-                      {/* STYLE: CTA title typography + truncation */}
+                    {/* STYLE: Button fallback preserves identical visual treatment */}
+                    <span className="min-w-0 truncate film-stills-cta-title">
                       {film.filmTitle}
                     </span>
-                    <span className="shrink-0 text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black">
-                      {/* STYLE: CTA suffix typography + keep visible */}
+                    <span className="shrink-0 film-stills-cta-label">
                       Stills
                     </span>
                   </button>

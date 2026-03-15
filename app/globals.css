@@ -294,54 +294,90 @@ html[data-theme='dark'] .floating-action-button {
 }
 
 .header-sticky-film-cta-button {
-  display: inline-flex;
   width: 100%;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  height: 44px;
-  padding: 12px;
-  border: 1px solid #000000;
-  color: #000000;
-  background: transparent;
+  /* STYLE: Header CTA remains full width inside the header frame while inheriting the shared stills CTA system */
+}
+
+/* ──────────────────────────────────────────────────────────────
+   PRIMARY FILM STILLS CTA
+   Controls:
+   - Primary action surface for film sections
+   - Promotes into header-sticky CTA seamlessly
+   - Shared visual system across inline + sticky variants
+────────────────────────────────────────────────────────────── */
+.film-stills-cta {
+  height: 48px;
+  padding-inline: 16px;
+  border-radius: 18px;
+  background: #000000;
+  color: #ffffff;
   transition:
     opacity 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease;
-  /* STYLE: Header CTA deliberately matches the inline CTA language instead of introducing a second utility surface */
+    background-color 220ms ease,
+    color 220ms ease;
+  /* STYLE: Mobile-first scale keeps the CTA fluid on smaller screens while preserving the intended primary-action hierarchy */
 }
 
-.header-sticky-film-cta-button:hover {
+.film-stills-cta:hover {
   opacity: 0.7;
-  /* STYLE: Hover state remains identical to the inline CTA interaction model */
 }
 
-.header-sticky-film-cta-title,
-.header-sticky-film-cta-label {
+.film-stills-cta-title,
+.film-stills-cta-label {
   font-size: 12px;
   line-height: 24px;
   letter-spacing: 0.01em;
   color: inherit;
-  /* STYLE: Typography mirrors the inline CTA exactly to preserve the one-component/two-state illusion */
 }
 
-html[data-theme='dark'] .header-sticky-film-cta-button {
-  border-color: #ffffff;
-  color: #ffffff;
-  background: transparent;
-  /* STYLE: Dark-mode header CTA mirrors the inline CTA's theme inversion while staying visually clean and flat */
+html[data-theme='dark'] .film-stills-cta {
+  background: #ffffff;
+  color: #000000;
+  /* STYLE: Dark mode inverts the stills CTA cleanly to preserve strong contrast against black surfaces */
 }
 
 @media (min-width: 768px) {
-  .header-sticky-film-cta-button {
-    height: 42px;
-    /* STYLE: Desktop height mirrors the inline CTA's desktop scale */
+  .film-stills-cta {
+    height: 52px;
+    border-radius: 20px;
+    padding-inline: 18px;
+    /* STYLE: Desktop reaches the full intended stills CTA scale and corner radius */
   }
 
-  .header-sticky-film-cta-title,
-  .header-sticky-film-cta-label {
+  .film-stills-cta-title,
+  .film-stills-cta-label {
     font-size: 14px;
     line-height: 20px;
-    /* STYLE: Desktop typography mirrors the inline CTA's desktop scale */
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   WATCH TRAILER CTA
+   Controls:
+   - Secondary action style
+   - Soft translucent neutral surface
+   - Pill form to differentiate hierarchy from the primary Stills CTA
+────────────────────────────────────────────────────────────── */
+.film-trailer-cta {
+  height: 32px;
+  border-radius: 9999px;
+  border: 1px solid #0000000d;
+  background: #f4f4f480;
+  color: #000000;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* STYLE: Mobile-first sizing keeps the trailer CTA fluid while preserving its softer secondary-action character */
+}
+
+html[data-theme='dark'] .film-trailer-cta {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .film-trailer-cta {
+    height: 34px;
+    /* STYLE: Desktop trailer CTA gains a touch more presence without competing with the primary stills action */
   }
 }
