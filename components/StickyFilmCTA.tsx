@@ -97,7 +97,11 @@ export default function StickyFilmCTA() {
 
   return (
     <div className="header-sticky-film-cta-slot" aria-label="Active film stills">
-      <Link href={activeCTA.href} className="header-sticky-film-cta-button film-stills-cta">
+      <Link
+        href={activeCTA.href}
+        className="header-sticky-film-cta-button film-stills-cta flex items-center justify-center gap-[4px]"
+      >
+        {/* STYLE: Sticky CTA explicitly preserves the same flex layout behavior as the inline Stills CTA so promoted state and default state remain visually identical */}
         <span className="min-w-0 truncate film-stills-cta-title">
           {activeCTA.title}
         </span>
