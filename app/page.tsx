@@ -2,7 +2,6 @@ import FilmSection from '@/components/FilmSection';
 import AppearanceControl from '@/components/AppearanceControl';
 import ScrollRestoration from '@/components/ScrollRestoration';
 import FloatingActions from '@/components/FloatingActions';
-import StickyFilmCTA from '@/components/StickyFilmCTA';
 import { getFilms } from '@/lib/sanity';
 
 /* ──────────────────────────────────────────────────────────────
@@ -37,8 +36,6 @@ function Header() {
             <AppearanceControl />
           </div>
         </div>
-
-        <StickyFilmCTA />
       </div>
     </header>
   );
