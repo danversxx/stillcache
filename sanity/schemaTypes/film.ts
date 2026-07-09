@@ -1,3 +1,5 @@
+import GalleryGeneratorInput from '../components/GalleryGeneratorInput'
+
 export default {
   name: 'film',
   title: 'Film',
@@ -125,19 +127,22 @@ export default {
       validation: (Rule: any) => Rule.required().length(6),
     },
     {
-      name: 'galleryImages',
-      title: 'Gallery Images',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'url', title: 'Image URL', type: 'url' },
-            { name: 'alt', title: 'Alt Text', type: 'string' },
-          ],
-        },
+  name: 'galleryImages',
+  title: 'Gallery Images',
+  type: 'array',
+  components: {
+    input: GalleryGeneratorInput,
+  },
+  of: [
+    {
+      type: 'object',
+      fields: [
+        { name: 'url', title: 'Image URL', type: 'url' },
+        { name: 'alt', title: 'Alt Text', type: 'string' },
       ],
     },
+  ],
+},
     {
       name: 'order',
       title: 'Display Order',
