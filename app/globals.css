@@ -67,8 +67,8 @@
    - Font rendering/smoothing
 ────────────────────────────────────────────────────────────── */
 html {
-  overflow-x: hidden;
-  /* STYLE: Prevents accidental horizontal scroll */
+  /* TRAP: overflow-x here creates a scroll container that breaks position:sticky.
+     body's overflow-x below already prevents horizontal scroll. Do not re-add. */
   -webkit-font-smoothing: antialiased;
   /* STYLE: Smoother type rendering on WebKit */
   -moz-osx-font-smoothing: grayscale;

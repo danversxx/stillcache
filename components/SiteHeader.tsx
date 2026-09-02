@@ -12,7 +12,7 @@ export default function SiteHeader({ filmTitle }: { filmTitle?: string }) {
   const isFilm = Boolean(filmTitle);
 
   return (
-    <div className="fixed inset-x-0 top-0 z-30 bg-white">
+    <div className="sticky top-0 z-30 bg-white">
       <Frame>
         <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
           <div className={`flex flex-col ${isFilm ? 'gap-[4px] md:gap-0' : ''}`}>
