@@ -200,9 +200,6 @@ export default function FilmSection({
   return (
     <section
       className="film-section w-full bg-white text-black"
-      data-film-section
-      data-film-title={film.filmTitle}
-      data-film-href={galleryHref || ""}
     >
       {/* STYLE: Section surface (background + text color) */}
 
@@ -331,7 +328,6 @@ export default function FilmSection({
                 galleryHref ? (
                   <Link
                     href={galleryHref}
-                    data-film-cta
                     className="film-stills-cta flex w-full items-center justify-center gap-[4px]"
                   >
                     {/* STYLE: Primary Stills CTA — solid surface with rounded form and responsive scaling */}
@@ -345,7 +341,6 @@ export default function FilmSection({
                 ) : (
                   <button
                     type="button"
-                    data-film-cta
                     className="film-stills-cta flex w-full items-center justify-center gap-[4px]"
                   >
                     {/* STYLE: Button fallback preserves identical visual treatment */}

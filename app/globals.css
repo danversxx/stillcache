@@ -287,17 +287,6 @@ html[data-theme='dark'] .floating-action-button {
    - CTA remains inside the header frame instead of becoming a detached overlay
    - Visual style intentionally mirrors the authored inline CTA so the component reads as one CTA with two modes
 ────────────────────────────────────────────────────────────── */
-.header-sticky-film-cta-slot {
-  width: 100%;
-  margin-top: 4px;
-  /* STYLE: Slight separation from the title row preserves header rhythm when the CTA enters its triggered state */
-}
-
-.header-sticky-film-cta-button {
-  width: 100%;
-  /* STYLE: Header CTA remains full width inside the header frame while inheriting the shared stills CTA system */
-}
-
 /* ──────────────────────────────────────────────────────────────
    PRIMARY FILM STILLS CTA
    Controls:
