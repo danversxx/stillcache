@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import type { Film } from "@/lib/sanity";
@@ -8,6 +9,7 @@ type Props = {
   hideGalleryButton?: boolean;
   filmHref?: string;
   galleryHref?: string;
+  priority?: boolean;
 };
 
 /* ──────────────────────────────────────────────────────────────
@@ -114,13 +116,13 @@ function StillTile({ url, alt }: { url: string; alt: string }) {
   return (
     <div className="relative w-full aspect-[342.67/192.75]">
       {/* STYLE: Tile sizing (full width) + aspect ratio (controls tile shape) + positioning context (relative) */}
-      <img
+      <Image
         src={url}
         alt={alt}
-        className="absolute inset-0 h-full w-full object-contain"
-        /* STYLE: Image fill (absolute + inset-0 + h/w full) + fit (object-contain) */
-        loading="lazy"
-        decoding="async"
+        fill
+        sizes="(min-width: 1280px) 360px, (min-width: 640px) 50vw, 100vw"
+        className="object-contain"
+        /* STYLE: fill needs the relative parent above; object-contain letterboxes non-16:9 exports rather than cropping the frame */
       />
     </div>
   );
@@ -157,6 +159,7 @@ export default function FilmSection({
   hideGalleryButton = false,
   filmHref,
   galleryHref,
+  priority = false,
 }: Props) {
   if (!film) {
     return (
@@ -448,13 +451,16 @@ export default function FilmSection({
               {posterImageUrl ? (
                 <div className="w-full max-w-full md:max-w-[clamp(460px,58vw,680px)]">
                   {/* STYLE: Poster max width constraint while stacked; desktop image sizing takes over at xl */}
-                  <img
+                  <Image
                     src={posterImageUrl}
                     alt={`${film.filmTitle} poster`}
+                    width={2000}
+                    height={3000}
+                    sizes="(min-width: 1280px) 400px, (min-width: 768px) 58vw, 100vw"
+                    priority={priority}
                     className="w-full aspect-[2/3] object-cover xl:h-[600px] xl:w-[400px]"
-                    /* STYLE: Poster sizing (full width) + aspect ratio + crop (object-cover) + fixed xl dimensions */
-                    loading="lazy"
-                    decoding="async"
+                    /* STYLE: Poster sizing + aspect ratio + crop + fixed xl dimensions */
+                    /* TRAP: width/height declare the source ratio only — CSS controls rendered size */
                   />
                 </div>
               ) : (

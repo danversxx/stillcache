@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <PageShell>
       <ScrollRestoration />
-      {films.map((film) => {
+      {films.map((film, index) => {
         const filmHref = film.slug ? `/films/${film.slug}` : undefined;
         return (
           <FilmSection
@@ -19,6 +19,7 @@ export default async function Page() {
             film={film}
             filmHref={filmHref}
             galleryHref={filmHref}
+            priority={index === 0}
           />
         );
       })}
