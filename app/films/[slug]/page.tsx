@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import FilmSection from '@/components/FilmSection';
 import AppearanceControl from '@/components/AppearanceControl';
@@ -10,6 +11,55 @@ import { getFilmBySlug } from '@/lib/sanity';
 ────────────────────────────────────────────────────────────── */
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+/* ──────────────────────────────────────────────────────────────
+   PER-FILM METADATA (tab title, search results, link previews)
+   TRAP: runs its own fetch — Sanity is hit twice per request
+────────────────────────────────────────────────────────────── */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const film = await getFilmBySlug(slug);
+
+  if (!film) {
+    return { title: 'Film not found · Still Cache' };
+  }
+
+  const year = film.releaseDate?.slice(0, 4) ?? '';
+  const title = year ? `${film.filmTitle} (${year})` : film.filmTitle;
+
+  const description = [
+    film.directorName ? `Directed by ${film.directorName}` : '',
+    film.genreRuntime,
+    film.country,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
+  /* STYLE: First still fills the ~1.91:1 preview frame; poster is fallback only */
+  const previewImage = film.galleryImages?.[0]?.url || film.posterImageUrl;
+
+  return {
+    title: `${title} · Still Cache`,
+    description: description || 'Film stills',
+    openGraph: {
+      title,
+      description: description || 'Film stills',
+      type: 'article',
+      siteName: 'Still Cache',
+      images: previewImage ? [{ url: previewImage, alt: `${film.filmTitle} still` }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: description || 'Film stills',
+      images: previewImage ? [previewImage] : [],
+    },
+  };
+}
 
 /* ──────────────────────────────────────────────────────────────
    HEADER
