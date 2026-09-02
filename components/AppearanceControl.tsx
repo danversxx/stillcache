@@ -90,10 +90,11 @@ function DarkIcon() {
 
 export default function AppearanceControl() {
   const [mode, setMode] = useState<AppearanceMode>('auto');
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const stored = getStoredMode();
-    setMode(stored);
+    setMode(getStoredMode());
+    setReady(true);
   }, []);
 
   const resolved = useMemo<ResolvedTheme>(() => {
@@ -102,9 +103,12 @@ export default function AppearanceControl() {
     return resolveAutoTheme();
   }, [mode]);
 
+  /* TRAP: gated on `ready` — without it, mount applies the default 'auto'
+     theme before localStorage is read, overwriting the pre-paint script
+     and flashing light on every navigation. */
   useEffect(() => {
-    applyTheme(resolved);
-  }, [resolved]);
+    if (ready) applyTheme(resolved);
+  }, [resolved, ready]);
 
   function updateMode(next: AppearanceMode) {
     setMode(next);

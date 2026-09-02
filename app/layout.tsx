@@ -42,7 +42,16 @@ export const viewport: Viewport = {
 ────────────────────────────────────────────────────────────── */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* TRAP: must run before paint, and must mirror AppearanceControl —
+            same storage key, same 07:00–19:00 auto window. Edit both together. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var m=localStorage.getItem('stillcache_appearance_mode')||'auto';var h=new Date().getHours();var t=m==='light'||m==='dark'?m:(h>=7&&h<19?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-white text-black">
         {children}
       </body>
