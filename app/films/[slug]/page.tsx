@@ -1,19 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import FilmSection from '@/components/FilmSection';
-import AppearanceControl from '@/components/AppearanceControl';
-import BackLink from '@/components/BackLink';
-import FloatingActions from '@/components/FloatingActions';
+import PageShell from '@/components/PageShell';
 import { getFilmBySlug } from '@/lib/sanity';
 
-/* ──────────────────────────────────────────────────────────────
-   ALWAYS LIVE (no route caching)
-────────────────────────────────────────────────────────────── */
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 /* ──────────────────────────────────────────────────────────────
-   PER-FILM METADATA (tab title, search results, link previews)
+   PER-FILM METADATA
    TRAP: runs its own fetch — Sanity is hit twice per request
 ────────────────────────────────────────────────────────────── */
 export async function generateMetadata({
@@ -24,30 +19,24 @@ export async function generateMetadata({
   const { slug } = await params;
   const film = await getFilmBySlug(slug);
 
-  if (!film) {
-    return { title: 'Film not found · Still Cache' };
-  }
+  if (!film) return { title: 'Film not found · Still Cache' };
 
   const year = film.releaseDate?.slice(0, 4) ?? '';
   const title = year ? `${film.filmTitle} (${year})` : film.filmTitle;
 
-  const description = [
-    film.directorName ? `Directed by ${film.directorName}` : '',
-    film.genreRuntime,
-    film.country,
-  ]
-    .filter(Boolean)
-    .join(' · ');
+  const description =
+    [film.directorName ? `Directed by ${film.directorName}` : '', film.genreRuntime, film.country]
+      .filter(Boolean)
+      .join(' · ') || 'Film stills';
 
-  /* STYLE: First still fills the ~1.91:1 preview frame; poster is fallback only */
   const previewImage = film.galleryImages?.[0]?.url || film.posterImageUrl;
 
   return {
     title: `${title} · Still Cache`,
-    description: description || 'Film stills',
+    description,
     openGraph: {
       title,
-      description: description || 'Film stills',
+      description,
       type: 'article',
       siteName: 'Still Cache',
       images: previewImage ? [{ url: previewImage, alt: `${film.filmTitle} still` }] : [],
@@ -55,110 +44,21 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title,
-      description: description || 'Film stills',
+      description,
       images: previewImage ? [previewImage] : [],
     },
   };
 }
 
-/* ──────────────────────────────────────────────────────────────
-   HEADER
-────────────────────────────────────────────────────────────── */
-function Header({ filmTitle }: { filmTitle?: string }) {
-  return (
-    <header className="pt-[20px] md:pt-[64px] pb-[20px] md:pb-[32px]">
-      <div className="flex flex-col gap-[4px] md:gap-0">
-        <div className="flex items-center justify-between gap-[16px]">
-          <div className="min-w-0 flex items-center gap-x-[8px] md:gap-x-[10px] text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
-            <BackLink
-              fallbackHref="/"
-              className="shrink-0 opacity-[0.25] transition-opacity duration-150 hover:opacity-100"
-            >
-              Still Cache
-            </BackLink>
-
-            <span className="shrink-0" aria-hidden="true">
-              /
-            </span>
-
-            <span className="hidden md:inline min-w-0 break-words leading-[41px]">
-              {filmTitle || 'Film'}
-            </span>
-          </div>
-
-          <div className="shrink-0 self-center">
-            <AppearanceControl />
-          </div>
-        </div>
-
-        <div className="md:hidden min-w-0 text-[20px] font-bold tracking-[-0.02em] leading-[22px]">
-          <span className="block break-words max-w-[22ch]">
-            {filmTitle || 'Film'}
-          </span>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────
-   FOOTER
-────────────────────────────────────────────────────────────── */
-function Footer() {
-  return (
-    <footer className="py-[22px] md:py-[32px]">
-      <div className="text-[10px] md:text-[14px] font-medium leading-[14px]">
-        © 2026 · Still Cache
-      </div>
-    </footer>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────
-   PAGE
-────────────────────────────────────────────────────────────── */
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-
   const film = await getFilmBySlug(slug);
 
-  if (!film) {
-    notFound();
-  }
+  if (!film) notFound();
 
   return (
-    <main className="bg-white text-black antialiased">
-      <FloatingActions showHome />
-
-      {/* HEADER */}
-      <div className="fixed inset-x-0 top-0 z-30 bg-white">
-        <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
-          <div className="mx-auto w-full max-w-[clamp(1060px,68vw,1280px)]">
-            <Header filmTitle={film.filmTitle} />
-          </div>
-        </div>
-      </div>
-
-      {/* PAGE CONTENT */}
-      <div className="w-full px-[18px] sm:px-[24px] md:px-[clamp(44px,calc(13.2vw-20px),240px)]">
-        <div className="mx-auto pt-[116px] md:pt-[169px] w-full max-w-[clamp(1060px,68vw,1280px)] flex flex-col gap-[40px] md:gap-[64px]">
-
-          <div className="flex flex-col gap-[40px] md:gap-[64px]">
-            <FilmSection
-              film={film}
-              imageSet="gallery"
-              hideGalleryButton
-            />
-          </div>
-
-          <Footer />
-
-        </div>
-      </div>
-    </main>
+    <PageShell filmTitle={film.filmTitle}>
+      <FilmSection film={film} imageSet="gallery" hideGalleryButton />
+    </PageShell>
   );
 }
