@@ -4,8 +4,7 @@ import FilmSection from '@/components/FilmSection';
 import PageShell from '@/components/PageShell';
 import { getFilmBySlug } from '@/lib/sanity';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 /* ──────────────────────────────────────────────────────────────
    PER-FILM METADATA

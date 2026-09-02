@@ -4,7 +4,7 @@ export const client = createClient({
   projectId: '78tpiznj',
   dataset: 'production',
   apiVersion: '2024-02-15',
-  useCdn: false,
+  useCdn: true,
 });
 
 export type Film = {

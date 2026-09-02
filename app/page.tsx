@@ -3,8 +3,7 @@ import PageShell from '@/components/PageShell';
 import ScrollRestoration from '@/components/ScrollRestoration';
 import { getFilms } from '@/lib/sanity';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function Page() {
   const films = await getFilms();
