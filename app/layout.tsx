@@ -2,22 +2,34 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 /* ──────────────────────────────────────────────────────────────
-   GLOBAL METADATA (SEO + browser tab)
-   Controls:
-   - Page title
-   - Search engine description
+   GLOBAL METADATA (SEO + browser tab + link previews)
+   TRAP: no title.template — film pages append "· Still Cache"
+   themselves, and a template would double the suffix
 ────────────────────────────────────────────────────────────── */
+const SITE_DESCRIPTION = "A Curated Archive of Film Stills · Still Cache";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://stillcache.vercel.app"),
   title: "Still Cache",
-  description: "A curated collection of film stills",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: "Still Cache",
+    description: SITE_DESCRIPTION,
+    type: "website",
+    siteName: "Still Cache",
+    url: "https://stillcache.vercel.app",
+    images: [{ url: "/og.png", width: 1920, height: 1008, alt: "Still Cache" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Still Cache",
+    description: SITE_DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 /* ──────────────────────────────────────────────────────────────
    VIEWPORT SETTINGS (mobile & edge-to-edge display)
-   Controls:
-   - Device width scaling
-   - Initial zoom level
-   - Safe-area usage on modern phones (notches)
 ────────────────────────────────────────────────────────────── */
 export const viewport: Viewport = {
   width: "device-width",
@@ -27,24 +39,11 @@ export const viewport: Viewport = {
 
 /* ──────────────────────────────────────────────────────────────
    ROOT LAYOUT (global document frame)
-   Applies to every page.
-
-   Controls:
-   - HTML language
-   - Global body styling
-   - Minimum viewport height
-   - Background & text colors
 ────────────────────────────────────────────────────────────── */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      {/* STYLE: Document language for accessibility & SEO */}
-
       <body className="min-h-screen bg-white text-black">
-        {/* STYLE: Minimum full viewport height */}
-        {/* STYLE: Global background color */}
-        {/* STYLE: Global text color */}
-
         {children}
       </body>
     </html>
