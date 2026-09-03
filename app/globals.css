@@ -3,207 +3,101 @@
 @tailwind utilities;
 
 /* ──────────────────────────────────────────────────────────────
-   TYPOGRAPHY: Local font faces
-   Controls:
-   - Font family name used across the site
-   - Available weights (400/500/700)
-   - Loading strategy (font-display)
+   FONTS
 ────────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Regular.woff2') format('woff2');
-  /* STYLE: Source file path + format */
   font-weight: 400;
-  /* STYLE: Weight mapping (Regular) */
   font-style: normal;
-  /* STYLE: Normal (non-italic) */
   font-display: swap;
-  /* STYLE: Loading behaviour (swap prevents invisible text) */
 }
 
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Medium.woff2') format('woff2');
-  /* STYLE: Source file path + format */
   font-weight: 500;
-  /* STYLE: Weight mapping (Medium) */
   font-style: normal;
-  /* STYLE: Normal (non-italic) */
   font-display: swap;
-  /* STYLE: Loading behaviour */
 }
 
 @font-face {
   font-family: 'Helvetica Now Display';
   src: url('/fonts/HelveticaNowDisplay-Bold.woff2') format('woff2');
-  /* STYLE: Source file path + format */
   font-weight: 700;
-  /* STYLE: Weight mapping (Bold) */
   font-style: normal;
-  /* STYLE: Normal (non-italic) */
   font-display: swap;
-  /* STYLE: Loading behaviour */
 }
 
 /* ──────────────────────────────────────────────────────────────
-   BASE RESET / BOX MODEL
-   Controls:
-   - Default margin/padding removal
-   - Consistent sizing with border-box
+   BASE
+   Colours live on the elements themselves (bg-white / text-black in
+   layout.tsx), not here — see THEME below for how dark mode flips them.
 ────────────────────────────────────────────────────────────── */
 * {
   margin: 0;
-  /* STYLE: Removes browser default spacing */
   padding: 0;
-  /* STYLE: Removes browser default spacing */
   box-sizing: border-box;
-  /* STYLE: Predictable sizing (padding/border included in width/height) */
 }
 
-/* ──────────────────────────────────────────────────────────────
-   DOCUMENT-LEVEL BEHAVIOUR
-   Controls:
-   - Prevent horizontal overflow
-   - Font rendering/smoothing
-────────────────────────────────────────────────────────────── */
 html {
-  /* TRAP: overflow-x here creates a scroll container that breaks position:sticky.
-     body's overflow-x below already prevents horizontal scroll. Do not re-add. */
+  /* TRAP: no overflow-x here — it creates a scroll container that breaks
+     position:sticky on the header. body handles horizontal overflow. */
   -webkit-font-smoothing: antialiased;
-  /* STYLE: Smoother type rendering on WebKit */
   -moz-osx-font-smoothing: grayscale;
-  /* STYLE: Smoother type rendering on macOS Firefox */
 }
 
-/* ──────────────────────────────────────────────────────────────
-   BODY THEME + GLOBAL TYPE
-   Controls:
-   - Default background/text colours
-   - Global font stack
-   - Global overflow behaviour
-────────────────────────────────────────────────────────────── */
 body {
-  background-color: #000000;
-  /* STYLE: Global background colour */
-  color: #ffffff;
-  /* STYLE: Global text colour */
   font-family: 'Helvetica Now Display', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, Helvetica, Arial, sans-serif;
-  /* STYLE: Global font stack (primary → system fallbacks) */
-  margin: 0;
-  /* STYLE: Ensure no default outer spacing */
-  padding: 0;
-  /* STYLE: Ensure no default inner spacing */
   overflow-x: hidden;
-  /* STYLE: Prevents accidental horizontal scroll */
-}
-
-/* ──────────────────────────────────────────────────────────────
-   MEDIA DEFAULTS
-   Controls:
-   - Block-level images
-   - Responsive sizing
-────────────────────────────────────────────────────────────── */
-img {
-  display: block;
-  /* STYLE: Removes inline image whitespace and baseline gaps */
-  max-width: 100%;
-  /* STYLE: Prevents images overflowing their containers */
-  height: auto;
-  /* STYLE: Maintains aspect ratio when width changes */
-}
-
-/* ──────────────────────────────────────────────────────────────
-   LINK DEFAULTS
-   Controls:
-   - Inherit colour from surrounding text
-   - Remove underline (use Tailwind/utility classes when needed)
-────────────────────────────────────────────────────────────── */
-a {
-  color: inherit;
-  /* STYLE: Links use surrounding text colour */
-  text-decoration: none;
-  /* STYLE: No underline by default (add underlines per-component as needed) */
-}
-
-/* ──────────────────────────────────────────────────────────────
-   RESPONSIVE UTILITIES: Hero sizing
-   Controls:
-   - Desktop+ aspect ratio behaviour
-   - Max viewport height constraint
-────────────────────────────────────────────────────────────── */
-/* Hero responsive height */
-@media (min-width: 768px) {
-  .hero-responsive {
-    height: auto;
-    /* STYLE: Height derives from aspect ratio/contents */
-    aspect-ratio: 1440 / 880;
-    /* STYLE: Controls hero proportions on desktop */
-    max-height: 100vh;
-    /* STYLE: Prevents hero exceeding viewport height */
-  }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   THEME MODE OVERRIDES
-   Controls:
-   - Manual / auto appearance on html[data-theme]
-   - Shared utility overrides for light/dark surfaces
-   - Smooth appearance transitions
-────────────────────────────────────────────────────────────── */
-html[data-theme='light'] body,
-html[data-theme='dark'] body {
   transition:
     background-color 220ms ease,
     color 220ms ease,
     border-color 220ms ease;
-  /* STYLE: Smooth theme transition */
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ──────────────────────────────────────────────────────────────
+   THEME
+   Dark mode repaints Tailwind's utility classes rather than using
+   variables. Consequence: every bg-white flips, so a surface that
+   must stay white needs its own class.
+────────────────────────────────────────────────────────────── */
 html[data-theme='dark'] .bg-white {
   background-color: #000000 !important;
-  /* STYLE: Dark surface override for white utility backgrounds */
 }
 
 html[data-theme='dark'] .text-black {
   color: #ffffff !important;
-  /* STYLE: Dark surface override for black utility text */
-}
-
-html[data-theme='dark'] .border-black {
-  border-color: #ffffff !important;
-  /* STYLE: Dark surface override for black utility borders */
 }
 
 html[data-theme='dark'] .bg-black\/10 {
   background-color: rgba(255, 255, 255, 0.1) !important;
-  /* STYLE: Dark surface override for placeholder fills */
 }
 
-/* ──────────────────────────────────────────────────────────────
-   STUDIO LOGO THEME TREATMENT
-   Controls:
-   - Preserve black SVG studio marks in light mode
-   - Convert black SVG studio marks to white in dark mode
-   - Smooth filter transition during appearance changes
-────────────────────────────────────────────────────────────── */
+/* Studio marks are monochrome SVGs — inverted wholesale for dark mode.
+   TRAP: a coloured logo would lose its colour here. */
 .studio-logo-mark {
   transition: filter 220ms ease;
-  /* STYLE: Smooth theme transition for logo treatment */
 }
 
 html[data-theme='dark'] .studio-logo-mark {
   filter: brightness(0) invert(1);
-  /* STYLE: Converts black SVG marks to white in dark mode */
 }
 
 /* ──────────────────────────────────────────────────────────────
-   FLOATING ACTION CONTROLS
-   Controls:
-   - Fixed bottom-right action stack
-   - Premium translucent / glass treatment
-   - Light / dark theme adaptation
-   - Mobile-safe hit area sizing
+   FLOATING ACTIONS (back to top / home)
 ────────────────────────────────────────────────────────────── */
 .floating-actions-stack {
   position: fixed;
@@ -214,8 +108,8 @@ html[data-theme='dark'] .studio-logo-mark {
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
+  /* Stack ignores pointer events so it never blocks the page; buttons re-enable it. */
   pointer-events: none;
-  /* STYLE: Stack stays fixed and allows only buttons to receive interaction */
 }
 
 .floating-action-button {
@@ -241,17 +135,14 @@ html[data-theme='dark'] .studio-logo-mark {
     box-shadow 220ms ease,
     transform 180ms ease,
     opacity 180ms ease;
-  /* STYLE: Light-mode treatment keeps icons readable against pale surfaces while preserving a restrained translucent glass effect */
 }
 
 .floating-action-button:hover {
   transform: translateY(-1px);
-  /* STYLE: Light hover lift */
 }
 
 .floating-action-button:active {
   transform: translateY(0);
-  /* STYLE: Pressed state resets lift */
 }
 
 html[data-theme='dark'] .floating-action-button {
@@ -261,7 +152,6 @@ html[data-theme='dark'] .floating-action-button {
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.24),
     0 1px 0 rgba(255, 255, 255, 0.10) inset;
-  /* STYLE: Dark-mode treatment switches icon colour to white while keeping the glass surface open enough for underlying imagery to read through */
 }
 
 @media (min-width: 768px) {
@@ -269,35 +159,20 @@ html[data-theme='dark'] .floating-action-button {
     right: 24px;
     bottom: 24px;
     gap: 12px;
-    /* STYLE: Desktop edge offset + slightly airier stack spacing */
   }
 
   .floating-action-button {
-    width: 40px;
-    height: 40px;
     border-radius: 12px;
-    /* STYLE: Desktop scale remains compact while preserving the same glass treatment */
   }
 }
 
 /* ──────────────────────────────────────────────────────────────
-   HEADER-INTEGRATED FILM CTA
-   Controls:
-   - Shared homepage CTA that activates when a film's inline CTA passes under the fixed header
-   - CTA remains inside the header frame instead of becoming a detached overlay
-   - Visual style intentionally mirrors the authored inline CTA so the component reads as one CTA with two modes
+   CTAs
+   Both share one translucent surface; only geometry differs.
+   Stills = primary (tall, soft rectangle). Trailer = secondary (pill).
 ────────────────────────────────────────────────────────────── */
-/* ──────────────────────────────────────────────────────────────
-   PRIMARY FILM STILLS CTA
-   Controls:
-   - Primary action surface for film sections
-   - Promotes into header-sticky CTA seamlessly
-   - Shared visual system across inline + sticky variants
-────────────────────────────────────────────────────────────── */
-.film-stills-cta {
-  height: 48px;
-  padding-inline: 16px;
-  border-radius: 18px;
+.film-stills-cta,
+.film-trailer-cta {
   border: 1px solid #0000000d;
   background: #f4f4f480;
   color: #000000;
@@ -307,12 +182,29 @@ html[data-theme='dark'] .floating-action-button {
     opacity 180ms ease,
     background-color 220ms ease,
     color 220ms ease;
-  /* STYLE: Mobile-first scale keeps the CTA fluid on smaller screens while preserving the intended primary-action hierarchy */
 }
 
+html[data-theme='dark'] .film-stills-cta,
+html[data-theme='dark'] .film-trailer-cta {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.film-stills-cta {
+  height: 48px;
+  padding-inline: 16px;
+  border-radius: 18px;
+}
 
 .film-stills-cta:hover {
   opacity: 0.7;
+}
+
+/* Trailer CTA gets its horizontal padding from the component. */
+.film-trailer-cta {
+  height: 32px;
+  border-radius: 9999px;
 }
 
 .film-stills-cta-title,
@@ -324,55 +216,20 @@ html[data-theme='dark'] .floating-action-button {
   color: inherit;
 }
 
-html[data-theme='dark'] .film-stills-cta {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  /* STYLE: Dark mode matches the shared translucent secondary action treatment. */
-}
-
 @media (min-width: 768px) {
   .film-stills-cta {
     height: 52px;
-    border-radius: 20px;
     padding-inline: 18px;
-    /* STYLE: Desktop reaches the full intended stills CTA scale and corner radius */
+    border-radius: 20px;
+  }
+
+  .film-trailer-cta {
+    height: 34px;
   }
 
   .film-stills-cta-title,
   .film-stills-cta-label {
     font-size: 14px;
     line-height: 20px;
-  }
-}
-
-/* ──────────────────────────────────────────────────────────────
-   WATCH TRAILER CTA
-   Controls:
-   - Secondary action style
-   - Soft translucent neutral surface
-   - Pill form to differentiate hierarchy from the primary Stills CTA
-────────────────────────────────────────────────────────────── */
-.film-trailer-cta {
-  height: 32px;
-  border-radius: 9999px;
-  border: 1px solid #0000000d;
-  background: #f4f4f480;
-  color: #000000;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  /* STYLE: Mobile-first sizing keeps the trailer CTA fluid while preserving its softer secondary-action character */
-}
-
-html[data-theme='dark'] .film-trailer-cta {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-}
-
-@media (min-width: 768px) {
-  .film-trailer-cta {
-    height: 34px;
-    /* STYLE: Desktop trailer CTA gains a touch more presence without competing with the primary stills action */
   }
 }
