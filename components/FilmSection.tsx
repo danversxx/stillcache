@@ -76,9 +76,9 @@ function ExternalButton({
       target="_blank"
       rel="noreferrer"
       className={[
-        "film-trailer-cta inline-flex items-center justify-center px-[14px]",
+        "film-trailer-cta inline-flex items-center justify-center px-[14px] font-bold",
         // STYLE: Trailer CTA layout (pill) + horizontal padding
-        "text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em]",
+        "text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em]",
         // STYLE: Typography scale aligned with other CTAs
         "transition-opacity hover:opacity-70",
         className,
@@ -132,12 +132,12 @@ function InfoRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-[16px] min-w-0">
       {/* STYLE: Two-column row layout (flex) + alignment + spacing (gap) + truncation support (min-w-0) */}
-      <p className="text-[12px] md:text-[14px] font-bold leading-[22px] md:leading-[18px] tracking-[0.01em] text-black whitespace-nowrap">
+      <p className="text-[12px] md:text-[14px] font-bold leading-[18px] md:leading-[20px] tracking-[0.01em] text-black whitespace-nowrap">
         {/* STYLE: Label typography (size/weight/leading/tracking) + responsive typography + keep on one line */}
         {label}
       </p>
       {/* Regular: +2px line-height */}
-      <div className="text-[12px] md:text-[14px] font-normal leading-[24px] md:leading-[20px] tracking-[0.01em] text-black text-right min-w-0">
+      <div className="text-[12px] md:text-[14px] font-normal leading-[18px] md:leading-[20px] tracking-[0.01em] text-black text-right min-w-0">
         {/* STYLE: Value typography (size/weight/leading/tracking) + responsive leading + right alignment + truncation support */}
         <span className="block truncate">{value}</span>
         {/* STYLE: Truncation (truncate) */}
@@ -167,7 +167,7 @@ export default function FilmSection({
         {/* STYLE: Section surface (background + text color) */}
         <div className="py-12 md:py-16">
           {/* STYLE: Loading state spacing (vertical padding) + responsive padding */}
-          <p className="text-[12px] md:text-[14px] leading-[24px] md:leading-[20px] tracking-[0.01em] text-black/70">
+          <p className="text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-black/70">
             {/* STYLE: Loading typography + muted opacity (text-black/70) */}
             Loading film…
           </p>
@@ -251,13 +251,13 @@ export default function FilmSection({
                     {/* STYLE: Text stack spacing + truncation support (min-w-0) + responsive gap */}
 
                     {/* H3: +2px line-height */}
-                    <h3 className="text-[20px] md:text-[28px] font-bold leading-[24px] md:leading-[32px] text-black truncate">
+                    <h3 className="text-[20px] md:text-[28px] font-bold leading-[26px] md:leading-[34px] text-black truncate">
                       {/* STYLE: Director name typography + responsive scale + truncation */}
                       {film.directorName}
                     </h3>
 
                     {directorMeta ? (
-                      <p className="text-[12px] md:text-[14px] leading-[12px] md:leading-[18px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-black">
                         {/* STYLE: Director meta typography (size/leading/tracking) */}
                         {directorMeta}
                       </p>
@@ -269,13 +269,13 @@ export default function FilmSection({
                   {/* STYLE: Film title vertical offset (edit mt-* / -mt-* per breakpoint to move FilmTitle up/down without changing gap/gap-* above) */}
                   {filmHref ? (
                     <Link href={filmHref} className="block transition-opacity hover:opacity-70">
-                      <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
+                      <h2 className="text-[32px] md:text-[48px] font-bold leading-[38px] md:leading-[54px] text-black">
                         {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
                         {film.filmTitle}
                       </h2>
                     </Link>
                   ) : (
-                    <h2 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] text-black">
+                    <h2 className="text-[32px] md:text-[48px] font-bold leading-[38px] md:leading-[54px] text-black">
                       {/* STYLE: Film title typography (size/weight/leading) + responsive scale */}
                       {film.filmTitle}
                     </h2>
@@ -295,11 +295,11 @@ export default function FilmSection({
                   {releaseDate ? (
                     <div className="flex flex-col gap-0">
                       {/* STYLE: Group label + value as a single unit (removes spacing between them) */}
-                      <p className="text-[12px] md:text-[14px] font-bold leading-[20px] md:leading-[20px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] font-bold leading-[18px] md:leading-[20px] tracking-[0.01em] text-black">
                         {/* STYLE: Release Date label typography (matches date styling; bold weight for hierarchy) */}
                         Release Date
                       </p>
-                      <p className="text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-black">
+                      <p className="text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-black">
                         {/* STYLE: Release date typography */}
                         {releaseDate}
                       </p>
@@ -307,7 +307,7 @@ export default function FilmSection({
                   ) : null}
 
                   {copyrightInfo ? (
-                    <p className="whitespace-pre-line text-[12px] md:text-[14px] leading-[16px] md:leading-[20px] tracking-[0.01em] text-[#999999] max-w-[34ch] md:max-w-[270px]">
+                    <p className="whitespace-pre-line text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-[#999999]">
                       {/* STYLE: Copy typography + muted color + width constraint + preserve line breaks */}
                       {copyrightInfo}
                     </p>
@@ -368,7 +368,7 @@ export default function FilmSection({
                 {trailerHref || letterboxdHref ? (
                   <div className="flex items-center justify-between gap-[16px]">
                     {/* STYLE: Row layout for external links + alignment + spacing */}
-                    <p className="text-[12px] font-bold leading-[22px] tracking-[0.01em] text-black whitespace-nowrap">
+                    <p className="text-[12px] font-bold leading-[18px] tracking-[0.01em] text-black whitespace-nowrap">
                       {/* STYLE: Label typography + keep on one line */}
                       External
                     </p>
@@ -387,7 +387,7 @@ export default function FilmSection({
 
                 <div className="flex flex-col items-start">
                   {/* STYLE: Stacked label/value */}
-                  <p className="text-[14px] font-bold leading-[18px] tracking-[0.01em] text-black">
+                  <p className="text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
                     {/* STYLE: Label typography */}
                     Directed By
                   </p>
@@ -398,7 +398,7 @@ export default function FilmSection({
                 </div>
 
                 <div className="flex flex-col items-start">
-                  <p className="text-[14px] font-bold leading-[18px] tracking-[0.01em] text-black">
+                  <p className="text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
                     Overview
                   </p>
                   <p className="text-[14px] font-normal leading-[20px] tracking-[0.01em] text-black">
@@ -407,7 +407,7 @@ export default function FilmSection({
                 </div>
 
                 <div className="flex flex-col items-start">
-                  <p className="text-[14px] font-bold leading-[18px] tracking-[0.01em] text-black">
+                  <p className="text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
                     Studio
                   </p>
                   <p className="text-[14px] font-normal leading-[20px] tracking-[0.01em] text-black">
@@ -416,7 +416,7 @@ export default function FilmSection({
                 </div>
 
                 <div className="flex flex-col items-start">
-                  <p className="text-[14px] font-bold leading-[18px] tracking-[0.01em] text-black">
+                  <p className="text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
                     Country
                   </p>
                   <p className="text-[14px] font-normal leading-[20px] tracking-[0.01em] text-black">
@@ -429,7 +429,7 @@ export default function FilmSection({
               {trailerHref || letterboxdHref ? (
                 <div className="hidden md:flex w-full flex-col items-start gap-[8px]">
                   {/* STYLE: Desktop-only (hidden → md:flex) + vertical spacing */}
-                  <p className="text-[14px] font-bold leading-[18px] tracking-[0.01em] text-black">
+                  <p className="text-[14px] font-bold leading-[20px] tracking-[0.01em] text-black">
                     {/* STYLE: Label typography */}
                     External
                   </p>

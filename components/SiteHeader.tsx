@@ -18,7 +18,7 @@ export default function SiteHeader({ filmTitle }: { filmTitle?: string }) {
           <div className={`flex flex-col ${isFilm ? 'gap-[4px] md:gap-0' : ''}`}>
 
             <div className="flex items-center justify-between gap-[16px]">
-              <div className="min-w-0 flex items-center gap-x-[8px] md:gap-x-[10px] text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px]">
+              <div className="min-w-0 flex items-center gap-x-[8px] md:gap-x-[10px] text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[26px] md:leading-[34px]">
                 {isFilm ? (
                   <>
                     <BackLink
@@ -28,7 +28,7 @@ export default function SiteHeader({ filmTitle }: { filmTitle?: string }) {
                       Still Cache
                     </BackLink>
                     <span className="shrink-0" aria-hidden="true">/</span>
-                    <span className="hidden md:inline min-w-0 break-words leading-[41px]">
+                    <span className="hidden md:inline min-w-0 break-words leading-[34px]">
                       {filmTitle}
                     </span>
                   </>
@@ -43,7 +43,7 @@ export default function SiteHeader({ filmTitle }: { filmTitle?: string }) {
             </div>
 
             {isFilm ? (
-              <div className="md:hidden min-w-0 text-[20px] font-bold tracking-[-0.02em] leading-[22px]">
+              <div className="md:hidden min-w-0 text-[20px] font-bold tracking-[-0.02em] leading-[26px]">
                 <span className="block break-words max-w-[22ch]">{filmTitle}</span>
               </div>
             ) : null}

@@ -14,7 +14,7 @@ export default function NotFound() {
             {/* STYLE: Static header — not fixed, so no clearance offset needed */}
             <Link
               href="/"
-              className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[24px] md:leading-[41px] transition-opacity hover:opacity-70"
+              className="text-[20px] md:text-[28px] font-bold tracking-[-0.02em] leading-[26px] md:leading-[34px] transition-opacity hover:opacity-70"
             >
               Still Cache
             </Link>
@@ -25,13 +25,13 @@ export default function NotFound() {
 
           <div className="flex flex-col gap-[24px] md:gap-[32px] pt-[80px] md:pt-[120px] pb-[64px]">
             <div className="flex flex-col gap-[8px] md:gap-[12px]">
-              <p className="text-[12px] md:text-[14px] font-bold leading-[20px] tracking-[0.01em] opacity-[0.25]">
+              <p className="text-[12px] md:text-[14px] font-bold leading-[18px] md:leading-[20px] tracking-[0.01em] opacity-[0.25]">
                 404
               </p>
-              <h1 className="text-[32px] md:text-[48px] font-bold leading-[36px] md:leading-[50px] tracking-[-0.02em]">
+              <h1 className="text-[32px] md:text-[48px] font-bold leading-[38px] md:leading-[54px] tracking-[-0.02em]">
                 Film not found
               </h1>
-              <p className="text-[12px] md:text-[14px] leading-[20px] tracking-[0.01em] text-[#999999] max-w-[40ch]">
+              <p className="text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] tracking-[0.01em] text-[#999999] max-w-[40ch]">
                 This film isn’t in the cache. It may have been removed, or the link may be incorrect.
               </p>
             </div>
